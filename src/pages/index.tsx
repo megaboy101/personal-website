@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Helmet } from 'react-helmet'
 import '../styles/index.scss'
 import { LinkIcon } from "../components/icons/LinkIcon"
 import profilePicture from '../images/profile-picture.png'
@@ -77,7 +78,27 @@ export default function Home() {
   }
 
   return (
-    <main ref={pageRef}>
+    <>
+      <Helmet>
+        <title>Jacob Bleser</title>
+        <meta
+          name="description"
+          content="Jacob Bleser | Co-Founder & CEO of Studio Reach Software | TypeScript, React, Elm, Node.js"
+        />
+
+        <link rel="canonical" href="https://jacobbleser.dev" />
+        <meta name="author" content="Jacob Bleser" />
+
+        <meta name="og:title" content="Jacob Bleser" />
+        <meta name="og:site_name" content="Jacob Bleser" />
+        <meta
+          name="og:description"
+          content="Jacob Bleser | Co-Founder & CEO of Studio Reach Software | TypeScript, React, Elm, Node.js"
+        />
+        <meta name="og:image" content="https://jacobbleser.dev/og-image.jpg" />
+      </Helmet>
+
+      <main ref={pageRef}>
       <div className="content-container">
         <section className="about">
           <h1>Hello, I’m Jacob Bleser.</h1>
@@ -261,5 +282,6 @@ export default function Home() {
         </section>
       </div>
     </main>
+    </>
   )
 }
