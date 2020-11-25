@@ -17,20 +17,24 @@ const useWindowSize = () => {
   const [windowSize, setWindowSize] = React.useState({
     width: undefined,
     height: undefined,
-  });
+  })
 
   React.useEffect(() => {
     function handleResize() {
       setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
+        width: typeof window !== 'undefined' ? window.innerWidth : 1000,
+        height: typeof window !== 'undefined' ? window.innerHeight : 1000,
+      })
     }
 
-    window.addEventListener("resize", handleResize);
-    handleResize();
+    if (typeof window !== 'undefined')
+      window.addEventListener("resize", handleResize)
+    handleResize()
 
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      if (typeof window !== 'undefined')
+        window.removeEventListener("resize", handleResize)
+    }
   }, []);
 
   return windowSize;
@@ -43,8 +47,10 @@ export default function Home() {
   const [, setY] = useSpring(() => ({
     y: 0,
     reset: true,
-    from: { y: window.scrollY },
-    onFrame: props => window.scroll(0, props.y),
+    from: { y: (typeof window !== 'undefined' ? window.scrollY : 0) },
+    onFrame: props => {
+      if (typeof window !== 'undefined') window.scroll(0, props.y)
+    },
     config: { tension: 200, clamp: true }
   }))
 
@@ -54,13 +60,13 @@ export default function Home() {
   const setScroll = (number: '01' | '02' | '03') => {
     switch (number) {
       case '01':
-        setY({ y: 30, from: { y: window.scrollY } })
+        setY({ y: 30, from: { y: typeof window !== 'undefined' ? window.scrollY : 0 } })
         break
       case '02':
-        setY({ y: 750, from: { y: window.scrollY } })
+        setY({ y: 750, from: { y: typeof window !== 'undefined' ? window.scrollY : 0 } })
         break
       case '03':
-        setY({ y: 1450, from: { y: window.scrollY } })
+        setY({ y: 1450, from: { y: typeof window !== 'undefined' ? window.scrollY : 0 } })
         break
     }
   }
