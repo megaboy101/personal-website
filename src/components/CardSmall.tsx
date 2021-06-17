@@ -4,6 +4,7 @@ import { useSpring, animated } from "react-spring"
 import { Github } from "./icons/Github"
 import { Award } from "./icons/Award"
 import { Devpost } from "./icons/Devpost"
+import { Figma } from './icons/Figma'
 
 interface Props {
   awardTitle?: string
@@ -12,6 +13,7 @@ interface Props {
   title: string
   githubLink?: string
   devpostLink?: string
+  figmaLink?: string
   hidden: boolean
   selected: boolean
   select: (title: string) => void
@@ -26,6 +28,7 @@ export const CardSmall: React.FC<Props> = ({
   children,
   githubLink,
   devpostLink,
+  figmaLink,
   hidden,
   selected,
   select,
@@ -82,6 +85,13 @@ export const CardSmall: React.FC<Props> = ({
             <a href={devpostLink} target="_blank" rel="noopener">
               <Devpost />
               Devpost
+              <LinkIcon theme="light" />
+            </a>
+            }
+            { figmaLink &&
+            <a href={figmaLink} target="_blank" rel="noopener">
+              <Figma />
+              Figma
               <LinkIcon theme="light" />
             </a>
             }

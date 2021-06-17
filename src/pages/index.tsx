@@ -104,7 +104,7 @@ export default function Home() {
           <h1>Hello, I’m Jacob Bleser.</h1>
           <p>
             I’m a Software Engineer & Designer from Orlando, Florida.
-            I’m the cofounder and CEO of <a href="https://www.studioreach.io/" target="_blank" rel="noopener">Studio Reach</a>, a web development
+            I’m the cofounder and CEO of Studio Reach, a web development
             boutique that helps founders bootstrap SaaS products. I can't
             shut up about <a href="https://www.figma.com/" target="_blank" rel="noopener">Figma</a> and <a href="https://builttoadapt.io/why-tdd-489fdcdda05e" target="_blank" rel="noopener">test-driven development</a>. I love creating
             engaging software and helping others do the same.
@@ -208,6 +208,7 @@ export default function Home() {
               <CardSmall
                 title="Storyboard.js"
                 hidden={focus !== '' && focus !== 'Storyboard.js'}
+                figmaLink="https://www.figma.com/file/MWhOvXKbuhVFfKHY328CYsXy/Storyboard?node-id=587%3A0"
                 selected={focus === 'Storyboard.js'}
                 select={title => setSafeFocus(title)}
                 deselect={() => setSafeFocus('')}
