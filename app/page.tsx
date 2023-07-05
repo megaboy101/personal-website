@@ -29,7 +29,9 @@ export default function Home() {
           <h1>Hello, I’m Jacob Bleser.</h1>
           <p>
             I’m an indie web and game developer currently living the dream in
-            ✨ New York City ✨. In college I co-founded a small web dev shop called
+            ✨ <span style={{ background: 'linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #eeff41, #f9a825, #ff5722)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent' }}>New York City</span> ✨. In college I co-founded a small web dev shop called
             Studio Reach to help bootstrap local tech startups, and more recently
             led the engineering efforts at a VC-backed social-dating startup called <a href="https://marriagepact.com/" target="_blank" rel="noopener">The Marriage Pact</a>, along with the <a href="https://apps.apple.com/us/app/checkmate-scan-your-friends/id6443729738" target="_blank" rel="noopener">Checkmate app</a>.
           </p>
