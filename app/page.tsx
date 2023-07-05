@@ -28,14 +28,13 @@ export default function Home() {
         <section className={styles.about}>
           <h1>Hello, I’m Jacob Bleser.</h1>
           <p>
-
             I’m an indie web and game developer currently living the dream in
             ✨ New York City ✨. In college I co-founded a small web dev shop called
             Studio Reach to help bootstrap local tech startups, and more recently
             led the engineering efforts at a VC-backed social-dating startup called <a href="https://marriagepact.com/" target="_blank" rel="noopener">The Marriage Pact</a>, along with the <a href="https://apps.apple.com/us/app/checkmate-scan-your-friends/id6443729738" target="_blank" rel="noopener">Checkmate app</a>.
           </p>
           <p style={{marginTop: '25px'}}>
-            Outside of work I'm also active in the open source community, primarily
+            Outside of work I’m also active in the open source community, primarily
             in <a href="https://elixir-lang.org/" target="_blank" rel="noopener">Elixir</a> and the <a href="https://bevyengine.org/" target="_blank" rel="noopener">Bevy game engine</a> for Rust.
           </p>
 
