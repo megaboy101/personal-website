@@ -30,7 +30,7 @@ export default function Home() {
           <p>
             I’m a Software Engineer & Designer from Orlando, Florida.
             I’m the cofounder and CEO of Studio Reach, a web development
-            boutique that helps founders bootstrap SaaS products. I can't
+            boutique that helps founders bootstrap SaaS products. I can’t
             shut up about <a href="https://www.figma.com/" target="_blank" rel="noopener">Figma</a> and <a href="https://builttoadapt.io/why-tdd-489fdcdda05e" target="_blank" rel="noopener">test-driven development</a>. I love creating
             engaging software and helping others do the same.
           </p>
