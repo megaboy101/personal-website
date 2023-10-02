@@ -1,5 +1,4 @@
 import * as React from 'react'
-import styles from '../page.module.scss'
 import { LinkIcon } from './icons/LinkIcon'
 import { useSpring, animated } from '@react-spring/web'
 import { Github } from './icons/Github'
@@ -55,16 +54,16 @@ export const CardSmall = ({
         onMouseMove={() => onHover(title)}
         onMouseLeave={() => onHoverLeave()}
       >
-        <div className={styles.experience}>
+        <div className="template-card-sm">
           { awardTitle &&
-            <p className={styles.award}>
+            <p className="template-card-sm__award text-label">
               <Award/>
               {awardTitle}
             </p>
           }
           { awardDate &&
             <>
-            <p className={styles.awardInfo}>
+            <p className="template-card-sm__award-info">
               {awardLocation}
               <br/>
               {awardDate}
@@ -75,7 +74,7 @@ export const CardSmall = ({
           <p>
             {children}
           </p>
-          <div className={styles.links}>
+          <div>
             { githubLink &&
               <a href={githubLink} target="_blank" rel="noopener">
                 <Github />

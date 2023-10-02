@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useSpring, animated } from '@react-spring/web'
-import styles from '../page.module.scss'
 
 type Props = {
   number: '01' | '02' | '03'
@@ -24,14 +23,14 @@ export const NavItem: React.FC<Props> = ({ number, label, onClick }) => {
   })
 
   return (
-    <li className={styles.headerItem}>
+    <li className="text-label">
       <animated.button
         style={props}
         onMouseMove={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onClick={() => onClick(number)}
       >
-        {number} <animated.div style={barProps} className={styles.bar} /> {label}
+        {number} <animated.div style={barProps} /> {label}
       </animated.button>
     </li>
   )

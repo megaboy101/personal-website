@@ -1,5 +1,4 @@
 import * as React from 'react'
-import styles from '../page.module.scss'
 import { LinkIcon } from './icons/LinkIcon'
 import { useSpring, animated } from '@react-spring/web'
 
@@ -43,13 +42,13 @@ export const Card = ({
         onMouseMove={() => onHover(title)}
         onMouseLeave={() => onHoverLeave()}
       >
-        <div className={styles.experience}>
-          <p className={styles.company}>{label}</p>
-          <h3>{title}</h3>
+        <div className="template-card">
+          <p className="text-label">{label}</p>
+          <h3 className="text-header">{title}</h3>
           <p>
             {children}
           </p>
-          <div className={styles.links}>
+          <div>
             <a href={websiteURL} target="_blank" rel="noopener">
               Website
               <LinkIcon theme="dark" />

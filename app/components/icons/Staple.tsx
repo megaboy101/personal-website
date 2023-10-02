@@ -1,9 +1,8 @@
 import * as React from 'react'
-import styles from '../../page.module.scss'
 
 export const Staple = () => (
   <svg
-    className={styles.logoIcon}
+    className="logo-icon"
     width="16"
     height="12"
     viewBox="0 0 16 12"

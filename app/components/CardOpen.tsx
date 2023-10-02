@@ -1,5 +1,4 @@
 import * as React from 'react'
-import styles from '../page.module.scss'
 import { LinkIcon } from './icons/LinkIcon'
 
 type Props = {
@@ -12,14 +11,14 @@ type Props = {
 
 export const CardOpen = ({ title, description, position, websiteURL, children }: Props) => {
   return (
-    <div className={styles.cardOpen}>
-      <div className={styles.logoContainer}>
+    <div className="template-card-open">
+      <div>
         {children}
       </div>
-      <div className={styles.info}>
+      <div>
         <h3>{title}</h3>
         <p>{description}</p>
-        <h4>{position}</h4>
+        <h4 className="text-label">{position}</h4>
         <a href={websiteURL} target="_blank" rel="noopener">
           Website
           <LinkIcon theme="dark" />

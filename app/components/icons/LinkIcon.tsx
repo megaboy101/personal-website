@@ -1,5 +1,4 @@
 import * as React from 'react'
-import styles from '../../page.module.scss'
 
 type Props = {
   theme: 'light' | 'dark'
@@ -8,7 +7,7 @@ type Props = {
 export const LinkIcon = ({ theme }: Props) => {
   return (
     <svg
-      className={styles.linkIcon}
+      className="link-icon"
       width="10"
       height="10"
       viewBox="0 0 10 10"

@@ -1,4 +1,4 @@
-import './globals.css'
+import './style.css'
 import { Gothic_A1 } from 'next/font/google'
 
 // Font definitions
