@@ -283,36 +283,4 @@ function useScroller() {
   }
 
   return setScroll
-
-
-
-
-
-
-
-  // const scrollPosition = useSpringValue<number>(0, {
-  //   reset: true,
-  //   config: {
-  //     tension: 200,
-  //     clamp: true
-  //   }
-  // })
-
-  // const scrollTo = (number: '01' | '02' | '03') => {
-  //   console.log("Setting scroll")
-  //   switch (number) {
-  //     case '01':
-  //       scrollPosition.start(30)
-  //       setY({ y: 30, from: { y: hasWindow() ? window.scrollY : 0 } })
-  //       break
-  //     case '02':
-  //       setY({ y: 750, from: { y: hasWindow() ? window.scrollY : 0 } })
-  //       break
-  //     case '03':
-  //       setY({ y: 1450, from: { y: hasWindow() ? window.scrollY : 0 } })
-  //       break
-  //   }
-  // }
-
-
 }
