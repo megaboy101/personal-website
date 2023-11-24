@@ -1,0 +1,30 @@
+<div style="width:100px;height: 100px; background-color: red;" @html="Yo"></div>
+
+<script>
+    import { animate } from 'https://esm.sh/motion'
+
+    customElements.define("x-bar", class extends HTMLElement {
+        static get observedAttributes() {
+            return ['active']
+        }
+
+        get active() {
+            return this.getAttribute('active')
+        }
+
+        set active(val) {
+            console.log(val)
+            this.setAttribute('active', val)
+        }
+
+        attributeChangedCallback(name, oldValue, newValue) {
+            console.log(`[${name}] changed`)
+            console.log(newValue, typeof newValue)
+            if (name === 'active' && newValue === true) {
+                animate(this, { transform: "rotate(45deg)" }, { duration: 10 })
+            } else if (name === 'active' && newValue === false) {
+                animate(this, { transform: "rotate(0deg)" }, { duration: 10 })
+            }
+        }
+    })
+</script>

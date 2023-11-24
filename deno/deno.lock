@@ -1,0 +1,25 @@
+{
+  "version": "3",
+  "redirects": {
+    "https://esm.sh/preact": "https://esm.sh/preact@10.18.2",
+    "https://esm.sh/preact-render-to-string/jsx?deps=preact": "https://esm.sh/preact-render-to-string@6.2.2/jsx?deps=preact",
+    "https://esm.sh/preact-render-to-string?deps=preact": "https://esm.sh/preact-render-to-string@6.2.2?deps=preact",
+    "https://esm.sh/preact/jsx-runtime": "https://esm.sh/preact@10.18.2/jsx-runtime",
+    "https://esm.sh/unhead": "https://esm.sh/unhead@1.8.4"
+  },
+  "remote": {
+    "https://esm.sh/preact-render-to-string@6.2.2/jsx?deps=preact": "03c87c4605083217bad9bd8d1181adfe6f7e27c92ace2783b0f26f1757c0bcf6",
+    "https://esm.sh/preact-render-to-string@6.2.2?deps=preact": "ba70b5a838e0588c7de2e56a020ffb2e4d6cd49ff21b99245028571b7ea22e35",
+    "https://esm.sh/preact@10.18.2": "b936922f41acae435e36ebdf9b2d0b4098f783400d27585c4717791f006878cf",
+    "https://esm.sh/preact@10.18.2/jsx-runtime": "a25a0cd6f12c16b78d6de446615de0c509bbd6a20f51773263330be544e0e92c",
+    "https://esm.sh/stable/preact@10.18.2/denonext/jsx-runtime.js": "38c93672042f5ca35277217e718edaa42da90dfde35e97b975a8931f4a966640",
+    "https://esm.sh/stable/preact@10.18.2/denonext/preact.mjs": "468a5fec47fc0f4da565e3f67a1e4d537332ed57a1f75c24c3129eac0a770d55",
+    "https://esm.sh/unhead@1.8.4": "073a14a093f8d6061ec1c4bf7ee7351eac5c4e809d8fcbda8dfee8621531c1f5",
+    "https://esm.sh/v133/preact-render-to-string@6.2.2/X-ZC9wcmVhY3RAMTAuMTguMg/denonext/jsx.js": "0d74a0c4b734f220eb390e8ea5c58a7eb44b266e734f94b9fefdaf3dce054f49",
+    "https://esm.sh/v133/preact-render-to-string@6.2.2/X-ZC9wcmVhY3RAMTAuMTguMg/denonext/preact-render-to-string.mjs": "fcf21445ae07dddc7b8fa850a99da62e23af0d1da271eda908d10a16938bda97",
+    "https://esm.sh/v134/@unhead/dom@1.8.4/denonext/dom.mjs": "0342b9990881bc7dfc0f85bf60fb9a2bcdff63afb1bbc1d3fb05e3fd7f5a2094",
+    "https://esm.sh/v134/@unhead/shared@1.8.4/denonext/shared.mjs": "bd8f7691eab21a390b68d0cbe03162113e25ff286ceb0ba315293e87f65f48bf",
+    "https://esm.sh/v134/hookable@5.5.3/denonext/hookable.mjs": "121480f6ae710cbc857323a76c8bb608297a756314202006c29aabfa98c17ba7",
+    "https://esm.sh/v134/unhead@1.8.4/denonext/unhead.mjs": "6f9202feb671b1707718ec94be5d5b289ebf10f312000a4b55734b523a9d2b9f"
+  }
+}

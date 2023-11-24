@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jacob Bleser</title>
+
+    <!-- Design Tokens -->
+    <link rel="stylesheet" href="style/tokens.css">
+
+    <!-- Default styles -->
+    <link rel="stylesheet" href="style/preflight.css">
+
+    <!-- Default styles -->
+    <link rel="stylesheet" href="style/layout.css">
+</head>
+<body>
+    <h1>Hello!</h1>
+
+    <script type="module" async>
+       class MyButton extends HTMLElement {
+            constructor() {
+                super();
+
+                console.log("Loaded")
+
+                const internals = this.attachInternals();
+
+                // check for a Declarative Shadow Root:
+                let shadow = internals.shadowRoot;
+                if (!shadow) {
+                    // there wasn't one. create a new Shadow Root:
+                    shadow = this.attachShadow({
+                        mode: 'open'
+                    });
+                    shadow.innerHTML = `<button><slot></slot></button>`;
+                } else {
+                    console.log("There is already a shadow root")
+                }
+
+                // in either case, wire up our event listener:
+                console.log("Adding event listener")
+                shadow.firstElementChild.addEventListener('click', this.handleClick);
+            }
+
+            handleClick() {
+                console.log("Clicked!")
+            }
+        }
+
+        customElements.define('nineties-button', MyButton);
+    </script>
+</body>
+</html>

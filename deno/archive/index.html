@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jacob Bleser</title>
+
+    <!-- Design Tokens -->
+    
+
+    <!-- Default styles -->
+    
+
+    <!-- Default styles -->
+    
+
+    </head><body><style>
+        :root {
+  --font: 'Gothic A1', sans-serif;
+
+  --background: #151515;
+  --foreground: #202022;
+  --text-primary: #FFFFFF;
+  --text-secondary: #949495;
+}
+/*
+Preset base styles for browser consistency and more
+intuitive styling
+
+Based on Tailwind's Preflight:
+https://unpkg.com/tailwindcss@3.3.5/src/css/preflight.css
+*/
+
+/*
+There's many different ways to apply this style.
+
+See here for discussion:
+https://github.com/mozdevs/cssremedy/issues/4
+*/
+*,
+::before,
+::after {
+  /* Prevent padding and border from affecting element width */
+  box-sizing: border-box;
+}
+
+html {
+  /* Use a consistent sensible line-height in all browsers */
+  line-height: 1.5;
+
+  /* Prevent adjustments of font size after orientation changes in iOS */
+  -webkit-text-size-adjust: 100%;
+  
+  /* Use a more readable tab size
+  -moz-tab-size: 4;
+  tab-size: 4;
+
+  /* Use the user's configured `sans` font-family by default */
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  
+  /* Use the user's configured `sans` font-feature-settings by default */
+  font-feature-settings: normal;
+  
+  /* Use the user's configured `sans` font-variation-settings by default */
+  font-variation-settings: normal;
+}
+
+body {
+  /* Remove the margin in all browsers */
+  margin: 0;
+
+  /* Inherit line-height from `html` so users can set them */
+  /* as a class directly on the `html` element */
+  line-height: inherit;
+}
+
+hr {
+  /* Add the correct height in Firefox */
+  height: 0;
+
+  /* Correct the inheritance of border color in Firefox */
+  color: inherit;
+
+  /* Ensure horizontal rules are visible by default */
+  border-top-width: 1px;
+}
+
+/* Add the correct text decoration in Chrome, Edge, and Safari. */
+abbr:where([title]) {
+  text-decoration: underline dotted;
+}
+
+
+/* Remove the default font size and weight for headings. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* Reset links to optimize for opt-in styling instead of opt-out. */
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/* Add the correct font weight in Edge and Safari. */
+b,
+strong {
+  font-weight: bolder;
+}
+
+code,
+kbd,
+samp,
+pre {
+  /* Use the user's configured `mono` font family by default */
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  /* Correct the odd `em` font sizing in all browsers */
+  font-size: 1em;
+}
+
+/* Add the correct font size in all browsers. */
+small {
+  font-size: 80%;
+}
+
+/* Prevent `sub` and `sup` elements from affecting the line height in all browsers. */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+table {
+  /* Remove text indentation from table contents in Chrome and Safari */
+  text-indent: 0; /* 1 */
+
+  /* Correct table border color inheritance in all Chrome and Safari */
+  border-color: inherit; /* 2 */
+  
+  /* Remove gaps between table borders by default */
+  border-collapse: collapse; /* 3 */
+}
+
+/* 1. Change the font styles in all browsers. */
+/* 2. Remove the margin in Firefox and Safari. */
+/* 3. Remove default padding in all browsers. */
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-feature-settings: inherit;
+  font-variation-settings: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove the inheritance of text transform in Edge and Firefox. */
+button,
+select {
+  text-transform: none;
+}
+
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  /* Correct the inability to style clickable types in iOS and Safari */
+  -webkit-appearance: button;
+
+  /* Remove default button styles */
+  background-color: transparent;
+  background-image: none;
+}
+
+/* Use the modern Firefox focus style for all focusable elements */
+:-moz-focusring {
+  outline: auto;
+}
+
+/* Remove the additional `:invalid` styles in Firefox */
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/* Add the correct vertical alignment in Chrome and Firefox. */
+progress {
+  vertical-align: baseline;
+}
+
+/* Correct the cursor style of increment and decrement buttons in Safari. */
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+[type='search'] {
+  /* Correct the odd appearance in Chrome and Safari */
+  -webkit-appearance: textfield;
+
+  /* Correct the outline style in Safari */
+  outline-offset: -2px;
+}
+
+/* Remove the inner padding in Chrome and Safari on macOS. */
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+  /* Correct the inability to style clickable types in iOS and Safari */
+  -webkit-appearance: button;
+  
+  /* Change font properties to `inherit` in Safari */
+  font: inherit;
+}
+
+/* Add the correct display in Chrome and Safari. */
+summary {
+  display: list-item;
+}
+
+/* Removes the default spacing and border for appropriate elements. */
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Reset default styling for dialogs. */
+dialog {
+  padding: 0;
+}
+
+/* Prevent resizing textareas horizontally by default. */
+textarea {
+  resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+  /* Reset the default placeholder opacity in Firefox */
+  opacity: 1;
+
+  /* Set the default placeholder color to a consistent */
+  /* standard color */
+  color: #9ca3af; /* 2 */
+}
+
+/* Set the default cursor for buttons. */
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/* Make sure disabled buttons don't get the pointer cursor. */
+:disabled {
+  cursor: default;
+}
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  /* Make replaced elements `display: block` by default */
+  display: block;
+
+  /* Add `vertical-align: middle` to align replaced elements more sensibly by default */
+  vertical-align: middle;
+}
+
+/* Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14) */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+[hidden] {
+  display: none;
+}
+
+.layout-page {
+    display: grid;
+    grid-template-columns: 420px 1fr 3fr;
+    grid-template-areas:
+        'about . content';
+    
+    // Auto-layout immediate children
+    & > section:nth-child(1) { grid-area: about; }
+    & > section:nth-child(2) { grid-area: content; }
+
+    @media screen and (max-width: 1200px) {
+        grid-template-columns: 420px 1fr 5fr;
+    }
+
+    @media screen and (max-width: 1200px) {
+        display: block;
+    }
+}
+
+        </style>
+
+
+    <main class="layout-page">
+        <section id="about">
+            <h1>Hello, I’m Jacob Bleser.</h1>
+            <p>
+                I’m an indie web and game developer currently living the dream in
+                ✨ <span class="color-rainbow">New York City</span> ✨. In college I co-founded a small web dev shop called
+                Studio Reach to help bootstrap local tech startups, and more recently
+                led the engineering efforts at a VC-backed social-dating startup called <a href="https://marriagepact.com/" target="_blank" rel="noopener">The Marriage Pact</a>, along with the <a href="https://apps.apple.com/us/app/checkmate-scan-your-friends/id6443729738" target="_blank" rel="noopener">Checkmate app</a>.
+            </p>
+            <p style="margin-top: 25px">
+                Outside of work I’m also active in the open source community, primarily
+                in <link href="https://elixir-lang.org/">Elixir and the <link href="https://bevyengine.org/">Bevy game engine for Rust.
+            </p>
+
+            <nav>
+                <ol>
+                    <nav-item><li class="text-label nav-item">
+    <button>
+        <span>01</span>
+        <x-bar><div style="width:100px; height: 100px; background-color: black"></div>
+
+</x-bar>
+        <span>EXPERIENCE</span>
+    </button>
+</li>
+
+</nav-item>
+                    {# <navitem number="01" label="EXPERIENCES" onclick="{setScroll}">
+                    <navitem number="02" label="HACKS &amp; PROJECTS" onclick="{setScroll}">
+                    <navitem number="03" label="INVOLVEMENT" onclick="{setScroll}"> #}
+                </navitem></navitem></navitem></ol>
+            </nav>
+
+            {# <div id="social-links">
+                <img src="{profilePicture}" alt="Profile Picture">
+                <ul>
+                    <li>
+                        <a href="https://github.com/megaboy101" target="_blank" rel="noopener">
+                            <github>
+                            <span>Github</span>
+                            <linkicon theme="light">
+                        </linkicon></github></a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/jacobbleser/" target="_blank" rel="noopener">
+                            <linkedin>
+                            <span>LinkedIn</span>
+                            <linkicon theme="light">
+                        </linkicon></linkedin></a>
+                    </li>
+                    <li>
+                        <a href="https://docs.google.com/document/d/1WGUI6Ib-jkLDm7kzfFZwINk2x1Wi3TQjopYROJYNbAk/edit?usp=sharing" target="_blank" rel="noopener">
+                        <staple>
+                        <span>Resume</span>
+                        <linkicon theme="light">
+                        </linkicon></staple></a>
+                    </li>
+                </ul>
+            </div> #}
+        </section>
+    </main>
+
+    <script type="module">
+        
+    import { animate } from 'https://esm.sh/motion'
+
+    customElements.define("x-bar", class extends HTMLElement {
+        static get observedAttributes() {
+            return ['active']
+        }
+
+        get active() {
+            return this.getAttribute('active')
+        }
+
+        set active(val) {
+            console.log(val)
+            this.setAttribute('active', val)
+        }
+
+        attributeChangedCallback(name, oldValue, newValue) {
+            console.log(`[${name}] changed`)
+            console.log(newValue, typeof newValue)
+            if (name === 'active' && newValue === true) {
+                animate(this, { transform: "rotate(45deg)" }, { duration: 10 })
+            } else if (name === 'active' && newValue === false) {
+                animate(this, { transform: "rotate(0deg)" }, { duration: 10 })
+            }
+        }
+    })
+
+
+    const navItems = document.getElementsByClassName('nav-item')
+
+    for (const navItem of navItems) {
+        navItem.addEventListener('mouseenter', function() {
+            const bar = navItem.getElementsByTagName('x-bar')[0]
+            // bar.setAttribute('active', true)
+            bar.active = true
+        })
+
+        navItem.addEventListener('mouseleave', function() {
+            const bar = navItem.getElementsByTagName('x-bar')[0]
+            // bar.setAttribute('active', false)
+            bar.active = false
+        })
+    }
+
+        </script>
+
+
+
+
+</body>
+</html>
