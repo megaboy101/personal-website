@@ -1,0 +1,20 @@
+{
+  "tasks": {
+    "dev": "deno run -A --watch server.tsx"
+  },
+  "imports": {
+    "@/": "./",
+    "hono": "https://deno.land/x/hono/mod.ts",
+    "hono/html": "https://deno.land/x/hono/helper.ts",
+    "hono/jsx": "https://deno.land/x/hono/jsx/index.ts",
+    "hono/middleware": "https://deno.land/x/hono/middleware.ts",
+    "hono/jsx/jsx-runtime": "https://deno.land/x/hono/jsx/jsx-runtime.ts"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
+    "types": [
+      "./types.d.ts"
+    ]
+  }
+}
