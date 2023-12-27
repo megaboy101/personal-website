@@ -27,9 +27,9 @@
     /* Prevent adjustments of font size after orientation changes in iOS */
     -webkit-text-size-adjust: 100%;
     
-    /* Use a more readable tab size */
-    -moz-tab-size: 4;
-    tab-size: 4;
+    /* Use a standard tab size, regardless of language */
+    -moz-tab-size: 2;
+    tab-size: 2;
 
     /* Use the user's configured `sans` font-family by default */
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -261,7 +261,7 @@
   }
 
   li {
-    display: block;
+    display: list-item;
   }
 
   /* Reset default styling for dialogs. */
@@ -315,6 +315,11 @@
   video {
     max-width: 100%;
     height: auto;
+  }
+
+  /* Set time elements as block displayed to match h1-h6 and p elements */
+  time {
+    display: block;
   }
 
   /* Make elements with the HTML hidden attribute stay hidden by default */

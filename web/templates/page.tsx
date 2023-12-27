@@ -1,6 +1,6 @@
 import { FC } from 'hono/jsx'
-import Nav from '@/templates/nav.tsx'
-import Footer from '@/templates/footer.tsx'
+import Nav from './nav.tsx'
+import Footer from './footer.tsx'
 
 export default ({ children }) => (
   <body layout="frame">

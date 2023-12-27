@@ -48,7 +48,7 @@ export default () => (
           <Link href="/doodles">doodles</Link>
         </LinkList>
 
-        <nav-divider></nav-divider>
+        {/* <nav-divider></nav-divider> */}
       </div>
     </class-group>
   </nav>

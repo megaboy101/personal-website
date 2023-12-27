@@ -1,9 +1,11 @@
 {
   "tasks": {
-    "dev": "deno run -A --watch server.tsx"
+    "dev": "deno run -A --unstable --watch main.ts",
+    "start": "deno run -A --unstable main.ts"
   },
   "imports": {
     "@/": "./",
+    "dotenv": "https://deno.land/std@0.210.0/dotenv/mod.ts",
     "hono": "https://deno.land/x/hono/mod.ts",
     "hono/html": "https://deno.land/x/hono/helper.ts",
     "hono/jsx": "https://deno.land/x/hono/jsx/index.ts",
