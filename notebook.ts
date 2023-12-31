@@ -77,13 +77,12 @@ export async function getNote(id: string) {
 export async function sync() {
   console.log('Syncing all notes from notion')
 
-  console.log('Syncing directory page')
+  console.log('Syncing directory')
   const sections = await syncSections()
 
   const noteSummaries = sections.flatMap(s => s.notes)
   const noteTasks = noteSummaries.map(s => syncNote(s))
 
-  console.log('Syncing content pages')
   await Promise.allSettled(noteTasks)
 }
 
@@ -95,19 +94,25 @@ async function syncSections() {
   return sections
 }
 
-async function syncNote(summary: NoteSummary) {
-  const notePageHtml = await getPageHtml(summary.id)
-  const note: Note = {
-    id: summary.id,
-    title: summary.title,
-    createdAt: summary.createdAt,
-    updatedAt: summary.updatedAt,
-    html: notePageHtml
+async function syncNote({ id, title, updatedAt, createdAt }: NoteSummary) {
+  // Only sync a note if it doesn't exist, or if it has been
+  // updated since we last synced
+  if (await getNote(id) == null || withinLastDay(new Date(updatedAt))) {
+    console.log(`Syncing note [${title}]`)
+
+    const html = await getPageHtml(id)
+    const note: Note = {
+      id,
+      title,
+      createdAt,
+      updatedAt,
+      html
+    }
+
+    await saveNote(note)
+
+    return note
   }
-
-  await saveNote(note)
-
-  return note
 }
 
 async function saveSections(sections: Section[]) {
@@ -121,4 +126,10 @@ async function saveNote(note: Note) {
 async function save(key: Deno.KvKey, value: any) {
   if (!kv) throw new Error('Not connected to notebook')
   await kv.set(key, value)
+}
+
+function withinLastDay(date: Date) {
+  const oneDayAgo = new Date().getTime() - (24 * 60 * 60 * 1000)
+  const updatedAt = date.getTime()
+  return updatedAt > oneDayAgo
 }

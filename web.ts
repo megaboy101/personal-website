@@ -11,11 +11,15 @@ import notes from "@/web/pages/notes.tsx";
 import note from "@/web/pages/note.tsx";
 import Document from '@/web/templates/document.tsx'
 
-const router = new Hono()
+/**
+ * ES Module based worker object for usage in Cloudflare
+ * workers or other worker-based runtimes
+ */
+export const router = new Hono()
 
 router.use('*', serveStatic({ root: './web/' }))
 router.use("*", notebook())
-router.get("/*", jsxRenderer(Document))
+router.get("/*", jsxRenderer(Document, { docType: true }))
 
 router.route("/", index)
 router.route("/projects", projects)
