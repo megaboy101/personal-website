@@ -47,16 +47,6 @@
       line-height: var(--type-line-height-2);
     }
 
-    /* Special style just for navigation logo */
-    &[variant="signature"] {
-      font-family: 'darlington', serif;
-      font-size: var(--type-size-8);
-      letter-spacing: var(--type-spacing-8);
-      line-height: var(--type-line-height-8);
-      font-weight: normal;
-      color: var(--neutral-8);
-    }
-
     &[variant="surface"] {
       border-radius: 4px;
       margin: 0 calc(var(--space-1) * -1);
@@ -228,5 +218,9 @@
       letter-spacing: inherit;
       line-height: inherit;
     }
+  }
+
+  svg.signature {
+    fill: var(--neutral-8);
   }
 }

@@ -1,11 +1,13 @@
 import { FC } from 'hono/jsx'
 import { useRequestContext } from 'hono/middleware';
+import { Signature } from "@/web/templates/signature.tsx";
 
 const LinkList: FC = ({ children }) => {
   return (
     <ul class="row center">
-      {
-        children.map(child => (
+      { !Array.isArray(children)
+        ? <li layout="box">{children}</li>
+        : children.map(child => (
           <li layout="box">
             {child}
           </li>
@@ -33,23 +35,22 @@ const Link: FC<{href: string}> = ({ href, children }) => {
   )
 }
 
-export default () => (
-  <nav>
-    <class-group target="a" trigger="hover" active="color-neutral-12" layout="row center gap-auto">
-      <a variant="signature" href="/">
-        Jacob Bleser
-      </a>
+export default () => {
+  return (
+    <nav>
+      <class-group target=":where(a, svg)" trigger="hover" active="color-neutral-12" layout="row center gap-auto">
+        <a href="/">
+          <Signature />
+        </a>
 
-      <div layout="row center gap-6">
-        <LinkList>
-          <Link href="/projects">projects</Link>
-          <Link href="/notes">notes</Link>
-          <Link href="/cool-stuff">cool stuff</Link>
-          <Link href="/doodles">doodles</Link>
-        </LinkList>
+        <div layout="row center gap-6">
+          <LinkList>
+            <Link href="/notes">notes</Link>
+          </LinkList>
 
-        {/* <nav-divider></nav-divider> */}
-      </div>
-    </class-group>
-  </nav>
-)
+          {/* <nav-divider></nav-divider> */}
+        </div>
+      </class-group>
+    </nav>
+  )
+}

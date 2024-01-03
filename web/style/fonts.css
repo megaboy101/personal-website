@@ -1,8 +1,2 @@
 @layer fonts {
-  @font-face {
-    font-family: "darlington";
-    src: url("fonts/darlington.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
-  }
 }
