@@ -33,9 +33,15 @@ page.get("", async c => {
 
               {
                 section.notes.map(note => (
-                  <a class="page" href={`/note/${note.id}`}>
-                    <span>{note.title}</span>
-                    <span>{formatDate(note.createdAt)}</span>
+                  <a
+                    variant="surface"
+                    layout="row gap-auto px-1 py-2"
+                    style="
+                      transition: background-color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+                    "
+                    href={`/note/${note.id}`}>
+                    <span variant="note-link">{note.title}</span>
+                    <span variant="large">{formatDate(note.createdAt)}</span>
                   </a>
                 ))
               }

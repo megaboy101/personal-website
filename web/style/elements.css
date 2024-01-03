@@ -38,38 +38,37 @@
     font-weight: 700;
   }
 
-  a.page {
-    padding: 6px 6px;
-    margin-left: -6px;
-    margin-right: -6px;
-    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    border-radius: 4px;
-
-    display: flex;
-    justify-content: space-between;
-
-    & span:first-child {
+  a {
+    &[variant="muted"] {
+      color: var(--neutral-8);
       font-family: var(--type-font-sans);
-      font-size: var(--type-size-3);
-      letter-spacing: var(--type-spacing-3);
-      line-height: var(--type-line-height-3);
-      color: var(--color-type);
-      font-weight: 600;
-      border-bottom: 1px solid var(--neutral-5);
-      padding-bottom: 1px;
+      font-size: var(--type-size-2);
+      letter-spacing: var(--type-spacing-2);
+      line-height: var(--type-line-height-2);
     }
 
-    & span:nth-child(2) {
-      font-family: var(--type-font-sans);
-      font-size: var(--type-size-3);
-      letter-spacing: var(--type-spacing-3);
-      line-height: var(--type-line-height-3);
-      color: var(--color-type);
-      font-weight: 400;
+    /* Special style just for navigation logo */
+    &[variant="signature"] {
+      font-family: 'darlington', serif;
+      font-size: var(--type-size-8);
+      letter-spacing: var(--type-spacing-8);
+      line-height: var(--type-line-height-8);
+      font-weight: normal;
+      color: var(--neutral-8);
     }
 
-    &:hover {
-      background: var(--neutral-3);
+    &[variant="surface"] {
+      border-radius: 4px;
+      margin: 0 calc(var(--space-1) * -1);
+
+      &:hover {
+        background: var(--neutral-3);
+      }
+
+      /* Passthrough visited styling to link contents */
+      &:visited :where(p, span) {
+        color: var(--color-subtype);
+      }
     }
   }
 
@@ -111,15 +110,25 @@
     font-size: var(--type-size-2);
     letter-spacing: var(--type-spacing-2);
     line-height: var(--type-line-height-2);
-  }
-  
-  [variant="small"],
-  [variant\:hover="small"]:hover {
-    color: var(--color-type);
-    font-family: var(--type-font-sans);
-    font-size: var(--type-size-2);
-    letter-spacing: var(--type-spacing-2);
-    line-height: var(--type-line-height-2);
+
+    &[variant="large"] {
+      color: var(--color-type);
+      font-family: var(--type-font-sans);
+      font-size: var(--type-size-3);
+      letter-spacing: var(--type-spacing-3);
+      line-height: var(--type-line-height-3);
+    }
+
+    &[variant="note-link"] {
+      color: var(--color-type);
+      font-family: var(--type-font-sans);
+      font-size: var(--type-size-3);
+      letter-spacing: var(--type-spacing-3);
+      line-height: var(--type-line-height-3);
+      font-weight: 600;
+      border-bottom: 1px solid var(--neutral-5);
+      padding-bottom: 1px;
+    }
   }
 
   time {
@@ -220,81 +229,4 @@
       line-height: inherit;
     }
   }
-
-
-
-
-  /* Extended Elements */
-  
-  ul.nav-list {
-    & li {
-      & span {
-        color: var(--neutral-8);
-        font-family: var(--type-font-sans);
-        font-size: var(--type-size-2);
-        letter-spacing: var(--type-spacing-2);
-        line-height: var(--type-line-height-2);
-  
-        &:hover {
-          color: var(--neutral-12);
-        }
-      }
-    }
-  }
-  
-  ul.nav-icon-list {
-    & li {
-      & svg {
-        fill: var(--neutral-8);
-        width: 20px;
-        height: 20px;
-      }
-    }
-  }
-  
-  a {
-    &[variant="muted"] {
-      color: var(--neutral-8);
-      font-family: var(--type-font-sans);
-      font-size: var(--type-size-2);
-      letter-spacing: var(--type-spacing-2);
-      line-height: var(--type-line-height-2);
-    }
-
-    /* Special style just for navigation logo */
-    &[variant="signature"] {
-      font-family: 'darlington', serif;
-      font-size: var(--type-size-8);
-      letter-spacing: var(--type-spacing-8);
-      line-height: var(--type-line-height-8);
-      font-weight: normal;
-      color: var(--neutral-8);
-    }
-  }
-  
-  
-  x-frame {
-    padding-top: var(--space-6);
-  
-    display: block;
-    width: 100%;
-    height: 100%;
-    margin: auto;
-    max-width: var(--page-width);
-  }
-  
-  x-bar {
-    display: block;
-    background-color: var(--neutral-3);
-    height: 1px;
-  }
-  
-  x-bar[vertical] {
-    width: 1px;
-    height: initial;
-  }
-  
-  class-transition {
-    display: contents;
-  }  
 }
