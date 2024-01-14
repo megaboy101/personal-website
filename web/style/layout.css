@@ -50,28 +50,28 @@
     grid-template:
         '. frame .'
       / minmax(0, 1fr) minmax(0, 900px) minmax(0, 1fr);
-    
+
+    container-type: inline-size;
+
     & > * {
       grid-area: frame;
+    }
+
+    & > * {
+      @container (max-width: 900px) {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
     }
   }
 
   [layout~="content-frame"] {
-    width: 62ch;
+    max-width: 62ch;
 
     display: flex;
     flex-flow: column nowrap;
     margin-left: auto;
     margin-right: auto;
-
-    /* display: grid;
-    grid-template:
-        '. frame .'
-      / 1fr 60ch 1fr;
-
-    & > * {
-      grid-area: frame;
-    } */
   }
 
   [layout~="box"] {

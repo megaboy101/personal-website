@@ -23,12 +23,12 @@ page.get("/:id", async c => {
   )
 
   return c.render(
-    <article layout="py-8">
-      <time variant="label" layout="pb-2" datetime={note.createdAt}>{formatDate(note.createdAt)}</time>
-
+    <article layout="py-6">
       <h1 variant="article">{note.title}</h1>
 
-      <article-content layout="col pt-6 gap-3" dangerouslySetInnerHTML={{ __html: note.html }}></article-content>
+      <time variant="label" layout="pt-2" datetime={note.createdAt}>{formatDate(note.createdAt)}</time>
+
+      <article-content layout="col pt-6 gap-5" dangerouslySetInnerHTML={{ __html: note.html }}></article-content>
     </article>
   )
 })

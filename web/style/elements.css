@@ -1,36 +1,44 @@
 @layer elements {
-  body {
+  html, body {
     background: var(--color-bg);
   }
   
   /* TYPEOGRAPHY */
   
   h1 {
-    color: var(--color-type);
+    color: var(--neutral-strong);
     font-family: var(--type-font-sans);
     font-size: var(--type-size-8);
     letter-spacing: var(--type-spacing-8);
     line-height: var(--type-line-height-8);
-    font-weight: 700;
+    font-weight: 500;
 
     &[variant="article"] {
-      font-size: var(--type-size-9);
-      letter-spacing: var(--type-spacing-9);
-      line-height: 68px;
+      font-size: var(--type-size-7);
+      letter-spacing: var(--type-spacing-7);
+      line-height: var(--type-line-height-7);
+      font-weight: 500;
     }
   }
 
   h2 {
-    color: var(--color-type);
+    color: var(--neutral-strong);
     font-family: var(--type-font-sans);
     font-size: var(--type-size-6);
     letter-spacing: var(--type-spacing-6);
     line-height: var(--type-line-height-6);
     font-weight: 700;
+
+    color: var(--neutral-strong);
+    font-family: var(--type-font-sans);
+    font-size: var(--type-size-5);
+    letter-spacing: var(--type-spacing-5);
+    line-height: var(--type-line-height-5);
+    font-weight: 500;
   }
 
   h3 {
-    color: var(--color-type);
+    color: var(--neutral-strong);
     font-family: var(--type-font-sans);
     font-size: var(--type-size-5);
     letter-spacing: var(--type-spacing-5);
@@ -57,20 +65,20 @@
 
       /* Passthrough visited styling to link contents */
       &:visited :where(p, span) {
-        color: var(--color-subtype);
+        color: var(--neutral-muted);
       }
     }
   }
 
   p {
-    color: var(--color-type);
+    color: var(--neutral-normal);
     font-family: var(--type-font-sans);
     font-size: var(--type-size-3);
     letter-spacing: var(--type-spacing-3);
     line-height: var(--type-line-height-3);
 
     &[variant="large"] {
-      color: var(--color-subtype);
+      color: var(--neutral-muted);
       font-family: var(--type-font-sans);
       font-size: var(--type-size-4);
       letter-spacing: var(--type-spacing-4);
@@ -95,14 +103,14 @@
   }
   
   span {
-    color: var(--color-type);
+    color: var(--neutral-normal);
     font-family: var(--type-font-sans);
     font-size: var(--type-size-2);
     letter-spacing: var(--type-spacing-2);
     line-height: var(--type-line-height-2);
 
     &[variant="large"] {
-      color: var(--color-type);
+      color: var(--neutral-strong);
       font-family: var(--type-font-sans);
       font-size: var(--type-size-3);
       letter-spacing: var(--type-spacing-3);
@@ -110,20 +118,23 @@
     }
 
     &[variant="note-link"] {
-      color: var(--color-type);
+      color: var(--neutral-strong);
       font-family: var(--type-font-sans);
       font-size: var(--type-size-3);
       letter-spacing: var(--type-spacing-3);
       line-height: var(--type-line-height-3);
-      font-weight: 600;
+      font-weight: 500;
       border-bottom: 1px solid var(--neutral-5);
       padding-bottom: 1px;
     }
   }
 
+
+  /* Misc */
+
   time {
     &[variant="label"] {
-      color: var(--neutral-12);
+      color: var(--neutral-10);
       font-family: var(--type-font-sans);
       font-size: var(--type-size-1);
       letter-spacing: var(--type-spacing-1);
@@ -133,27 +144,48 @@
 
   article-content {
     & h1 {
-      padding-top: var(--space-6);
-      padding-bottom: var(--space-4);
+      font-size: var(--type-size-6);
+      letter-spacing: var(--type-spacing-6);
+      line-height: var(--type-line-height-6);
+      padding-top: var(--space-5);
+      padding-bottom: var(--space-2);
+      font-weight: 500;
     }
 
     & h2 {
-      padding-top: var(--space-6);
-      /* padding-bottom: var(--space-1); */
+      padding-top: var(--space-4);
+
+      color: var(--neutral-strong);
+      font-family: var(--type-font-sans);
+      font-size: var(--type-size-5);
+      letter-spacing: var(--type-spacing-5);
+      line-height: var(--type-line-height-5);
+      font-weight: 500;
     }
 
     & h3 {
       padding-top: var(--space-6);
-      /* padding-bottom: var(--space-1); */
+
+      color: var(--neutral-strong);
+      font-family: var(--type-font-sans);
+      font-size: var(--type-size-4);
+      letter-spacing: var(--type-spacing-4);
+      line-height: var(--type-line-height-4);
+      font-weight: 500;
     }
 
     & p {
-      color: var(--color-type);
+      color: var(--neutral-normal);
       font-family: var(--type-font-sans);
       font-size: var(--type-size-3);
       letter-spacing: var(--type-spacing-3);
       line-height: var(--type-line-height-5);
     }
+
+    & strong {
+      color: var(--neutral-strong);
+    }
+
     & ul {
       list-style-position: outside;
 
@@ -178,14 +210,16 @@
     }
 
     & li {
-      color: var(--color-type);
+      color: var(--neutral-normal);
       font-family: var(--type-font-sans);
       font-size: var(--type-size-3);
-      letter-spacing: var(--type-spacing-3);
+      /* font-size: 15px; */
+      letter-spacing: var(--type-spacing-4);
       line-height: var(--type-line-height-5);
 
       &::marker {
         font-size: var(--type-size-4);
+        color: var(--neutral-8);
       }
     }
   }
@@ -193,6 +227,7 @@
   pre {
     border-radius: 12px;
     overflow: hidden;
+    border: 1px solid var(--neutral-5);
 
     & code {
       display: block;
@@ -204,7 +239,7 @@
       for the code block background 
       */
       color: #abb2bf;
-      background: #282c34;
+      background: var(--neutral-2);
     }
   }
 
