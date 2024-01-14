@@ -58,6 +58,7 @@
     &[variant="surface"] {
       border-radius: 4px;
       margin: 0 calc(var(--space-1) * -1);
+      overflow: hidden;
 
       &:hover {
         background: var(--neutral-3);
@@ -66,6 +67,12 @@
       /* Passthrough visited styling to link contents */
       &:visited :where(p, span) {
         color: var(--neutral-muted);
+      }
+
+      @media screen and (max-width: 62ch) {
+        & span:nth-child(2) {
+          display: none;
+        }
       }
     }
   }
@@ -126,6 +133,10 @@
       font-weight: 500;
       border-bottom: 1px solid var(--neutral-5);
       padding-bottom: 1px;
+
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
   }
 
