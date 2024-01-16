@@ -38,6 +38,30 @@
   --neutral-faint: var(--neutral-8);
 
   /* TYPOGRAPHY */
+  /*
+  Semantic Scale:
+  - Text-mini
+  - Text-sm
+  - Text
+  - Text-Lg
+  - Heading-mini
+  - Heading-sm
+  - Heading
+  - Heading-lg
+  - Display
+
+  Semantic weight:
+  - Normal
+  - Medium
+  - Bold
+
+  New semantic color:
+  - Bright
+  - Base
+  - Muted
+  - Faint
+  */
+
   --type-size-1: 12px;
   --type-size-2: 14px;
   --type-size-3: 16px;

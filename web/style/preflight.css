@@ -243,6 +243,16 @@
     margin: 0;
   }
 
+  /* Remove orphan text on multiline text elements */
+  blockquote,
+  dl,
+  dd,
+  p,
+  li {
+    text-wrap: pretty;
+  }
+
+
   fieldset {
     margin: 0;
     padding: 0;

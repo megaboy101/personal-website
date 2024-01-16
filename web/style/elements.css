@@ -14,9 +14,9 @@
     font-weight: 500;
 
     &[variant="article"] {
-      font-size: var(--type-size-7);
-      letter-spacing: var(--type-spacing-7);
-      line-height: var(--type-line-height-7);
+      font-size: var(--type-size-8);
+      letter-spacing: var(--type-spacing-8);
+      line-height: var(--type-line-height-8);
       font-weight: 500;
     }
   }
@@ -147,19 +147,21 @@
     &[variant="label"] {
       color: var(--neutral-10);
       font-family: var(--type-font-sans);
-      font-size: var(--type-size-1);
-      letter-spacing: var(--type-spacing-1);
-      line-height: var(--type-line-height-1);
+      font-size: var(--type-size-2);
+      letter-spacing: var(--type-spacing-2);
+      line-height: var(--type-line-height-2);
     }
   }
 
   article-content {
     & h1 {
-      font-size: var(--type-size-6);
+      /* font-size: var(--type-size-6);
       letter-spacing: var(--type-spacing-6);
-      line-height: var(--type-line-height-6);
+      line-height: var(--type-line-height-6); */
+      font-size: var(--type-size-7);
+      letter-spacing: var(--type-spacing-7);
+      line-height: var(--type-line-height-7);
       padding-top: var(--space-5);
-      padding-bottom: var(--space-2);
       font-weight: 500;
     }
 
@@ -168,9 +170,12 @@
 
       color: var(--neutral-strong);
       font-family: var(--type-font-sans);
-      font-size: var(--type-size-5);
+      /* font-size: var(--type-size-5);
       letter-spacing: var(--type-spacing-5);
-      line-height: var(--type-line-height-5);
+      line-height: var(--type-line-height-5); */
+      font-size: var(--type-size-6);
+      letter-spacing: var(--type-spacing-6);
+      line-height: var(--type-line-height-6);
       font-weight: 500;
     }
 
@@ -179,9 +184,12 @@
 
       color: var(--neutral-strong);
       font-family: var(--type-font-sans);
-      font-size: var(--type-size-4);
+      /* font-size: var(--type-size-4);
       letter-spacing: var(--type-spacing-4);
-      line-height: var(--type-line-height-4);
+      line-height: var(--type-line-height-4); */
+      font-size: var(--type-size-5);
+      letter-spacing: var(--type-spacing-5);
+      line-height: var(--type-line-height-5);
       font-weight: 500;
     }
 
@@ -193,8 +201,18 @@
       line-height: var(--type-line-height-5);
     }
 
-    & strong {
+    & a {
       color: var(--neutral-strong);
+      font-family: var(--type-font-sans);
+      font-size: var(--type-size-3);
+      letter-spacing: var(--type-spacing-3);
+      line-height: var(--type-line-height-5);
+      border-bottom: 1px solid var(--neutral-9);
+      font-weight: 700;
+    }
+
+    & strong {
+      font-weight: 700;
     }
 
     & ul {
@@ -205,6 +223,14 @@
       display: flex;
       flex-flow: column wrap;
       gap: var(--space-2);
+    }
+
+    & p + ul {
+      /*
+      Fix so that text that appears just above
+      a list doesn't have added spacing
+      */
+      margin-top: calc(-1 * var(--space-4));
     }
 
     /* Change the list style based on depth */
@@ -241,29 +267,34 @@
     border: 1px solid var(--neutral-5);
 
     & code {
+      font-size: var(--type-size-2);
       display: block;
       overflow-x: auto;
       padding: 1em;
 
       /*
-      This is a hard-coded hack to get Atom One-Dark colors
+      This is a hard-coded hack to get Atom One colors
       for the code block background 
       */
       color: #abb2bf;
       background: var(--neutral-2);
+
+      & span {
+        color: inherit;
+        font-family: inherit;
+        font-size: var(--type-size-2);
+        letter-spacing: inherit;
+        line-height: inherit;
+      }
     }
   }
 
   code {
     font-size: var(--type-size-2);
-
-    & span {
-      color: inherit;
-      font-family: inherit;
-      font-size: var(--type-size-2);
-      letter-spacing: inherit;
-      line-height: inherit;
-    }
+    background: var(--neutral-4);
+    padding: 5px 6px;
+    margin: -5px 0;
+    border-radius: 5px;
   }
 
   svg.signature {

@@ -17,8 +17,7 @@ export default ({ children }: { children?: Child } ) => (
       <link rel="stylesheet" href="/style/layout.css" />
       <link rel="stylesheet" href="/style/elements.css" />
       <link rel="stylesheet" href="/style/utilities.css" />
-
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+      <link rel="stylesheet" href="/style/syntax.css" />
 
       <script type="module" defer src="/elements/smol.js"></script>
       <script type="module" defer src="/elements/class-group.js"></script>
