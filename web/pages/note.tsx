@@ -28,7 +28,7 @@ page.get("/:id", async c => {
 
       <time variant="label" layout="pt-2" datetime={note.createdAt}>{formatDate(note.createdAt)}</time>
 
-      <article-content layout="col pt-5 gap-5" dangerouslySetInnerHTML={{ __html: note.html }}></article-content>
+      <article-content layout="col pt-6 gap-5" dangerouslySetInnerHTML={{ __html: note.html }}></article-content>
     </article>
   )
 })

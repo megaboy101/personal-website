@@ -14,9 +14,9 @@
     font-weight: 500;
 
     &[variant="article"] {
-      font-size: var(--type-size-8);
-      letter-spacing: var(--type-spacing-8);
-      line-height: var(--type-line-height-8);
+      font-size: var(--type-size-7);
+      letter-spacing: var(--type-spacing-7);
+      line-height: var(--type-line-height-7);
       font-weight: 500;
     }
   }
@@ -147,9 +147,9 @@
     &[variant="label"] {
       color: var(--neutral-10);
       font-family: var(--type-font-sans);
-      font-size: var(--type-size-2);
-      letter-spacing: var(--type-spacing-2);
-      line-height: var(--type-line-height-2);
+      font-size: var(--type-size-1);
+      letter-spacing: var(--type-spacing-1);
+      line-height: var(--type-line-height-1);
     }
   }
 
