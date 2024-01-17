@@ -84,6 +84,7 @@ export async function sync() {
   const noteTasks = noteSummaries.map(s => syncNote(s))
 
   await Promise.allSettled(noteTasks)
+  console.log('Sync complete!')
 }
 
 
@@ -140,7 +141,7 @@ async function saveNote(note: Note) {
 }
 
 async function save(key: Deno.KvKey, value: unknown) {
-  if (!kv) throw new Error('Not connected to notebook')
+  if (!kv) await connect()
 
   // We serialize data to a UTF-8 string instead of the default
   // UTF-16 format because it's more space efficient, and Deno
@@ -148,13 +149,13 @@ async function save(key: Deno.KvKey, value: unknown) {
   const valueStr = JSON.stringify(value)
   const valueBin = encoder.encode(valueStr)
 
-  return await kv.set(key, valueBin)
+  return await kv!.set(key, valueBin)
 }
 
 async function load<T>(key: Deno.KvKey) {
-  if (!kv) throw new Error('Not connected to notebook')
+  if (!kv) await connect()
 
-  const result = await kv.get<Uint8Array>(key)
+  const result = await kv!.get<Uint8Array>(key)
 
   if (result.value == null) return null
 
