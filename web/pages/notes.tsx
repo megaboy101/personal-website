@@ -21,6 +21,14 @@ page.get("", async c => {
     </div>
   )
 
+  sections.forEach(section => {
+    section.notes.sort((first, second) => (
+      first.createdAt < second.createdAt ? 1 :
+      first.createdAt > second.createdAt ? -1 :
+      0
+    ))
+  })
+
   return c.render(
     <div layout="py-8">
       <h1>notes</h1>
