@@ -15,6 +15,22 @@
     &[layout~="bottom"] {
       align-items: end;
     }
+
+    &[layout~="center"] {
+      align-items: center;
+    }
+
+    &[layout~="left"] {
+      justify-content: start;
+    }
+
+    &[layout~="right"] {
+      justify-content: end;
+    }
+
+    &[layout~="baseline"] {
+      align-items: baseline;
+    }
   }
 
   [layout~="col"] {

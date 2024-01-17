@@ -116,12 +116,13 @@
     letter-spacing: var(--type-spacing-2);
     line-height: var(--type-line-height-2);
 
-    &[variant="large"] {
-      color: var(--neutral-strong);
+    &[variant="date"] {
+      color: var(--neutral-11);
       font-family: var(--type-font-sans);
-      font-size: var(--type-size-3);
-      letter-spacing: var(--type-spacing-3);
-      line-height: var(--type-line-height-3);
+      font-size: var(--type-size-2);
+      letter-spacing: var(--type-spacing-2);
+      line-height: var(--type-line-height-2);
+      font-family: monospace;
     }
 
     &[variant="note-link"] {
