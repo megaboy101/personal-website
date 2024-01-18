@@ -16,8 +16,8 @@
       align-items: end;
     }
 
-    &[layout~="center"] {
-      align-items: center;
+    &[layout~="middle"] {
+      justify-content: center;
     }
 
     &[layout~="left"] {
