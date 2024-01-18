@@ -39,7 +39,7 @@ export default () => {
   return (
     <nav>
       <class-group target=":where(a, svg)" trigger="hover" active="color-neutral-12" layout="row center gap-auto">
-        <a href="/">
+        <a variant="box" href="/">
           <Signature />
         </a>
 

@@ -30,7 +30,7 @@ page.get("", async c => {
   })
 
   return c.render(
-    <div layout="py-8">
+    <div>
       <h1>notes</h1>
 
       <div layout="col pt-6 gap-6">
@@ -48,7 +48,7 @@ page.get("", async c => {
                       transition: background-color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
                     "
                     href={`/note/${note.id}`}>
-                    <span variant="date">{formatDate(note.createdAt)}</span>
+                    <span variant="date" layout="noshrink">{formatDate(note.createdAt)}</span>
                     <span variant="note-link">{note.title}</span>
                   </a>
                 ))

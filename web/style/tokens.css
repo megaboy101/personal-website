@@ -37,6 +37,14 @@
   --neutral-muted: var(--neutral-11);
   --neutral-faint: var(--neutral-8);
 
+  /* Brand tones */
+  --color-discord: #5865F2;
+  --color-marriagepact: rgba(255, 0, 59, 0.8);
+  --color-twitter: #ffffff;
+  --color-github: #fafbfc;
+  --color-linkedin: #0A66C2;
+  --color-google-docs: #4285F4;
+
   /* TYPOGRAPHY */
   /*
   Semantic Scale:
@@ -121,5 +129,8 @@
     --neutral-11: #646464;
     --neutral-11-5: #424242;
     --neutral-12: #202020;
+
+    --color-twitter: #14171a;
+    --color-github: #181717;
   }
 }

@@ -4,7 +4,7 @@ const page = new Hono()
 
 page.get("", c => {
   return c.render(
-    <div layout="pt-8">
+    <div>
       <h1 variant="small" layout="pb-5">
         👋 Hi, I'm Jacob
       </h1>
@@ -12,7 +12,7 @@ page.get("", c => {
       <p>
         I build apps and games for the web.
         <br/><br/>
-        Right now I work as a product engineer at <a href="https://discord.com/" style="color:#5865F2;font-weight:500;border-bottom:1px solid #5865F2">Discord</a>, and before that I was a founding engineer at a social dating startup called <a href="https://marriagepact.com/" style="color:#ff003d;font-weight:500;border-bottom:1px solid #ff003d">The Marriage Pact</a>.
+        Right now I work as a product engineer at <a href="https://discord.com/" style="color:var(--color-discord);border-color:var(--color-discord)">Discord</a>, and before that I was an early engineer at a social dating startup called <a href="https://marriagepact.com/" style="color:var(--color-marriagepact);border-color:var(--color-marriagepact)">The Marriage Pact</a>.
         <br/><br/>
         I currently live in Brooklyn, New York
       </p>
@@ -31,12 +31,12 @@ page.get("", c => {
 
       <h2 variant="small" layout="pt-8 pb-2">Connect with me</h2>
 
-      <div layout="row gap-3">
-        <a href="https://discordapp.com/users/318894685714120706" style="color:#5865F2;font-weight:500;border-bottom:1px solid #5865F2">Discord</a>
-        <a href="https://twitter.com/jacobbleser" style="color:#14171a;font-weight:500;border-bottom:1px solid #14171a">Twitter</a>
-        <a href="https://github.com/megaboy101" style="color:#181717;font-weight:500;border-bottom:1px solid #181717">Github</a>
-        <a href="https://www.linkedin.com/in/jacobbleser/" style="color:#0A66C2;font-weight:500;border-bottom:1px solid #0A66C2">LinkedIn</a>
-        <a href="https://docs.google.com/document/d/1WGUI6Ib-jkLDm7kzfFZwINk2x1Wi3TQjopYROJYNbAk/edit?usp=sharing" style="color:#4285F4;font-weight:500;border-bottom:1px solid #4285F4">Resume</a>
+      <div layout="row wrap gap-3">
+        <a href="https://discordapp.com/users/318894685714120706" style="color:var(--color-discord);border-color:var(--color-discord)">Discord</a>
+        <a href="https://twitter.com/jacobbleser" style="color:var(--color-twitter);border-color:var(--color-twitter)">Twitter</a>
+        <a href="https://github.com/megaboy101" style="color:var(--color-github);border-color:var(--color-github)">Github</a>
+        <a href="https://www.linkedin.com/in/jacobbleser/" style="color:var(--color-linkedin);border-color:var(--color-linkedin)">LinkedIn</a>
+        <a href="https://docs.google.com/document/d/1WGUI6Ib-jkLDm7kzfFZwINk2x1Wi3TQjopYROJYNbAk/edit?usp=sharing" style="color:var(--color-google-docs);border-color:var(--color-google-docs)">Resume</a>
       </div>
     </div>
   )
