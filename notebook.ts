@@ -31,6 +31,13 @@ export type Note = {
   html: string
 }
 
+/**
+ * ISO timestamp for when notes were last synced
+ */
+export type SyncTimestamp = {
+  timestamp: string
+}
+
 
 // Connection to Deno KV
 let kv: Deno.Kv | null
@@ -38,6 +45,10 @@ let kv: Deno.Kv | null
 // This is a hard-coded page ID corresponding
 // to the "Blog" page in my notion
 const SECTIONS_PAGE_ID = 'dc4d0731cf0a4fcc93c9c93de9c8927a'
+
+// In case we don't have a last-synced timestamp to work with,
+// this is how far in the past we will look to load new entries
+const OLDEST_SYNC_LOOKBACK_TS = new Date(2015, 0)
 
 // Objects for encoding/decoding Deno KV data in UTF-8
 const encoder = new TextEncoder()
@@ -77,14 +88,26 @@ export async function getNote(id: string) {
 export async function sync() {
   console.log('Syncing all notes from notion')
 
+  console.log('Checking when last synced')
+  const lastSyncedAt = await getLastSyncedAt()
+
   console.log('Syncing directory')
   const sections = await syncSections()
 
   const noteSummaries = sections.flatMap(s => s.notes)
-  const noteTasks = noteSummaries.map(s => syncNote(s))
+  const noteTasks = noteSummaries.reduce((tasks, summary) => {
+    const updatedAt = new Date(summary.updatedAt)
+    if (lastSyncedAt > updatedAt) return tasks
+    
+    return [...tasks, syncNote(summary)]
+  }, [] as Promise<Note>[])
 
   await Promise.allSettled(noteTasks)
-  console.log('Sync complete!')
+
+  const timestamp = new Date().toISOString()
+  await save(['lastSyncedAt'], {timestamp})
+
+  console.log(`Sync completed at [${timestamp}]!`)
 }
 
 
@@ -102,6 +125,13 @@ export async function clear() {
 }
 
 
+async function getLastSyncedAt() {
+  const lastSyncedAt = await load<SyncTimestamp>(['lastSyncedAt'])
+
+  return lastSyncedAt?.timestamp ? new Date(lastSyncedAt.timestamp) : OLDEST_SYNC_LOOKBACK_TS
+}
+
+
 async function syncSections() {
   const sectionPageBlocks = await getPage(SECTIONS_PAGE_ID)
   const sections = S.fromNotionBlocks(sectionPageBlocks)
@@ -111,25 +141,21 @@ async function syncSections() {
 }
 
 async function syncNote({ id, title, updatedAt, createdAt }: NoteSummary) {
-  // Only sync a note if it doesn't exist, or if it has been
-  // updated since we last synced
-  if (await getNote(id) == null || withinLastDay(new Date(updatedAt))) {
-    console.log(`Syncing note [${title}], was last updated at: [${updatedAt}]`)
+  console.log(`Syncing note [${title}], was last updated at: [${updatedAt}]`)
 
-    const html = await getPageHtml(id)
+  const html = await getPageHtml(id)
 
-    const note: Note = {
-      id,
-      title,
-      createdAt,
-      updatedAt,
-      html
-    }
-
-    await saveNote(note)
-
-    return note
+  const note: Note = {
+    id,
+    title,
+    createdAt,
+    updatedAt,
+    html
   }
+
+  await saveNote(note)
+
+  return note
 }
 
 async function saveSections(sections: Section[]) {
@@ -152,7 +178,7 @@ async function save(key: Deno.KvKey, value: unknown) {
   return await kv!.set(key, valueBin)
 }
 
-async function load<T>(key: Deno.KvKey) {
+async function load<T extends object>(key: Deno.KvKey): Promise<T | null> {
   if (!kv) await connect()
 
   const result = await kv!.get<Uint8Array>(key)
@@ -162,10 +188,4 @@ async function load<T>(key: Deno.KvKey) {
   const value: T = JSON.parse(decoder.decode(result.value))
 
   return value
-}
-
-function withinLastDay(date: Date) {
-  const oneDayAgo = new Date().getTime() - (24 * 60 * 60 * 1000)
-  const updatedAt = date.getTime()
-  return updatedAt > oneDayAgo
 }
