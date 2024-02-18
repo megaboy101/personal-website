@@ -1,0 +1,15 @@
+@layer theme {
+  :root {
+    --space-increment: 4px;
+
+    --space-1: var(--space-increment);
+    --space-2: calc(var(--space-increment) * 2);
+    --space-3: calc(var(--space-increment) * 3);
+    --space-4: calc(var(--space-increment) * 4);
+    --space-5: calc(var(--space-increment) * 6);
+    --space-6: calc(var(--space-increment) * 8);
+    --space-7: calc(var(--space-increment) * 10);
+    --space-8: calc(var(--space-increment) * 12);
+    --space-9: calc(var(--space-increment) * 16);
+  }
+}

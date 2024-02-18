@@ -1,0 +1,15 @@
+@layer elements {
+  .surface {
+    &[ui-rounded] {
+      border-radius: 4px;
+    }
+
+    &[ui-interactions~="hover"]:hover {
+      background-color: var(--neutral-3);
+    }
+
+    &[ui-interactions~="active"]:active {
+      background-color: var(--neutral-5);
+    }
+  }
+}

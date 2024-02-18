@@ -1,17 +1,19 @@
 {
   "tasks": {
     "dev": "deno run -A --unstable --watch main.ts",
-    "start": "deno run -A --unstable main.ts",
+    "start": "deno run -Ar --unstable main.ts",
     "deploy": "fly deploy",
     "status": "fly status"
   },
   "imports": {
     "@/": "./",
-    "hono": "https://deno.land/x/hono/mod.ts",
-    "hono/html": "https://deno.land/x/hono/helper.ts",
-    "hono/jsx": "https://deno.land/x/hono/jsx/index.ts",
-    "hono/middleware": "https://deno.land/x/hono/middleware.ts",
-    "hono/jsx/jsx-runtime": "https://deno.land/x/hono/jsx/jsx-runtime.ts"
+    "preact": "https://esm.sh/preact",
+    "hono": "https://deno.land/x/hono@v3.12.7/mod.ts",
+    "hono/html": "https://deno.land/x/hono@v3.12.7/helper.ts",
+    "hono/jsx": "https://deno.land/x/hono@v3.12.7/jsx/index.ts",
+    "hono/middleware": "https://deno.land/x/hono@v3.12.7/middleware.ts",
+    "hono/jsx/jsx-runtime": "https://deno.land/x/hono@v3.12.7/jsx/jsx-runtime.ts",
+    "panda/dev": "https://esm.sh/@pandacss/dev"
   },
   "compilerOptions": {
     "jsx": "react-jsx",

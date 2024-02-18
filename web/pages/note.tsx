@@ -19,16 +19,19 @@ page.get("/:id", async c => {
   const note = await getNote(id)
 
   if (!note) return c.render(
-    <h1>404</h1>
+    <h1 class="heading">404</h1>
   )
 
   return c.render(
-    <article layout="py-6">
-      <h1 variant="article">{note.title}</h1>
+    <article class="flex"  ui-py="6">
+      <div class="flex"  ui-gap="6">
+        <div class="flex"  ui-gap="2">
+          <h1 class="heading">{note.title}</h1>
+          <time class="text" ui-size="small" ui-color="muted" datetime={note.createdAt}>{formatDate(note.createdAt)}</time>
+        </div>
 
-      <time variant="label" layout="pt-2" datetime={note.createdAt}>{formatDate(note.createdAt)}</time>
-
-      <article-content layout="col pt-6 gap-5" dangerouslySetInnerHTML={{ __html: note.html }}></article-content>
+        <div class="article-content" dangerouslySetInnerHTML={{ __html: note.html }}></div>
+      </div>
     </article>
   )
 })

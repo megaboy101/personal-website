@@ -4,7 +4,7 @@ const page = new Hono()
 
 page.get("", c => {
   return c.render(
-    <h1 style="color:white;">projects</h1>
+    <h1 class="heading">projects</h1>
   )
 })
 

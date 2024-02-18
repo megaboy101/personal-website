@@ -11,7 +11,7 @@ import { fetch } from '@/web.ts'
 // await it since it can be safely resolved
 // in the background, and we don't want it
 // to delay server startup
-sync()
+// sync()
 
 // Start our CRON scheduler
 // const syncSchedule = Deno.env.get('NOTION_SYNC_SCHEDULE') ?? '*/5 * * * *' // Every 5 minutes by default

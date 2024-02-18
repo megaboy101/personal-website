@@ -12,13 +12,25 @@ function formatDate(dateStr: string) {
 }
 
 
+function NoteLink({ note }: any) {
+  return (
+    <a class="flex" ui-bx="1" href={`/note/${note.id}`}>
+      <article class="surface" ui-rounded ui-interactions="hover active">
+        <div class="flex" ui-row ui-px="1" ui-py="2" ui-gap="4" ui-align="baseline" ui-width="full">
+          <time class="text" ui-noshrink ui-size="small" ui-color="muted" ui-font="monospace" datetime={note.createdAt}>{formatDate(note.createdAt)}</time>
+          <h2 class="text" ui-size="regular" ui-weight="medium" ui-underlined ui-truncated ui-interactions="visit">{note.title}</h2>
+        </div>
+      </article>
+    </a>
+  )
+}
+
+
 page.get("", async c => {
   const sections = await getSections()
 
   if (sections === null) return c.render(
-    <div layout="py-8">
-      <h1>notes</h1>
-    </div>
+    <h1 class="heading">notes</h1>
   )
 
   sections.forEach(section => {
@@ -30,29 +42,22 @@ page.get("", async c => {
   })
 
   return c.render(
-    <div>
-      <h1>notes</h1>
+    <div class="flex"  ui-gap="6">
+      <h1 class="heading">notes</h1>
 
-      <div layout="col pt-6 gap-6">
+      <div class="flex" ui-gap="6">
         {
           sections.map(section => (
-            <div>
-              <h2 layout="pb-2">{section.title}</h2>
+            <div class="flex" ui-gap="2">
+              <h2 class="heading" ui-size="mini">{section.title}</h2>
 
-              {
-                section.notes.map(note => (
-                  <a
-                    variant="surface"
-                    layout="row gap-4 px-1 py-2 left baseline"
-                    style="
-                      transition: background-color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-                    "
-                    href={`/note/${note.id}`}>
-                    <span variant="date" layout="noshrink">{formatDate(note.createdAt)}</span>
-                    <span variant="note-link">{note.title}</span>
-                  </a>
-                ))
-              }
+              <div>
+                {
+                  section.notes.map(note => (
+                    <NoteLink note={note} />
+                  ))
+                }
+              </div>
             </div>
           ))
         }
