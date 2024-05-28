@@ -1,5 +1,5 @@
 import { connect } from '@/notebook.ts'
-import { Context, MiddlewareHandler, Next } from 'hono';
+import { Context, MiddlewareHandler, Next } from '@hono';
 
 /**
  * Hono middleware for connecting to notebook

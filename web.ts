@@ -2,8 +2,9 @@
  * HTTP Request handler
  */
 
-import { Hono } from 'hono'
-import { jsxRenderer, serveStatic } from "hono/middleware"
+import { Hono } from '@hono'
+import { serveStatic } from '@hono/deno'
+import { jsxRenderer } from '@hono/jsx-renderer'
 import { notebook } from '@/notebook/middleware.ts'
 import index from "@/web/pages/index.tsx";
 import projects from "@/web/pages/projects.tsx";

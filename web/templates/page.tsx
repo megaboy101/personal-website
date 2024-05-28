@@ -1,7 +1,8 @@
 import Nav from './nav.tsx'
 import Footer from './footer.tsx'
+import { Child } from "@hono/jsx";
 
-export default ({ children }) => (
+export default ({ children }: {children: Child}) => (
   <body
     class="flex"
     ui-minheight="device"

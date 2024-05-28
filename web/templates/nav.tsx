@@ -1,8 +1,8 @@
-import { FC } from 'hono/jsx'
-import { useRequestContext } from 'hono/middleware';
+import { Child } from '@hono/jsx'
+import { useRequestContext } from '@hono/jsx-renderer';
 import { Signature } from "@/web/templates/signature.tsx";
 
-const LinkList: FC = ({ children }) => {
+const LinkList = ({ children }: { children: Child }) => {
   return (
     <ul class="flex" ui-row ui-align="center">
       { !Array.isArray(children)
@@ -21,7 +21,7 @@ const LinkList: FC = ({ children }) => {
   )
 }
 
-const Link: FC<{href: string}> = ({ href, children }) => {
+const Link = ({ href, children }: { href: string, children: Child }) => {
   const ctx = useRequestContext()
 
   const currentRoute = ctx.req.path === href;

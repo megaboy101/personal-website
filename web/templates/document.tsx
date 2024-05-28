@@ -1,4 +1,4 @@
-import { FC, Child } from 'hono/jsx'
+import { Child } from '@hono/jsx'
 import Page from './page.tsx'
 
 
