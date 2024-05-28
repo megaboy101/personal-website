@@ -22,17 +22,12 @@ const LinkList = ({ children }: { children: Child }) => {
 }
 
 const Link = ({ href, children }: { href: string, children: Child }) => {
-  const ctx = useRequestContext()
-
-  const currentRoute = ctx.req.path === href;
-
   return (
     <a
       class="text"
       ui-size="small"
       ui-color="faint"
       ui-interactions="hover current-link"
-      aria-current={currentRoute ? 'page' : null}
       href={href}
     >
       {children}
@@ -41,13 +36,9 @@ const Link = ({ href, children }: { href: string, children: Child }) => {
 }
 
 export default () => {
-  const ctx = useRequestContext()
-
-  const currentRoute = ctx.req.path === "/";
-
   return (
     <nav class="flex" ui-row ui-align="center" ui-gap="auto">
-      <a href="/" aria-current={currentRoute ? 'page' : null}>
+      <a href="/">
         <Signature />
       </a>
 

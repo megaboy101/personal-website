@@ -11,6 +11,7 @@ import projects from "@/web/pages/projects.tsx";
 import notes from "@/web/pages/notes.tsx";
 import note from "@/web/pages/note.tsx";
 import Document from '@/web/templates/document.tsx'
+import { ariaCurrent } from "@/middleware.ts";
 
 /**
  * ES Module based worker object for usage in Cloudflare
@@ -22,6 +23,7 @@ router.use('/style/*', serveStatic({ root: './web/' }))
 router.use('/elements/*', serveStatic({ root: './web/' }))
 router.use('*', notebook())
 router.get("/*", jsxRenderer(Document, { docType: true }))
+router.get('*', ariaCurrent)
 
 router.route("/", index)
 router.route("/projects", projects)
