@@ -1,7 +1,7 @@
 /**
  * Kicks off all our running services and processes
  */
-import 'https://deno.land/std@0.210.0/dotenv/load.ts'
+import '@std/dotenv/load'
 import { sync } from '@/notebook.ts'
 import { fetch } from '@/web.ts'
 
