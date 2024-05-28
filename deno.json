@@ -7,13 +7,11 @@
   },
   "imports": {
     "@/": "./",
-    "preact": "https://esm.sh/preact",
-    "hono": "https://deno.land/x/hono@v3.12.7/mod.ts",
-    "hono/html": "https://deno.land/x/hono@v3.12.7/helper.ts",
-    "hono/jsx": "https://deno.land/x/hono@v3.12.7/jsx/index.ts",
-    "hono/middleware": "https://deno.land/x/hono@v3.12.7/middleware.ts",
-    "hono/jsx/jsx-runtime": "https://deno.land/x/hono@v3.12.7/jsx/jsx-runtime.ts",
-    "panda/dev": "https://esm.sh/@pandacss/dev"
+    "hono": "https://deno.land/x/hono@v4.3.11/mod.ts",
+    "hono/html": "https://deno.land/x/hono@v4.3.11/helper.ts",
+    "hono/jsx": "https://deno.land/x/hono@v4.3.11/jsx/index.ts",
+    "hono/middleware": "https://deno.land/x/hono@v4.3.11/middleware.ts",
+    "hono/jsx/jsx-runtime": "https://deno.land/x/hono@v4.3.11/jsx/jsx-runtime.ts"
   },
   "compilerOptions": {
     "jsx": "react-jsx",

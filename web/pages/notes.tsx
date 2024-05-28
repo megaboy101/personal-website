@@ -1,5 +1,5 @@
 import { Hono } from 'hono'
-import { getSections } from "@/notebook.ts";
+import { NoteSummary, getSections } from "@/notebook.ts";
 
 const page = new Hono()
 
@@ -12,7 +12,7 @@ function formatDate(dateStr: string) {
 }
 
 
-function NoteLink({ note }: any) {
+function NoteLink({ note }: { note: NoteSummary }) {
   return (
     <a class="flex" ui-bx="1" href={`/note/${note.id}`}>
       <article class="surface" ui-rounded ui-interactions="hover active">

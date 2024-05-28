@@ -17,8 +17,9 @@ import Document from '@/web/templates/document.tsx'
  */
 export const router = new Hono()
 
-router.use('*', serveStatic({ root: './web/' }))
-router.use("*", notebook())
+router.use('/style/*', serveStatic({ root: './web/' }))
+router.use('/elements/*', serveStatic({ root: './web/' }))
+router.use('*', notebook())
 router.get("/*", jsxRenderer(Document, { docType: true }))
 
 router.route("/", index)

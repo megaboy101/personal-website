@@ -1,5 +1,5 @@
 import { Hono } from 'hono'
-import type { FC } from 'hono/jsx'
+import type { FC, Child } from 'hono/jsx'
 
 const page = new Hono()
 
@@ -49,9 +49,10 @@ const links: { readonly [k in LinkedPage]: LinkData } = {
 
 type LinkProps = {
   to: LinkedPage
+  children: Child
 }
 
-const Link: FC<LinkProps> = ({ to, children }) => {
+const Link = ({ to, children }: LinkProps) => {
   return (
     <a
       class="text"
