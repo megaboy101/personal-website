@@ -10,18 +10,15 @@ import index from "@/web/pages/index.tsx";
 import projects from "@/web/pages/projects.tsx";
 import notes from "@/web/pages/notes.tsx";
 import note from "@/web/pages/note.tsx";
-import Document from '@/web/templates/document.tsx'
+import Page from '@/web/page.tsx'
 
-/**
- * ES Module based worker object for usage in Cloudflare
- * workers or other worker-based runtimes
- */
-export const router = new Hono()
+
+const router = new Hono()
 
 router.use('/ui/*', serveStatic({ root: './web/' }))
 router.use('/elements/*', serveStatic({ root: './web/' }))
 router.use('*', notebook())
-router.get("/*", jsxRenderer(Document, { docType: true }))
+router.get("/*", jsxRenderer(Page, { docType: true }))
 
 router.route("/", index)
 router.route("/projects", projects)
