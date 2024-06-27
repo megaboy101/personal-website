@@ -1,19 +1,23 @@
+/**
+ * Notebook API backed by `notion`
+ */
+
 import { getPage, getPageHtml } from '@/notion.ts'
-import * as S from '@/notebook/section.ts'
+import * as C from './notebook/collection.ts'
 
 
 /**
- * A labeled group of notes
+ * A labeled group of entries
  */
-export type Section = {
-  title: string,
-  notes: NoteSummary[]
+export type Collection = {
+  label: string,
+  entries: Summary[]
 }
 
 /**
- * Surface level details about a note.
+ * Basic details about an `Entry`.
  */
-export type NoteSummary = {
+export type Summary = {
   id: string,
   title: string,
   createdAt: string,
@@ -21,9 +25,9 @@ export type NoteSummary = {
 }
 
 /**
- * A full note
+ * The full content of a single entry
  */
-export type Note = {
+export type Entry = {
   id: string,
   title: string,
   createdAt: string
@@ -32,7 +36,7 @@ export type Note = {
 }
 
 /**
- * ISO timestamp for when notes were last synced
+ * ISO timestamp for when entries were last synced
  */
 export type SyncTimestamp = {
   timestamp: string
@@ -44,7 +48,7 @@ let kv: Deno.Kv | null
 
 // This is a hard-coded page ID corresponding
 // to the "Blog" page in my notion
-const SECTIONS_PAGE_ID = 'dc4d0731cf0a4fcc93c9c93de9c8927a'
+const COLLECTIONS_PAGE_ID = 'dc4d0731cf0a4fcc93c9c93de9c8927a'
 
 // In case we don't have a last-synced timestamp to work with,
 // this is how far in the past we will look to load new entries
@@ -67,47 +71,47 @@ export async function connect() {
 
 
 /**
- * Fetches a list of notes grouped by section
+ * Fetches a list of entries grouped by collection
  */
-export async function getSections() {
-  return await load<Section[]>(['sections'])
+export async function getCollections() {
+  return await load<Collection[]>(['sections'])
 }
 
 
 /**
- * Fetches the full content of a single note
+ * Fetches the full content of a single entry
  */
-export async function getNote(id: string) {
-  return await load<Note>(['note', id])
+export async function getEntry(id: string) {
+  return await load<Entry>(['note', id])
 }
 
 
 /**
- * Sync notes from Notion into local KV storage
+ * Sync entries from Notion into local KV storage
  */
 export async function sync() {
-  console.log('Syncing all notes from notion')
+  console.info('Syncing all entries')
 
-  console.log('Checking when last synced')
+  console.info('Checking when last synced')
   const lastSyncedAt = await getLastSyncedAt()
 
-  console.log('Syncing directory')
-  const sections = await syncSections()
+  console.info('Syncing directory')
+  const collections = await syncCollections()
 
-  const noteSummaries = sections.flatMap(s => s.notes)
-  const noteTasks = noteSummaries.reduce((tasks, summary) => {
+  const summaries = collections.flatMap(c => c.entries)
+  const entryTasks = summaries.reduce((tasks, summary) => {
     const updatedAt = new Date(summary.updatedAt)
     if (lastSyncedAt > updatedAt) return tasks
     
-    return [...tasks, syncNote(summary)]
-  }, [] as Promise<Note>[])
+    return [...tasks, syncEntry(summary)]
+  }, [] as Promise<Entry>[])
 
-  await Promise.allSettled(noteTasks)
+  await Promise.allSettled(entryTasks)
 
   const timestamp = new Date().toISOString()
   await save(['lastSyncedAt'], {timestamp})
 
-  console.log(`Sync completed at [${timestamp}]!`)
+  console.info(`Sync completed at [${timestamp}]!`)
 }
 
 
@@ -132,20 +136,20 @@ async function getLastSyncedAt() {
 }
 
 
-async function syncSections() {
-  const sectionPageBlocks = await getPage(SECTIONS_PAGE_ID)
-  const sections = S.fromNotionBlocks(sectionPageBlocks)
-  await saveSections(sections)
+async function syncCollections() {
+  const collectionsPageBlocks = await getPage(COLLECTIONS_PAGE_ID)
+  const collections = C.fromNotionBlocks(collectionsPageBlocks)
+  await saveCollections(collections)
 
-  return sections
+  return collections
 }
 
-async function syncNote({ id, title, updatedAt, createdAt }: NoteSummary) {
-  console.log(`Syncing note [${title}], was last updated at: [${updatedAt}]`)
+async function syncEntry({ id, title, updatedAt, createdAt }: Summary) {
+  console.log(`Syncing entry [${title}], was last updated at: [${updatedAt}]`)
 
   const html = await getPageHtml(id)
 
-  const note: Note = {
+  const entry: Entry = {
     id,
     title,
     createdAt,
@@ -153,17 +157,17 @@ async function syncNote({ id, title, updatedAt, createdAt }: NoteSummary) {
     html
   }
 
-  await saveNote(note)
+  await saveEntry(entry)
 
-  return note
+  return entry
 }
 
-async function saveSections(sections: Section[]) {
-  return await save(['sections'], sections)
+async function saveCollections(collections: Collection[]) {
+  return await save(['sections'], collections)
 }
 
-async function saveNote(note: Note) {
-  return await save(['note', note.id], note)
+async function saveEntry(entry: Entry) {
+  return await save(['note', entry.id], entry)
 }
 
 async function save(key: Deno.KvKey, value: unknown) {
