@@ -50,7 +50,7 @@
     line-height: inherit;
 
     /* Ensure the root visual element always takes up the full screen*/
-    min-width: 100dvw;
+    /* min-width: 100dvw; */
     min-height: 100dvh;
 
     /* Improve text appearance on very crisp displays */
@@ -90,6 +90,11 @@
   a {
     color: inherit;
     text-decoration: inherit;
+  }
+
+  /* Don't put address contents in italics */
+  address {
+    font-style: normal;
   }
 
   /* Add the correct font weight in Edge and Safari. */
@@ -265,9 +270,25 @@
   ol,
   ul,
   menu {
+    /* Remove default list stylng */
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+
+  div,
+  ul,
+  ol,
+  main,
+  header,
+  footer,
+  section,
+  article,
+  nav,
+  aside {
+    /* Remove the box from most container elements by default */
+    /* NOTE: NOT li, due to accessibility bug */
+    /* display: contents; */
   }
 
   li {

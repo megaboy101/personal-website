@@ -1,0 +1,29 @@
+@layers preflight, theme, elements, components, syntax;
+
+@import "/ui/preflight.css";
+
+@import "/ui/theme/color.css";
+@import "/ui/theme/spacing.css";
+@import "/ui/theme/typography.css";
+@import "/ui/theme/syntax.css";
+
+@import "/ui/components/page.css";
+@import "/ui/components/nav.css";
+@import "/ui/components/footer.css";
+@import "/ui/components/divider.css";
+
+@import "/ui/pages/index.css";
+@import "/ui/pages/notes.css";
+@import "/ui/pages/note.css";
+
+
+/* New layout theory */
+/*
+
+preflight
+components
+pages/screens
+exceptions
+
+
+*/

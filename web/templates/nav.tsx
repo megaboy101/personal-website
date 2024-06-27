@@ -1,52 +1,29 @@
-import { Child } from '@hono/jsx'
-import { useRequestContext } from '@hono/jsx-renderer';
 import { Signature } from "@/web/templates/signature.tsx";
+import { Child } from '@hono/jsx'
+import { useRequestContext } from "@hono/jsx-renderer";
 
-const LinkList = ({ children }: { children: Child }) => {
-  return (
-    <ul class="flex" ui-row ui-align="center">
-      { !Array.isArray(children)
-        ? (
-          <li class="flex" ui-align="center" ui-justify="center">
-            {children}
-          </li>
-        )
-        : children.map(child => (
-          <li class="flex" ui-align="center" ui-justify="center">
-            {child}
-          </li>
-        ))
-      }
-    </ul>
-  )
-}
 
-const Link = ({ href, children }: { href: string, children: Child }) => {
+function Link({ href, children }: { href: string; children: Child }) {
+  const c = useRequestContext()
+  const currentPath = c.req.path === href
+
   return (
-    <a
-      class="text"
-      ui-size="small"
-      ui-color="faint"
-      ui-interactions="hover current-link"
-      href={href}
-    >
-      {children}
-    </a>
+    <a href={href} {...(currentPath ? { 'aria-current': 'page' } : null)}>{children}</a>
   )
 }
 
 export default () => {
   return (
-    <nav class="flex" ui-row ui-align="center" ui-gap="auto">
-      <a href="/">
-        <Signature />
-      </a>
+    <header>
+      <nav>
+        <Link href="/">
+          <Signature />
+        </Link>
 
-      <div class="flex" ui-row ui-align="center" ui-gap="6">
-        <LinkList>
-          <Link href="/notes">notes</Link>
-        </LinkList>
-      </div>
-    </nav>
+        <ul>
+          <li><Link href="/notes">notes</Link></li>
+        </ul>
+      </nav>
+    </header>
   )
 }

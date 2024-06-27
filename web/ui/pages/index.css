@@ -1,0 +1,33 @@
+:where(main#index) {
+  h1 {
+    margin-bottom: var(--space-5);
+  }
+
+  h2 {
+    margin-bottom: var(--space-3);
+  }
+
+  jb-divider {
+    margin: var(--space-8) auto;
+  }
+
+  p {
+    margin: var(--text-leading-3) 0;
+
+    &:last-of-type {
+      margin-bottom: var(--space-8);
+    }
+  }
+
+  a {
+    display: inline;
+    font-weight: 500;
+    border-bottom: 1px solid currentColor;
+  }
+
+  address {
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--space-3);
+  }
+}

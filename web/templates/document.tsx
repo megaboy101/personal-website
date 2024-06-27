@@ -10,7 +10,7 @@ export default ({ children }: { children?: Child } ) => (
 
       <script type="module" defer src="https://cdn.skypack.dev/@hotwired/turbo@7.3?min"></script>
 
-      <link rel="stylesheet" href="/style/style.css" />
+      <link rel="stylesheet" href="/ui/style.css" />
 
       <title>Jacob Bleser</title>
     </head>

@@ -1,10 +1,25 @@
-@layer components {
-  .article-content {
+:where(main#note) {
+  header {
+    margin-bottom: var(--space-6);
+
+    h1 {
+      margin-bottom: var(--space-2);
+    }
+
+    time {
+      font-size: var(--text-size-2);
+      line-height: var(--text-leading-2);
+      letter-spacing: var(--text-tracking-2);
+      color: var(--text-color-muted);
+    }
+  }
+
+  article-content {
     display: flex;
     flex-flow: column nowrap;
     gap: var(--space-5);
 
-    & h1 {
+    h1 {
       color: var(--text-color-bright);
       font-size: var(--text-size-7);
       letter-spacing: var(--text-tracking-7);
@@ -13,7 +28,7 @@
       font-weight: 500;
     }
 
-    & h2 {
+    h2 {
       margin-top: var(--space-4);
 
       color: var(--text-color-bright);
@@ -24,7 +39,7 @@
       font-weight: 500;
     }
 
-    & h3 {
+    h3 {
       margin-top: var(--space-6);
 
       color: var(--text-color-bright);
@@ -35,7 +50,7 @@
       font-weight: 500;
     }
 
-    & p {
+    p {
       color: var(--text-color-neutral);
       font-family: var(--text-sans);
       font-size: var(--text-size-3);
@@ -43,7 +58,8 @@
       line-height: var(--text-leading-5);
     }
 
-    & a {
+    a {
+      display: inline;
       color: var(--text-color-bright);
       font-family: var(--text-sans);
       font-size: var(--text-size-3);
@@ -53,11 +69,11 @@
       font-weight: 700;
     }
 
-    & strong {
+    strong {
       font-weight: 700;
     }
 
-    & ul {
+    ul {
       list-style-position: outside;
 
       margin-left: var(--space-5);
@@ -67,7 +83,7 @@
       gap: var(--space-2);
     }
 
-    & p + ul {
+    p + ul {
       /*
       Fix so that text that appears just above
       a list doesn't have added spacing
@@ -76,19 +92,19 @@
     }
 
     /* Change the list style based on depth */
-    & ul { list-style-type: disc; }
-    & ul ul { list-style-type: circle; }
-    & ul ul ul { list-style-type: square; }
+    ul { list-style-type: disc; }
+    ul ul { list-style-type: circle; }
+    ul ul ul { list-style-type: square; }
 
     /**
      * Give nested list containers some extra margin
      * so they honor the list-item gap
      */
-    & li > ul {
+    li > ul {
       margin-top: var(--space-2);
     }
 
-    & li {
+    li {
       color: var(--text-color-neutral);
       font-family: var(--text-sans);
       font-size: var(--text-size-3);
@@ -101,14 +117,15 @@
       }
     }
 
-    & pre {
+    pre {
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid var(--neutral-5);
   
-      & code {
+      code {
         font-size: var(--text-size-2);
         display: block;
+        width: 100%;
         overflow-x: auto;
         padding: 1em;
   
@@ -125,7 +142,7 @@
           }
         }
   
-        & span {
+        span {
           font-family: inherit;
           font-size: var(--text-size-2);
           letter-spacing: inherit;
@@ -134,7 +151,8 @@
       }
     }
   
-    & code {
+    code {
+      display: inline;
       font-size: var(--text-size-2);
       background: var(--neutral-4);
       padding: 5px 6px;

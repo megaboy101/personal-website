@@ -1,0 +1,29 @@
+body {
+  margin: auto;
+  width: min(100%, 932px);
+  padding: 0 var(--space-4);
+
+  background-color: var(--neutral-1);
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-template:
+    'header header header' min-content
+    '. main .' 1fr
+    'footer footer footer' min-content
+    / 1fr min(100%, 62ch) 1fr;
+
+  > header {
+    grid-area: header;
+    margin: var(--space-6) 0;
+  }
+
+  > main {
+    grid-area: main;
+  }
+
+  > footer {
+    grid-area: footer;
+    margin: var(--space-3) 0;
+  }
+}
