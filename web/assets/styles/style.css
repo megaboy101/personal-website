@@ -1,0 +1,17 @@
+@layers preflight, theme, elements, components, syntax;
+
+@import "/styles/preflight.css";
+
+@import "/styles/theme/color.css";
+@import "/styles/theme/spacing.css";
+@import "/styles/theme/typography.css";
+@import "/styles/theme/syntax.css";
+
+@import "/styles/components/page.css";
+@import "/styles/components/nav.css";
+@import "/styles/components/footer.css";
+@import "/styles/components/divider.css";
+
+@import "/styles/pages/index.css";
+@import "/styles/pages/notes.css";
+@import "/styles/pages/note.css";

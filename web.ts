@@ -15,8 +15,9 @@ import Page from '@/web/page.tsx'
 
 const router = new Hono()
 
-router.use('/ui/*', serveStatic({ root: './web/' }))
-router.use('/elements/*', serveStatic({ root: './web/' }))
+router.use('/styles/*', serveStatic({ root: './web/assets/' }))
+router.use('/scripts/*', serveStatic({ root: './web/assets/' }))
+router.use('/favicon.*', serveStatic({ root: './web/assets/' }))
 router.use('*', notebook())
 router.get("/*", jsxRenderer(Page, { docType: true }))
 
