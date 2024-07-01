@@ -1,5 +1,5 @@
 import { Hono } from '@hono'
-import { getNote } from "@/notebook.ts";
+import { getEntry } from "@/notebook.ts";
 
 const page = new Hono()
 
@@ -16,7 +16,7 @@ function formatDate(dateStr: string) {
 page.get("/:id", async c => {
   const id = c.req.param('id')
 
-  const note = await getNote(id)
+  const note = await getEntry(id)
 
   if (!note) return c.render(
     <h1>404</h1>

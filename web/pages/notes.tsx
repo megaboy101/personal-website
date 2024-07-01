@@ -1,5 +1,5 @@
 import { Hono } from '@hono'
-import { NoteSummary, getSections } from "@/notebook.ts";
+import { Summary, getCollections } from "@/notebook.ts";
 
 const page = new Hono()
 
@@ -11,7 +11,7 @@ function formatDate(dateStr: string) {
   return `${months[date.getMonth()]} ${date.getFullYear()}`
 }
 
-function NoteLink({ note }: { note: NoteSummary }) {
+function NoteLink({ note }: { note: Summary }) {
   return (
     <article>
         <h3>
@@ -26,14 +26,14 @@ function NoteLink({ note }: { note: NoteSummary }) {
 
 
 page.get("", async c => {
-  const sections = await getSections()
+  const collections = await getCollections()
 
-  if (sections === null) return c.render(
+  if (collections === null) return c.render(
     <h1>notes</h1>
   )
 
-  sections.forEach(section => {
-    section.notes.sort((first, second) => (
+  collections.forEach(c => {
+    c.entries.sort((first, second) => (
       first.createdAt < second.createdAt ? 1 :
       first.createdAt > second.createdAt ? -1 :
       0
@@ -44,13 +44,13 @@ page.get("", async c => {
     <main id="notes">
       <h1>notes</h1>
       {
-        sections.map(section => (
+        collections.map(c => (
           <section>
-            <h2>{section.title}</h2>
+            <h2>{c.label}</h2>
 
             {
-              section.notes.map(note => (
-                <NoteLink note={note} />
+              c.entries.map(entry => (
+                <NoteLink note={entry} />
               ))
             }
           </section>

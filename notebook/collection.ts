@@ -17,7 +17,7 @@ const toSummary = (childPage: ChildPageBlockObjectResponse): Summary => ({
   updatedAt: childPage.last_edited_time
 })
 
-const addSummary = (collection: Collection, summary: Summary) => ({ ...collection, notes: [...collection.entries, summary] })
+const addSummary = (collection: Collection, summary: Summary): Collection => ({ ...collection, entries: [...collection.entries, summary] })
 
 /**
  * Converts a list of Notion blocks into a list of collections
