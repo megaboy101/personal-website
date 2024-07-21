@@ -14,10 +14,11 @@ import Page from '@/web/page.tsx'
 
 
 const router = new Hono()
+const staticHandler = serveStatic({ root: '/app' })
 
-router.use('/styles/*', serveStatic({ root: './src/web/assets/' }))
-router.use('/scripts/*', serveStatic({ root: './src/web/assets/' }))
-router.use('/favicon.*', serveStatic({ root: './src/web/assets/' }))
+router.use('/styles/*', staticHandler)
+router.use('/scripts/*', staticHandler)
+router.use('/favicon.*', staticHandler)
 router.use('*', notebook())
 router.get("/*", jsxRenderer(Page, { docType: true }))
 
