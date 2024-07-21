@@ -4,7 +4,6 @@ type Job<T> = {
   reject: (reason?: any) => void
 }
 
-
 const THROTTLE_DELAY = 500
 const queue: Job<any>[] = []
 let running = false
@@ -33,7 +32,7 @@ async function run() {
   const {
     handler,
     resolve,
-    reject
+    reject,
   } = queue.shift()!
 
   try {

@@ -1,9 +1,9 @@
-import { Client } from 'npm:@notionhq/client'
-import { NotionToMarkdown } from 'npm:notion-to-md'
-import type { BlockObjectResponse } from "npm:@notionhq/client/api-endpoints.d.ts";
-import markdownit from 'npm:markdown-it'
-import hljs from 'npm:highlight.js'
-import { throttled } from "@/notion/throttle.ts";
+import { Client } from "npm:@notionhq/client"
+import { NotionToMarkdown } from "npm:notion-to-md"
+import type { BlockObjectResponse } from "npm:@notionhq/client/api-endpoints.d.ts"
+import markdownit from "npm:markdown-it"
+import hljs from "npm:highlight.js"
+import { throttled } from "@/notion/throttle.ts"
 
 const notion = client()
 const md = new NotionToMarkdown({ notionClient: notion })
@@ -13,18 +13,19 @@ const html = markdownit({
       return hljs.highlight(str, { language: lang }).value
     }
 
-    return ''
-  }
+    return ""
+  },
 })
-
 
 /**
  * Get a list of content blocks for a Notion page
  */
 export async function getPage(pageId: string) {
-  const response = await throttled(async () => await notion.blocks.children.list({ block_id: pageId }))
+  const response = await throttled(async () =>
+    await notion.blocks.children.list({ block_id: pageId })
+  )
 
-  return response.results.filter((b): b is BlockObjectResponse  => "type" in b)
+  return response.results.filter((b): b is BlockObjectResponse => "type" in b)
 }
 
 /**
@@ -39,11 +40,14 @@ export async function getPageHtml(pageId: string) {
   return htmlStr
 }
 
-
 function client() {
-  const API_TOKEN = Deno.env.get('NOTION_API_TOKEN')
+  const API_TOKEN = Deno.env.get("NOTION_API_TOKEN")
 
-  if (API_TOKEN == null) throw new Error('Could not find required environment variable: [NOTION_API_TOKEN]')
+  if (API_TOKEN == null) {
+    throw new Error(
+      "Could not find required environment variable: [NOTION_API_TOKEN]",
+    )
+  }
 
   return new Client({ auth: API_TOKEN })
 }

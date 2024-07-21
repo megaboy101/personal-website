@@ -1,10 +1,10 @@
-import { Hono } from '@hono'
+import { Hono } from "@hono"
 
 const page = new Hono()
 
-page.get("", c => {
+page.get("", (c) => {
   return c.render(
-    <h1>projects</h1>
+    <h1>projects</h1>,
   )
 })
 

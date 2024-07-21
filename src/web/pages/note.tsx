@@ -1,10 +1,21 @@
-import { Hono } from '@hono'
-import { getEntry } from "@/notebook.ts";
+import { Hono } from "@hono"
+import { getEntry } from "@/notebook.ts"
 
 const page = new Hono()
 
 const months = [
-  "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ]
 
 function formatDate(dateStr: string) {
@@ -13,14 +24,16 @@ function formatDate(dateStr: string) {
   return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
 }
 
-page.get("/:id", async c => {
-  const id = c.req.param('id')
+page.get("/:id", async (c) => {
+  const id = c.req.param("id")
 
   const note = await getEntry(id)
 
-  if (!note) return c.render(
-    <h1>404</h1>
-  )
+  if (!note) {
+    return c.render(
+      <h1>404</h1>,
+    )
+  }
 
   return c.render(
     <main id="note">
@@ -30,9 +43,10 @@ page.get("/:id", async c => {
           <time datetime={note.createdAt}>{formatDate(note.createdAt)}</time>
         </header>
 
-        <article-content dangerouslySetInnerHTML={{ __html: note.html }}></article-content>
+        <article-content dangerouslySetInnerHTML={{ __html: note.html }}>
+        </article-content>
       </article>
-    </main>
+    </main>,
   )
 })
 

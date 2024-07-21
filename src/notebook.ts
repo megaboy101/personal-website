@@ -2,15 +2,14 @@
  * Notebook API backed by `notion`
  */
 
-import { getPage, getPageHtml } from '@/notion.ts'
-import * as C from './notebook/collection.ts'
-
+import { getPage, getPageHtml } from "@/notion.ts"
+import * as C from "./notebook/collection.ts"
 
 /**
  * A labeled group of entries
  */
 export type Collection = {
-  label: string,
+  label: string
   entries: Summary[]
 }
 
@@ -18,18 +17,18 @@ export type Collection = {
  * Basic details about an `Entry`.
  */
 export type Summary = {
-  id: string,
-  title: string,
-  createdAt: string,
-  updatedAt: string,
+  id: string
+  title: string
+  createdAt: string
+  updatedAt: string
 }
 
 /**
  * The full content of a single entry
  */
 export type Entry = {
-  id: string,
-  title: string,
+  id: string
+  title: string
   createdAt: string
   updatedAt: string
   html: string
@@ -42,13 +41,12 @@ export type SyncTimestamp = {
   timestamp: string
 }
 
-
 // Connection to Deno KV
 let kv: Deno.Kv | null
 
 // This is a hard-coded page ID corresponding
 // to the "Blog" page in my notion
-const COLLECTIONS_PAGE_ID = 'dc4d0731cf0a4fcc93c9c93de9c8927a'
+const COLLECTIONS_PAGE_ID = "dc4d0731cf0a4fcc93c9c93de9c8927a"
 
 // In case we don't have a last-synced timestamp to work with,
 // this is how far in the past we will look to load new entries
@@ -60,7 +58,7 @@ const decoder = new TextDecoder()
 
 /**
  * Open a connection to the notebook.
- * 
+ *
  * This is required before being able to fetch any data
  */
 export async function connect() {
@@ -69,72 +67,68 @@ export async function connect() {
   }
 }
 
-
 /**
  * Fetches a list of entries grouped by collection
  */
 export async function getCollections() {
-  return await load<Collection[]>(['sections'])
+  return await load<Collection[]>(["sections"])
 }
-
 
 /**
  * Fetches the full content of a single entry
  */
 export async function getEntry(id: string) {
-  return await load<Entry>(['note', id])
+  return await load<Entry>(["note", id])
 }
-
 
 /**
  * Sync entries from Notion into local KV storage
  */
 export async function sync() {
-  console.info('Syncing all entries')
+  console.info("Syncing all entries")
 
-  console.info('Checking when last synced')
+  console.info("Checking when last synced")
   const lastSyncedAt = await getLastSyncedAt()
 
-  console.info('Syncing directory')
+  console.info("Syncing directory")
   const collections = await syncCollections()
 
-  const summaries = collections.flatMap(c => c.entries)
+  const summaries = collections.flatMap((c) => c.entries)
   const entryTasks = summaries.reduce((tasks, summary) => {
     const updatedAt = new Date(summary.updatedAt)
     if (lastSyncedAt > updatedAt) return tasks
-    
+
     return [...tasks, syncEntry(summary)]
   }, [] as Promise<Entry>[])
 
   await Promise.allSettled(entryTasks)
 
   const timestamp = new Date().toISOString()
-  await save(['lastSyncedAt'], {timestamp})
+  await save(["lastSyncedAt"], { timestamp })
 
   console.info(`Sync completed at [${timestamp}]!`)
 }
-
 
 /**
  * Removes all data from KV storage
  */
 export async function clear() {
-  const rows = kv?.list({ prefix: [] });
+  const rows = kv?.list({ prefix: [] })
 
   if (!rows) return null
 
   for await (const row of rows) {
-    await kv?.delete(row.key);
+    await kv?.delete(row.key)
   }
 }
 
-
 async function getLastSyncedAt() {
-  const lastSyncedAt = await load<SyncTimestamp>(['lastSyncedAt'])
+  const lastSyncedAt = await load<SyncTimestamp>(["lastSyncedAt"])
 
-  return lastSyncedAt?.timestamp ? new Date(lastSyncedAt.timestamp) : OLDEST_SYNC_LOOKBACK_TS
+  return lastSyncedAt?.timestamp
+    ? new Date(lastSyncedAt.timestamp)
+    : OLDEST_SYNC_LOOKBACK_TS
 }
-
 
 async function syncCollections() {
   const collectionsPageBlocks = await getPage(COLLECTIONS_PAGE_ID)
@@ -154,7 +148,7 @@ async function syncEntry({ id, title, updatedAt, createdAt }: Summary) {
     title,
     createdAt,
     updatedAt,
-    html
+    html,
   }
 
   await saveEntry(entry)
@@ -163,11 +157,11 @@ async function syncEntry({ id, title, updatedAt, createdAt }: Summary) {
 }
 
 async function saveCollections(collections: Collection[]) {
-  return await save(['sections'], collections)
+  return await save(["sections"], collections)
 }
 
 async function saveEntry(entry: Entry) {
-  return await save(['note', entry.id], entry)
+  return await save(["note", entry.id], entry)
 }
 
 async function save(key: Deno.KvKey, value: unknown) {

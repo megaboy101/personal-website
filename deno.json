@@ -16,5 +16,9 @@
     "types": [
       "./types.d.ts"
     ]
+  },
+  "fmt": {
+    "semiColons": false,
+    "include": ["src/"]
   }
 }
