@@ -15,3 +15,18 @@ sync()
 
 // Start our HTTP server
 Deno.serve({ port: 8080 }, fetch)
+
+
+
+/**
+ * Theoretical Project Structure:
+ * 
+ * root
+ * - src => Project source code
+ *   - web => Web application logic
+ *   - web.ts => Entrypoint to web api
+ *   - 
+ * - tasks => Misc automation scripts. Should not depend on src code. Just supplements deno tasks
+ * - config => Various config files, like env vars, db setup, docker, deploy configs
+ * 
+ */

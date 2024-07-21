@@ -1,12 +1,12 @@
 {
   "tasks": {
-    "dev": "deno run -A --unstable --watch main.ts",
-    "start": "deno run -Ar --unstable main.ts",
+    "dev": "deno run -A --unstable --watch src/main.ts",
+    "start": "deno run -Ar --unstable src/main.ts",
     "deploy": "fly deploy",
     "status": "fly status"
   },
   "imports": {
-    "@/": "./",
+    "@/": "./src/",
     "@hono": "jsr:@hono/hono@^4.4.0",
     "@std/dotenv": "jsr:@std/dotenv@^0.224.0"
   },
