@@ -1,1 +1,19 @@
+# Ignore everything by default
+
+**
+
+# Include what's needed
+
+!Dockerfile
+!.dockerignore
+
+!app
+!src
+!deno.json
+!deno.lock
+
 fly.toml
+
+# Override excluding some internals
+**/*.log
+**/.DS_Store
