@@ -8,12 +8,15 @@ export default ({ children }: { children?: Child }) => (
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+      {/* Skypack URL that's pinned for faster file resolution */}
       <script
         type="module"
-        defer
-        src="https://cdn.skypack.dev/@hotwired/turbo@7.3?min"
+        async
+        src="https://cdn.skypack.dev/pin/@hotwired/turbo@v7.3.0-44BiCcz1UaBhgMf1MCRj/mode=imports,min/optimized/@hotwired/turbo.js"
       >
       </script>
+
+      <script type="module" async src="/scripts/insights.js"></script>
 
       <link rel="stylesheet" href="/styles/style.css" />
 

@@ -1,14 +1,18 @@
 {
   "tasks": {
-    "dev": "deno run -A --unstable --watch src/main.ts",
+    "dev": "deno run -A --unstable-kv --unstable-temporal --watch src/main.ts",
     "start": "deno run -Ar --unstable src/main.ts",
     "deploy": "fly deploy",
     "status": "fly status"
   },
   "imports": {
     "@/": "./src/",
-    "@hono": "jsr:@hono/hono@^4.4.0",
-    "@std/dotenv": "jsr:@std/dotenv@^0.224.0"
+    "@hono": "jsr:@hono/hono@~4.5.1",
+    "@std/dotenv": "jsr:@std/dotenv@~0.224.0",
+    "isbot": "npm:isbot",
+    "kysely": "npm:kysely",
+    "@db/sqlite": "jsr:@db/sqlite",
+    "@soapbox/kysely-deno-sqlite": "jsr:@soapbox/kysely-deno-sqlite"
   },
   "compilerOptions": {
     "jsx": "precompile",
