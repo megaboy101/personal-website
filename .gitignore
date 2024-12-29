@@ -37,3 +37,6 @@ next-env.d.ts
 
 # Database artifacts
 *.db*
+
+# Scratch files
+scratch.*
