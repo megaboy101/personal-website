@@ -1,4 +1,4 @@
-import { Hono } from "@hono"
+import { Hono } from "hono"
 import { getEntry } from "@/notebook.ts"
 
 const page = new Hono()

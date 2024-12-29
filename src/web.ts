@@ -2,10 +2,10 @@
  * HTTP Request handler
  */
 
-import { Hono } from "@hono"
-import { secureHeaders } from "@hono/secure-headers"
-import { serveStatic } from "@hono/deno"
-import { jsxRenderer } from "@hono/jsx-renderer"
+import { Hono } from "hono"
+import { secureHeaders } from "hono/secure-headers"
+import { serveStatic } from "hono/deno"
+import { jsxRenderer } from "hono/jsx-renderer"
 import index from "@/web/pages/index.tsx"
 import projects from "@/web/pages/projects.tsx"
 import notes from "@/web/pages/notes.tsx"

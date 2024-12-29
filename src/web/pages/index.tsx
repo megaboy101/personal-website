@@ -1,5 +1,5 @@
-import { Hono } from "@hono"
-import type { Child } from "@hono/jsx"
+import { Hono } from "hono"
+import type { Child } from "hono/jsx"
 
 const page = new Hono()
 

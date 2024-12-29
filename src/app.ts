@@ -2,7 +2,7 @@
  * App client configuration
  */
 
-import { HonoRequest } from "@hono"
+import { HonoRequest } from "hono"
 import { Pageview } from "@/insights.ts"
 import { sql } from "@/runtime/sql.ts"
 import { run } from "@/runtime.ts"

@@ -1,5 +1,5 @@
-import { Child } from "@hono/jsx"
-import { useRequestContext } from "@hono/jsx-renderer"
+import { Child } from "hono/jsx"
+import { useRequestContext } from "hono/jsx-renderer"
 import { Signature } from "./icons.tsx"
 
 export default ({ children }: { children?: Child }) => (

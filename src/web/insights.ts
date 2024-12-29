@@ -1,4 +1,4 @@
-import { Hono } from "@hono"
+import { Hono } from "hono"
 import { perform } from "@/runtime.ts"
 import { savePageview } from "@/app.ts"
 

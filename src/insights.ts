@@ -1,6 +1,6 @@
 import { isbot } from 'isbot'
 import { decoder, encoder } from "@/encoding.ts"
-import { HonoRequest } from "@hono"
+import { HonoRequest } from "hono"
 import { query, } from '@/runtime/sql.ts'
 import { sql } from "kysely"
 
