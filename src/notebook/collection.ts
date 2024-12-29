@@ -2,7 +2,7 @@ import type {
   BlockObjectResponse,
   ChildPageBlockObjectResponse,
   Heading1BlockObjectResponse,
-} from "npm:@notionhq/client/api-endpoints.d.ts"
+} from "@notionhq/client/api-endpoints.d.ts"
 import type { Collection, Summary } from "@/notebook.ts"
 
 const isHeading = (block: BlockObjectResponse) => block["type"] === "heading_1"

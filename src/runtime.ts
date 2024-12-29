@@ -10,7 +10,7 @@ import { port as sql } from "@/runtime/sql.ts"
  * side effects
  */
 export async function perform(commandList: Generator): Promise<unknown> {
-  let command: unknown = commandList.next().value
+  let command: any = commandList.next().value
 
   while (true) {
     if (command != null && typeof command == 'object' && command?.type != null && command?.data != null) {

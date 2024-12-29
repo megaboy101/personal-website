@@ -22,5 +22,5 @@ export function* savePageview(request: HonoRequest) {
  * Run sql table migrations
  */
 export function* syncTables() {
-  yield* sql.runAll(Pageview.table())
+  yield sql.run(Pageview.table)
 }

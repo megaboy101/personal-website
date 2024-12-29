@@ -45,6 +45,13 @@ export const sqlStorage = new Kysely({
  */
 export const sql = {
   /**
+   * Run an arbitrary query
+   */
+  run(query: CompiledQuery) {
+    return ({ type: 'SQL', query })
+  },
+
+  /**
    * Run an arbitrary list of queries
    */
   *runAll(queries: CompiledQuery[]) {

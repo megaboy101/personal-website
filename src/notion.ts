@@ -1,8 +1,8 @@
-import { Client } from "npm:@notionhq/client"
-import { NotionToMarkdown } from "npm:notion-to-md"
-import type { BlockObjectResponse } from "npm:@notionhq/client/api-endpoints.d.ts"
-import markdownit from "npm:markdown-it"
-import hljs from "npm:highlight.js"
+import { Client } from "@notionhq/client"
+import { NotionToMarkdown } from "notion-to-md"
+import type { BlockObjectResponse } from "@notionhq/client/api-endpoints.d.ts"
+import markdownit from "markdown-it"
+import hljs from "highlight.js"
 import { throttled } from "@/notion/throttle.ts"
 
 const notion = client()

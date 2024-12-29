@@ -12,14 +12,15 @@
     "isbot": "npm:isbot",
     "kysely": "npm:kysely",
     "@db/sqlite": "jsr:@db/sqlite",
-    "@soapbox/kysely-deno-sqlite": "jsr:@soapbox/kysely-deno-sqlite"
+    "@soapbox/kysely-deno-sqlite": "jsr:@soapbox/kysely-deno-sqlite",
+    "@notionhq/client": "npm:@notionhq/client",
+    "notion-to-md": "npm:notion-to-md",
+    "markdown-it": "npm:markdown-it",
+    "highlight.js": "npm:highlight.js"
   },
   "compilerOptions": {
     "jsx": "precompile",
-    "jsxImportSource": "hono/jsx",
-    "types": [
-      "./types.d.ts"
-    ]
+    "jsxImportSource": "hono/jsx"
   },
   "fmt": {
     "semiColons": false,
