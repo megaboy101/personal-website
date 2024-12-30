@@ -6,18 +6,19 @@ import { Hono } from "hono"
 import { secureHeaders } from "hono/secure-headers"
 import { serveStatic } from "hono/deno"
 import { jsxRenderer } from "hono/jsx-renderer"
-import index from "@/web/pages/index.tsx"
-import projects from "@/web/pages/projects.tsx"
-import notes from "@/web/pages/notes.tsx"
-import note from "@/web/pages/note.tsx"
-import insights from "./web/insights.ts"
-import Page from "@/web/page.tsx"
+import index from "~/web/html/pages/index.tsx"
+import projects from "~/web/html/pages/projects.tsx"
+import notes from "~/web/html/pages/notes.tsx"
+import note from "~/web/html/pages/note.tsx"
+import insights from "~/web/insights.ts"
+import Page from "~/web/html/page.tsx"
+
 
 const router = new Hono()
 
 router.use(secureHeaders())
 
-const staticHandler = serveStatic({ root: "/app" })
+const staticHandler = serveStatic({ root: "/web/client" })
 router.use("/styles/*", staticHandler)
 router.use("/scripts/*", staticHandler)
 router.use("/favicon.*", staticHandler)

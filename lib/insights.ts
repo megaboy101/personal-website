@@ -1,7 +1,7 @@
 import { isbot } from 'isbot'
 import { decoder, encoder } from "@/encoding.ts"
 import { HonoRequest } from "hono"
-import { query } from '@/runtime/sql.ts'
+import { query } from '@/app/sql.ts'
 import { sql } from "kysely"
 
 /**
@@ -66,9 +66,11 @@ export class Pageview {
     )
   }
 
-  static table = sql`
-    DROP TABLE IF EXISTS pageviews
-
+  static table = [
+    sql`
+      DROP TABLE IF EXISTS pageviews
+    `.compile(query),
+    sql`
     CREATE TABLE pageviews (
       id TEXT PRIMARY KEY,
       fingerprint TEXT NOT NULL,
@@ -77,7 +79,8 @@ export class Pageview {
       is_bot BOOLEAN NOT NULL,
       created_at TEXT NOT NULL
     )
-  `.compile(query)
+  `.compile(query),
+  ]
 
   insert() {
     return query

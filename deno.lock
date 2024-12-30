@@ -218,8 +218,12 @@
       "jsr:@hono/hono@~4.5.1",
       "jsr:@soapbox/kysely-deno-sqlite@*",
       "jsr:@std/dotenv@0.224",
+      "npm:@notionhq/client@*",
+      "npm:highlight.js@*",
       "npm:isbot@*",
-      "npm:kysely@*"
+      "npm:kysely@*",
+      "npm:markdown-it@*",
+      "npm:notion-to-md@*"
     ]
   }
 }

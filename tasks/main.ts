@@ -3,8 +3,8 @@
  */
 import "@std/dotenv/load"
 import { sync } from "@/notebook.ts"
-import { fetch } from "@/web.ts"
-import { perform } from "@/runtime.ts"
+import { fetch } from "~/web/http.ts"
+import { perform } from "@/app/runtime.ts"
 import { syncTables } from "@/app.ts"
 
 // Migrate sql tables

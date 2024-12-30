@@ -2,7 +2,7 @@
  * Runtime interpreter for general application effects
  */
 
-import { port as sql } from "@/runtime/sql.ts"
+import { port as sql } from "@/app/sql.ts"
 
 
 /**

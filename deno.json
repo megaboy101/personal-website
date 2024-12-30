@@ -1,12 +1,13 @@
 {
   "tasks": {
-    "dev": "deno run -A --unstable-kv --unstable-temporal --watch src/main.ts",
-    "start": "deno run -Ar --unstable src/main.ts",
+    "dev": "deno run -A --unstable-kv --unstable-temporal --watch tasks/main.ts",
+    "start": "deno run -Ar --unstable tasks/main.ts",
     "deploy": "fly deploy",
     "status": "fly status"
   },
   "imports": {
-    "@/": "./src/",
+    "~/": "./",
+    "@/": "./lib/",
     "hono": "jsr:@hono/hono@~4.5.1",
     "@std/dotenv": "jsr:@std/dotenv@~0.224.0",
     "isbot": "npm:isbot",
@@ -24,6 +25,6 @@
   },
   "fmt": {
     "semiColons": false,
-    "include": ["src/"]
+    "include": ["lib/", "/tasks", "/web"]
   }
 }

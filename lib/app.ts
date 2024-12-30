@@ -4,8 +4,8 @@
 
 import { HonoRequest } from "hono"
 import { Pageview } from "@/insights.ts"
-import { sql } from "@/runtime/sql.ts"
-import { run } from "@/runtime.ts"
+import { sql } from "@/app/sql.ts"
+import { run } from "@/app/runtime.ts"
 
 
 /**
@@ -22,5 +22,5 @@ export function* savePageview(request: HonoRequest) {
  * Run sql table migrations
  */
 export function* syncTables() {
-  yield sql.run(Pageview.table)
+  yield* sql.runAll(Pageview.table)
 }

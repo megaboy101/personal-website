@@ -22,7 +22,7 @@ export const query = new Kysely<{ pageviews: { id: string, fingerprint: string, 
  */
 export const sqlStorage = new Kysely({
   dialect: new SqliteDialect({
-    database: new Sqlite('database.db'),
+    database: new Sqlite('./data/database.db'),
   }),
 });
 

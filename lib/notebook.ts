@@ -3,7 +3,7 @@
  */
 
 import { getPage, getPageHtml } from "@/notion.ts"
-import * as C from "./notebook/collection.ts"
+import * as C from "@/notebook/collection.ts"
 
 /**
  * A labeled group of entries
