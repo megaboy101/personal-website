@@ -1,7 +1,7 @@
 {
   "tasks": {
     "dev": "deno run -A --watch blog.ts",
-    "start": "deno run -Ar --unstable blog.ts",
+    "start": "deno run -Ar blog.ts",
     "deploy": "fly deploy",
     "status": "fly status"
   },

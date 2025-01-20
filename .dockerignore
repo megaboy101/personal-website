@@ -7,8 +7,11 @@
 !Dockerfile
 !.dockerignore
 
-!app
-!src
+!assets
+!content
+!layout
+!lib
+!blog.ts
 !deno.json
 !deno.lock
 
