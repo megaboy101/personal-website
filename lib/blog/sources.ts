@@ -1,6 +1,6 @@
 import markdownit from "markdown-it"
 import hljs from "highlight.js"
-import { throttle } from "./throttle.ts"
+import { throttle } from "@/blog/utils.ts"
 import { Client } from "@notionhq/client"
 import { NotionToMarkdown } from "notion-to-md"
 
@@ -54,8 +54,8 @@ class Notion {
       yield {
         id: entryBlock.id,
         title: selectTitle(entryBlock),
-        createdAt: Temporal.ZonedDateTime.from(entryBlock.created_time),
-        updatedAt: Temporal.ZonedDateTime.from(entryBlock.last_edited_time),
+        createdAt: entryBlock.created_time,
+        updatedAt: entryBlock.last_edited_time,
         html: pageHtml
       }
     }
@@ -68,7 +68,7 @@ class Notion {
   }
 
   async pageHtml(pageId: string) {
-    const md = new NotionToMarkdown({ notionClient: this.client })
+    const md = new NotionToMarkdown({ notionClient: this.#client })
     const html = markdownit({
       highlight(str: string, lang: string) {
         if (lang && hljs.getLanguage(lang)) {
@@ -97,7 +97,7 @@ class Notion {
 }
 
 function selectTitle(pageBlock: { [key:string]: any }): string | undefined {
-  const titleProperty = Object.values(pageBlock.properties).find(p => p?.type === 'title')
+  const titleProperty = Object.values<any>(pageBlock.properties).find(p => p?.type === 'title')
   const titleText = titleProperty?.title?.at(0)?.text?.content
 
   if (!titleText) return undefined

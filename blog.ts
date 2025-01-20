@@ -1,14 +1,6 @@
 import blog from '@/blog.ts'
-import { markdown, notion } from './lib/blog/sources.ts'
-import insights from '@/insights/http.ts'
-
-/**
- * TODO:
- * - Cleanup source implementations
- * - Create a local json replica for
- *   the database and page queries from notion
- * - Maybe research removing html control?
- */
+import { notion } from "@/blog/sources.ts"
+import insights from "@/insights/plug.ts"
 
 blog({
   me: {
@@ -17,15 +9,9 @@ blog({
     'locality': 'Brooklyn'
   },
 
-  // documents: {
-
-  // },
-
   collections: {
-    'posts': markdown('./content/posts'),
+    // 'posts': markdown('./content/posts'),
     'notes': notion({ id: 'dc4d0731cf0a4fcc93c9c93de9c8927a', token: Deno.env.get("NOTION_API_TOKEN") }),
-    // 'projects': files('./notebooks/*.ipynb'),
-    // 'cool stuff': notion({ id: 'dc4d0731cf0a4fcc93c9c93de9c8927a' }),
   },
 
   plugs: [

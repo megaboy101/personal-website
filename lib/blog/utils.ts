@@ -65,3 +65,16 @@ function sleep(ms: number) {
     setTimeout(res, ms)
   })
 }
+
+
+/**
+ * Method decorator for debug logging
+ */
+export function debug(startMessage?: string) {
+  return function(method: any, _ctx: ClassMethodDecoratorContext) {
+    return function(this: any, ...args: any[]): Promise<any> {
+      console.debug(`[START] [${method.name}] - [${startMessage}]`)
+      return method.call(this, ...args)
+    }
+  }
+}

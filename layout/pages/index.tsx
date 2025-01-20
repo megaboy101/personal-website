@@ -1,6 +1,6 @@
 import type { Child } from "hono/jsx"
 
-export default ({ me }) => <main id="index">
+export default () => <main id="index">
   <h1>👋 Hi, I'm Jacob</h1>
 
   <p>I build apps and games for the web.</p>

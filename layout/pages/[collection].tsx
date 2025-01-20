@@ -1,3 +1,5 @@
+import { Entry } from "@/blog.ts"
+
 const months = [
   "Jan",
   "Feb",
@@ -32,7 +34,7 @@ function NoteLink({ note }: { note: Record<string, any> }) {
   )
 }
 
-export default ({ collection }) => {
+export default ({ collection }: { collection: Entry[] }) => {
   if (collection.length === 0) {
     return (
       <h1>notes</h1>

@@ -6,6 +6,7 @@ import { zip } from '@std/collections'
 import { secureHeaders } from "hono/secure-headers"
 import { serveStatic } from "hono/deno"
 import { jsxRenderer } from "hono/jsx-renderer"
+import { z } from "zod"
 
 type Me = {
   name?: string
@@ -21,23 +22,33 @@ type BlogOpts = {
   title?: string,
   me?: Me,
   collections: { [collectionName:string]: Source },
-  plugs: Hono[]
+  plugs?: Hono[]
 }
 
 const factory = createFactory()
 
+const entrySchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
+  html: z.string()
+})
+
+export type Entry = z.infer<typeof entrySchema>
+export type Collection = Entry[]
+
 class Blog {
   #sources: Map<string, Source>
-  collections: Map<string, object[]>
+  collections: Map<string, Entry[]>
   #router: Hono
+  #plugs: Hono[] = []
 
   constructor(opts: BlogOpts) {
     this.#sources = new Map(Object.entries(opts.collections))
     this.collections = new Map()
     this.#router = new Hono()
-
-    // Apply plugs before anything else
-    opts?.plugs.forEach(plug => this.#router.route('/', plug))
+    this.#plugs = opts?.plugs ?? []
   }
 
   /**
@@ -45,8 +56,10 @@ class Blog {
    * layout files
    */
   async build() {
+    // Run these concurrently so building layouts
+    // isn't blocked by pulling content
     await Promise.allSettled([
-      this.#pull(),
+      this.pull(),
       this.#layout()
     ])
   }
@@ -54,14 +67,22 @@ class Blog {
   /**
    * Pull latest content from all sources
    */
-  async #pull() {
-    for (const [key, source] of this.#sources) {
-      const entries = []
-      for await (const entry of source.entries()) {
-        entries.push(entry)
-      }
+  async pull() {
+    // Clear old collections before pulling new content
+    this.collections.clear()
 
-      this.collections.set(key, entries)
+    for (const [key, source] of this.#sources) {
+      try {
+        const entries = []
+        for await (const rawEntry of source.entries()) {
+          const { success, data: entry, error } = entrySchema.safeParse(rawEntry)
+          if (!success) throw new Error(error.toString())
+          entries.push(entry)
+        }
+        this.collections.set(key, entries)
+      } catch (e) {
+        console.error(e)
+      }
     }
   }
 
@@ -92,18 +113,43 @@ class Blog {
     this.#router.use("/scripts/*", staticHandler)
     this.#router.use("/favicon.*", staticHandler)
 
-    const page = (await import(resolve(Deno.cwd(), './layout/page.tsx'))).default
+    try {
+      const page = (await import(resolve(Deno.cwd(), './layout/page.tsx'))).default
+      this.#router.get("/*", jsxRenderer(page, { docType: true }))
+    } catch (e) {
+      console.error(e)
+    }
 
-    this.#router.get("/*", jsxRenderer(page, { docType: true }))
+    try {
+      const notFound = (await import(resolve(Deno.cwd(), './layout/404.tsx'))).default
+      this.#router.notFound((c) => {
+        return c.render(notFound())
+      })
+    } catch (e) {
+      console.error(e)
+    }
+
+    // Ensure plugs are applied last so notFound works
+    this.#plugs.forEach(plug => this.#router.route('/', plug))
   }
 
   #buildRouteHandler(handler: any) {
     return factory.createHandlers((c) => {
-      const collection = this.collections.get(c.req.param('collection'))
-      const entry = collection?.find(e => e?.id === c.req.param('entry'))
-      const html = handler({ collection, entry })
-      return c.render(html)
-    }).at(0)
+      if (c.req.param('collection')) {
+        const collection = this.collections.get(c.req.param('collection'))
+        if (!collection) return c.notFound();
+
+        if (c.req.param('entry')) {
+          const entry = collection?.find(e => e?.id === c.req.param('entry'))
+          if (!entry) return c.notFound()
+          return c.render(handler({ collection, entry }))
+        }
+
+        return c.render(handler({ collection }))
+      }
+
+      return c.render(handler({}))
+    })[0]
   }
 
   async #filepaths() {
@@ -142,7 +188,18 @@ class Blog {
 export default async function(opts: BlogOpts) {
   const blog = new Blog(opts)
 
-  await blog.build()
+  // Sync content on startup, but don't block server
+  // startup
+  blog.build()
 
   Deno.serve({ port: 8080 }, (req) => blog.page(req))
+
+  // Sync content every overnight
+  Deno.cron("pulling latest content", "0 0 * * *", async () => {
+    try {
+      await blog.pull()
+    } catch (e) {
+      console.error(e)
+    }
+  })
 }

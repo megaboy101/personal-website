@@ -4,7 +4,6 @@
     "jsr:@db/sqlite@0.12": "0.12.0",
     "jsr:@denosaurs/plug@1": "1.0.6",
     "jsr:@hono/hono@4.6": "4.6.17",
-    "jsr:@soapbox/kysely-deno-sqlite@*": "2.2.0",
     "jsr:@std/assert@0.217": "0.217.0",
     "jsr:@std/assert@0.221": "0.221.0",
     "jsr:@std/assert@1": "1.0.10",
@@ -28,10 +27,9 @@
     "npm:@types/node@*": "22.5.4",
     "npm:highlight.js@*": "11.11.1",
     "npm:isbot@*": "5.1.19",
-    "npm:kysely@*": "0.27.5",
-    "npm:kysely@~0.27.2": "0.27.5",
     "npm:markdown-it@*": "14.1.0",
-    "npm:notion-to-md@*": "3.1.1"
+    "npm:notion-to-md@*": "3.1.1",
+    "npm:zod@~3.24.1": "3.24.1"
   },
   "jsr": {
     "@db/sqlite@0.12.0": {
@@ -55,12 +53,6 @@
     },
     "@hono/hono@4.6.17": {
       "integrity": "932fcc61d043b14a8b2cb65242716eb32da44e91f2ee117fd7390508669fea31"
-    },
-    "@soapbox/kysely-deno-sqlite@2.2.0": {
-      "integrity": "668ec94600bc4b4d7bd618dd7ca65d4ef30ee61c46ffcb379b6f45203c08517a",
-      "dependencies": [
-        "npm:kysely@~0.27.2"
-      ]
     },
     "@std/assert@0.217.0": {
       "integrity": "c98e279362ca6982d5285c3b89517b757c1e3477ee9f14eb2fdf80a45aaa9642"
@@ -187,9 +179,6 @@
     "isbot@5.1.19": {
       "integrity": "sha512-8krWJBGKC3lVymkncvmBTpIEWMD5kKmjAvkM3/Xh6veE0bAydwgSNrI5h493DGrG2UNJCy0HuHpNPSKRy0dBJA=="
     },
-    "kysely@0.27.5": {
-      "integrity": "sha512-s7hZHcQeSNKpzCkHRm8yA+0JPLjncSWnjb+2TIElwS2JAqYr+Kv3Ess+9KFfJS0C1xcQ1i9NkNHpWwCYpHMWsA=="
-    },
     "linkify-it@5.0.0": {
       "integrity": "sha512-5aHCbzQRADcdP+ATqnDuhhJ/MRIqDkZX5pyjFHRRysS8vZ5AbqGEoFIb6pYHPZ+L/OC2Lc+xT8uHVVR5CAK/wQ==",
       "dependencies": [
@@ -262,13 +251,15 @@
         "tr46",
         "webidl-conversions"
       ]
+    },
+    "zod@3.24.1": {
+      "integrity": "sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A=="
     }
   },
   "workspace": {
     "dependencies": [
       "jsr:@db/sqlite@0.12",
       "jsr:@hono/hono@4.6",
-      "jsr:@soapbox/kysely-deno-sqlite@*",
       "jsr:@std/assert@1",
       "jsr:@std/collections@*",
       "jsr:@std/dotenv@0.224",
@@ -278,9 +269,9 @@
       "npm:@notionhq/client@*",
       "npm:highlight.js@*",
       "npm:isbot@*",
-      "npm:kysely@*",
       "npm:markdown-it@*",
-      "npm:notion-to-md@*"
+      "npm:notion-to-md@*",
+      "npm:zod@~3.24.1"
     ]
   }
 }
