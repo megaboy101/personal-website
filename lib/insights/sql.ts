@@ -1,30 +1,5 @@
-// import { DummyDriver, Kysely, SqliteAdapter, SqliteIntrospector, SqliteQueryCompiler } from 'kysely';
 import { Database } from '@db/sqlite';
-// import { DenoSqlite3Dialect as SqliteDialect } from '@soapbox/kysely-deno-sqlite';
 import { resolve } from "@std/path"
-
-// // Type definitions
-// interface Database {
-//   pageviews: PageviewTable
-// }
-
-// interface PageviewTable {
-//   id: string,
-//   fingerprint: string
-//   pathname: string
-//   referrer?: string
-//   is_bot?: boolean
-//   created_at: string
-// }
-
-// /**
-//  * A persistent SQL store
-//  */
-// const db = new Kysely<Database>({
-//   dialect: new SqliteDialect({
-//     database: new Sqlite(resolve(Deno.cwd(), 'data/insights.db')),
-//   }),
-// });
 
 const db = new Database(resolve(Deno.cwd(), 'data/insights.db'))
 

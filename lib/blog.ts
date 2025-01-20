@@ -41,9 +41,10 @@ class Blog {
   }
 
   /**
-   * Pull latest content from all sources
+   * Pull content from all sources and setup routes for
+   * layout files
    */
-  async refresh() {
+  async build() {
     await Promise.allSettled([
       this.#pull(),
       this.#layout()
@@ -139,15 +140,9 @@ class Blog {
 }
 
 export default async function(opts: BlogOpts) {
-  // Build blog state
-  // - Download all content
-  // - Build content into collections and documents
-  // - Parse layout filenames
-  // Start webserver
-
   const blog = new Blog(opts)
 
-  await blog.refresh()
+  await blog.build()
 
   Deno.serve({ port: 8080 }, (req) => blog.page(req))
 }
