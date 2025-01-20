@@ -1,7 +1,7 @@
 import { Database } from '@db/sqlite';
 import { resolve } from "@std/path"
 
-const db = new Database(resolve(Deno.cwd(), 'data/insights.db'))
+const db = new Database(':memory:')
 
 
 // Configure SQLite `pragma` settings
