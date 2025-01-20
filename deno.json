@@ -1,8 +1,7 @@
 {
   "tasks": {
-    "dev": "deno run -A --unstable-kv --unstable-temporal --watch tasks/main.ts",
-    "start": "deno run -Ar --unstable tasks/main.ts",
-    "blog": "deno run -A --unstable-kv --unstable-temporal --watch blog.ts",
+    "dev": "deno run -A --watch blog.ts",
+    "start": "deno run -Ar --unstable blog.ts",
     "deploy": "fly deploy",
     "status": "fly status"
   },
