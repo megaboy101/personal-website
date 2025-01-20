@@ -73,13 +73,22 @@ class Blog {
 
     for (const [key, source] of this.#sources) {
       try {
-        const entries = []
+        const entries: Entry[] = []
+        // We set the collection entries immediately
+        // because it'll only copy a reference to the
+        // `entries` array. Pushing items to that
+        // array here will also update the collection.
+        //
+        // We do this so entries populate the collection
+        // as they become available, rather than waiting
+        // until all entries have loaded
+        this.collections.set(key, entries)
         for await (const rawEntry of source.entries()) {
           const { success, data: entry, error } = entrySchema.safeParse(rawEntry)
           if (!success) throw new Error(error.toString())
+
           entries.push(entry)
         }
-        this.collections.set(key, entries)
       } catch (e) {
         console.error(e)
       }
