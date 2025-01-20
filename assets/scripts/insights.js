@@ -13,7 +13,7 @@ function ping() {
 
   // Trigger ping to go out 1s after viewing page
   delayRef = setTimeout(() => {
-    fetch('/insights/p', {
+    fetch('/p', {
       body: JSON.stringify({
         referrer: document.referrer,
         pathname: location.pathname,

@@ -1,6 +1,6 @@
 import { Child } from "hono/jsx"
 import { useRequestContext } from "hono/jsx-renderer"
-import { Signature } from "~/web/html/icons.tsx"
+import { Signature } from "./icons.tsx"
 
 export default ({ children }: { children?: Child }) => (
   <html lang="en">
@@ -22,7 +22,7 @@ export default ({ children }: { children?: Child }) => (
 
       <link rel="shortcut icon" type="image/jpg" href="/favicon.png" />
 
-      <title>Jacob Bleser</title>
+      <title>{'My blog'}</title>
     </head>
 
     <Layout>
@@ -33,7 +33,7 @@ export default ({ children }: { children?: Child }) => (
 
 const Layout = ({ children }: { children: Child }) => (
   <body>
-    <Nav />
+    <Header />
 
     {children}
 
@@ -41,7 +41,7 @@ const Layout = ({ children }: { children: Child }) => (
   </body>
 )
 
-const Nav = () => (
+const Header = () => (
   <header>
     <nav>
       <Link href="/">
@@ -50,7 +50,7 @@ const Nav = () => (
 
       <ul>
         <li>
-          <Link href="/notes">notes</Link>
+          <Link href={`/notes`}>/notes</Link>
         </li>
       </ul>
     </nav>
