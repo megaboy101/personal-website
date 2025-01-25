@@ -38,6 +38,55 @@ const entrySchema = z.object({
 export type Entry = z.infer<typeof entrySchema>
 export type Collection = Entry[]
 
+/**
+ * A `Hono` router
+ * 
+ * Preconfigured with the following:
+ * 1. Secure request headers by default
+ * 2. Serve static assets at `/assets`
+ */
+function router() {
+  const router = new Hono()
+
+  router.use(secureHeaders())
+
+  const staticHandler = serveStatic({ root: "./assets" })
+  router.use("/styles/*", staticHandler)
+  router.use("/scripts/*", staticHandler)
+  router.use("/favicon.*", staticHandler)
+
+  return router
+}
+
+/**
+ * Returns the list of filenames in `layout/pages` relative
+ * to the current working directory
+ */
+async function pagePaths() {
+  return (await Array.fromAsync(walk('./layout/pages')))
+    .filter(e => e.isFile)
+    .map(e => relative(resolve(Deno.cwd(), './layout/pages'), e.path))
+}
+
+/**
+ * Maps a filepath representing a url path to a router-interpretable
+ * url scheme
+ * 
+ * Examples
+ * - `/index.tsx` -> `/`
+ * - `[my-path].tsx` -> `:my-path`
+ */
+function filePathToUrlPath(filePath: string) {
+  const urlPath = filePath
+    .replace(/\.tsx?$/g, '') // remove tsx extension
+    .replace(/^\/?index$/, '/') // `/index` -> `/`
+    .replace(/\/index$/, '') // `/my-path/index` -> `/my-path`
+    .replace(/\[\.{3}.+\]/, '*') // `[...my-paths]` -> '*'
+    .replace(/\[(.+?)\]/g, ':$1') // `[my-path]` -> `:my-path`
+
+  return /^\//.test(urlPath) ? urlPath : '/' + urlPath
+}
+
 class Blog {
   #sources: Map<string, Source>
   collections: Map<string, Entry[]>
@@ -47,7 +96,7 @@ class Blog {
   constructor(opts: BlogOpts) {
     this.#sources = new Map(Object.entries(opts.collections))
     this.collections = new Map()
-    this.#router = new Hono()
+    this.#router = router()
     this.#plugs = opts?.plugs ?? []
   }
 
@@ -99,10 +148,42 @@ class Blog {
    * Build router from local filesystem
    */
   async #layout() {
-    const filePaths = await this.#filepaths()
-    const urlPaths = filePaths.map(this.#filePathToUrlPath)
+    await this.#loadPageShell()
+    await this.#loadNotFound()
 
-    await this.#presetRouter()
+    // Ensure plugs are applied last so notFound works
+    this.#setPlugs()
+
+    await this.#loadPageHandlers()
+  }
+
+  async #loadPageShell() {
+    try {
+      const page = (await import(resolve(Deno.cwd(), './layout/page.tsx'))).default
+      this.#router.get("/*", jsxRenderer(page, { docType: true }))
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  async #loadNotFound() {
+    try {
+      const notFound = (await import(resolve(Deno.cwd(), './layout/404.tsx'))).default
+      this.#router.notFound((c) => {
+        return c.render(notFound())
+      })
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  #setPlugs() {
+    this.#plugs.forEach(plug => this.#router.route('/', plug))
+  }
+
+  async #loadPageHandlers() {
+    const filePaths = await pagePaths()
+    const urlPaths = filePaths.map(filePathToUrlPath)
 
     for (const [filePath, urlPath] of zip(filePaths, urlPaths)) {
       try {
@@ -112,34 +193,6 @@ class Blog {
         console.error(e)
       }
     }
-  }
-
-  async #presetRouter() {
-    this.#router.use(secureHeaders())
-  
-    const staticHandler = serveStatic({ root: "./assets" })
-    this.#router.use("/styles/*", staticHandler)
-    this.#router.use("/scripts/*", staticHandler)
-    this.#router.use("/favicon.*", staticHandler)
-
-    try {
-      const page = (await import(resolve(Deno.cwd(), './layout/page.tsx'))).default
-      this.#router.get("/*", jsxRenderer(page, { docType: true }))
-    } catch (e) {
-      console.error(e)
-    }
-
-    try {
-      const notFound = (await import(resolve(Deno.cwd(), './layout/404.tsx'))).default
-      this.#router.notFound((c) => {
-        return c.render(notFound())
-      })
-    } catch (e) {
-      console.error(e)
-    }
-
-    // Ensure plugs are applied last so notFound works
-    this.#plugs.forEach(plug => this.#router.route('/', plug))
   }
 
   #buildRouteHandler(handler: any) {
@@ -159,31 +212,6 @@ class Blog {
 
       return c.render(handler({}))
     })[0]
-  }
-
-  async #filepaths() {
-    const filePaths = []
-
-    for await (const dirEntry of walk('./layout/pages')) {
-      const path = relative(resolve(Deno.cwd(), './layout/pages'), dirEntry.path)
-
-      if (dirEntry.isFile) {
-        filePaths.push(path)
-      }
-    }
-
-    return filePaths
-  }
-
-  #filePathToUrlPath(filePath: string) {
-    const urlPath = filePath
-      .replace(/\.tsx?$/g, '') // remove tsx extension
-      .replace(/^\/?index$/, '/') // `/index` -> `/`
-      .replace(/\/index$/, '') // `/my-path/index` -> `/my-path`
-      .replace(/\[\.{3}.+\]/, '*') // `[...my-paths]` -> '*'
-      .replace(/\[(.+?)\]/g, ':$1') // `[my-path]` -> `:my-path`
-  
-    return /^\//.test(urlPath) ? urlPath : '/' + urlPath
   }
 
   /**
