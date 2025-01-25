@@ -163,6 +163,8 @@ export function site(): Array<{ total: number, unique: number, created_at: strin
       created_at
     FROM
       pageviews
+    WHERE
+      is_bot != TRUE
     GROUP BY
       date(created_at)
     ORDER BY
@@ -182,6 +184,8 @@ export function pages(): Array<{ pathname: string, total: number, unique: number
       created_at
     FROM
       pageviews
+    WHERE
+      is_bot != TRUE
     GROUP BY
       pathname, date(created_at)
   `
@@ -201,6 +205,7 @@ export function page(pathname: string) {
       pageviews
     WHERE
       pathname = ${pathname}
+      is_bot != TRUE
     GROUP BY
       date(created_at)
   `
