@@ -1,70 +1,154 @@
 import type { Child } from "hono/jsx"
-
-export default () => <main id="index">
-  <h1>👋 Hi, I'm Jacob</h1>
-
-  <p>I build apps and games for the web.</p>
-  <p>
-    Right now I work as a product engineer at{" "}
-    <Link to="discord home">Discord</Link>, and before that I was an early
-    engineer at a social dating startup called{" "}
-    <Link to="marriage pact">The Marriage Pact</Link>.
-  </p>
-  <p>I currently live in Brooklyn, New York</p>
-
-  <Divider />
-
-  <p>
-    🌱 This is my{" "}
-    <Link to="digital garden">digital garden</Link>, where I collect my
-    thoughts, experiences, and doodles.
-  </p>
-  <p>
-    ❗️ Not everything here is polished or complete, but that's the beauty of
-    it. Life, much like software, is perpetually under construction.
-  </p>
-
-  <h2>Connect with me</h2>
-
-  <address>
-    <Link to="discord home">Discord</Link>
-    <Link to="twitter">Twitter</Link>
-    <Link to="github">Github</Link>
-    <Link to="linkedin">LinkedIn</Link>
-    <Link to="resume">Resume</Link>
-  </address>
-</main>
+import { Collection, Entry, useCollection } from "@/blog.ts"
+import Article from "../article.tsx"
+import { Bluesky, Github, LinkedIn, Signature } from "../icons.tsx"
+import { ArrowIcon } from "../icons.tsx"
 
 
-const links = {
-  "discord home": "https://discord.com/",
-  "marriage pact": "https://marriagepact.com/",
-  "digital garden": "https://maggieappleton.com/garden-history",
-  "discord personal": "https://discordapp.com/users/318894685714120706",
-  "github": "https://github.com/megaboy101",
-  "twitter": "https://twitter.com/jacobbleser",
-  "linkedin": "https://www.linkedin.com/in/jacobbleser/",
-  "resume":
-    "https://docs.google.com/document/d/1WGUI6Ib-jkLDm7kzfFZwINk2x1Wi3TQjopYROJYNbAk/edit?usp=sharing",
-}
+// MARK: Profile Card
 
-type LinkProps = {
-  to: keyof (typeof links)
-  children: Child
-}
+const ProfileCard = () => (
+  <cursor-tracker id="profile-card">
+    <div class="inner">
+      <svg role="none" class="banner">
+        <mask id="pfp-mask">
+          <rect></rect>
+          <circle></circle>
+        </mask>
+        <foreignObject mask="url(#pfp-mask)">
+          <img src="/img/banner.jpg" alt="" />
+        </foreignObject>
+      </svg>
 
-const Link = ({ to, children }: LinkProps) => (
-  <a href={links[to]}>
+      <img class="pfp" src="/img/pfp.jpeg" alt="" />
+
+      <div class="content">
+        <Signature id="signature" aria-label="Jacob Bleser" />
+
+        <dl class="follows">
+          <div>
+            <dt>following</dt>
+            <dd>44</dd>
+          </div>
+
+          <div>
+            <dt>followers</dt>
+            <dd>33</dd>
+          </div>
+        </dl>
+
+        <div class="bio">
+          <p><em>Wussup, choom? You need somethin'?</em></p>
+          <br></br>
+          <p>📍 Brooklyn, NY</p>
+          <p>💼 Product Engineer @ Discord</p>
+          <p>🧗 rock climber</p>
+          <p>🐉 DnD & Cyberpunk DM</p>
+        </div>
+
+        <ul className="socials">
+          <li>
+            <a href="https://github.com/megaboy101" aria-label="Github">
+              <Github />
+
+              megaboy101
+
+              <ArrowIcon />
+            </a>
+          </li>
+          <li>
+            <a href="https://bsky.app/profile/jacobb.nyc" aria-label="Bluesky">
+              <Bluesky />
+
+              jacobb.nyc
+
+              <ArrowIcon />
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/jacobbleser/" aria-label="Linkedin">
+              <LinkedIn />
+
+              Jacob Bleser
+
+              <ArrowIcon />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </cursor-tracker>
+)
+
+// MARK: Article Menu
+
+const FilterBtn = ({ label, children, active }: { label: string, children: Child, active?: boolean }) => (
+  <button
+    type="button"
+    id={`filter-${label}`}
+    aria-pressed={active}
+    tabIndex="0"
+  >
     {children}
-  </a>
+  </button>
 )
 
-const Divider = () => (
-  <jb-divider>
-    <template shadowrootmode="open">
-      <div part="dot" />
-      <div part="dot" />
-      <div part="dot" />
-    </template>
-  </jb-divider>
+const ArticleMenu = () => (
+  <div role="group" aria-label="Filter content">
+    <FilterBtn label="all" active>
+      all
+    </FilterBtn>
+    <FilterBtn label="posts">
+      posts
+    </FilterBtn>
+  </div>
 )
+
+// MARK: Article List
+
+function createdAtOrder(first: Entry, second: Entry) {
+  const firstCreatedAt = first.properties?.['created-time'] ?? first.createdAt
+  const secondCreatedAt = second.properties?.['created-time'] ?? second.createdAt
+
+  return (
+    firstCreatedAt < secondCreatedAt ? 1
+    : firstCreatedAt > secondCreatedAt ? -1
+    : 0
+  )
+}
+
+const ArticleList = ({ posts }: { posts?: Collection }) => {
+  const sortedPosts = posts?.toSorted(createdAtOrder) ?? []
+
+  return (
+    <ol id="content-list">
+      {sortedPosts.map(post => (
+        <li><Article {...post} truncate /></li>
+      ))}
+    </ol>
+  )
+}
+
+// MARK: Page
+
+export const head = {
+  title: 'Jacob Bleser'
+}
+
+export default () => {
+  const posts = useCollection('posts')
+
+  return (
+    <main id="index">
+      <aside>
+        <ProfileCard />
+      </aside>
+
+      <div>
+        <ArticleMenu />
+
+        <ArticleList posts={posts} />
+      </div>
+    </main>
+  )
+}

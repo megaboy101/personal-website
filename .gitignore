@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+# secrets
+service-account.json
+
 # next.js
 /.next/
 /out/
@@ -30,6 +33,9 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# vscode
+.vscode
 
 # typescript
 *.tsbuildinfo

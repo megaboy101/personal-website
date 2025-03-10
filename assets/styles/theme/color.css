@@ -5,35 +5,63 @@
 @layer theme {
   /* Neutral Palette */
   :root {
-    --neutral-1: #111111;
-    --neutral-2: #191919;
-    --neutral-3: #222222;
-    --neutral-4: #2a2a2a;
-    --neutral-5: #313131;
-    --neutral-6: #3a3a3a;
-    --neutral-7: #484848;
-    --neutral-8: #606060;
-    --neutral-9: #6e6e6e;
-    --neutral-10: #7b7b7b;
-    --neutral-11: #b4b4b4;
-    --neutral-11-5: #D1D1D1;
-    --neutral-12: #eeeeee;
+    --dark-1: #111111;
+    --dark-2: #191919;
+    --dark-3: #222222;
+    --dark-4: #2a2a2a;
+    --dark-5: #313131;
+    --dark-6: #3a3a3a;
+    --dark-7: #484848;
+    --dark-8: #606060;
+    --dark-9: #6e6e6e;
+    --dark-10: #7b7b7b;
+    --dark-11: #b4b4b4;
+    --dark-11-5: #D1D1D1;
+    --dark-12: #eeeeee;
+
+    --light-1: #fcfcfc;
+    --light-2: #f9f9f9;
+    --light-3: #f0f0f0;
+    --light-4: #e8e8e8;
+    --light-5: #e0e0e0;
+    --light-6: #d9d9d9;
+    --light-7: #cecece;
+    --light-8: #bbbbbb;
+    --light-9: #8d8d8d;
+    --light-10: #838383;
+    --light-11: #646464;
+    --light-11-5: #424242;
+    --light-12: #202020;
+
+    --neutral-1: var(--dark-1);
+    --neutral-2: var(--dark-2);
+    --neutral-3: var(--dark-3);
+    --neutral-4: var(--dark-4);
+    --neutral-5: var(--dark-5);
+    --neutral-6: var(--dark-6);
+    --neutral-7: var(--dark-7);
+    --neutral-8: var(--dark-8);
+    --neutral-9: var(--dark-9);
+    --neutral-10: var(--dark-10);
+    --neutral-11: var(--dark-11);
+    --neutral-11-5: var(--dark-11-5);
+    --neutral-12: var(--dark-12);
 
     @media (prefers-color-scheme: light) {
       & {
-        --neutral-1: #fcfcfc;
-        --neutral-2: #f9f9f9;
-        --neutral-3: #f0f0f0;
-        --neutral-4: #e8e8e8;
-        --neutral-5: #e0e0e0;
-        --neutral-6: #d9d9d9;
-        --neutral-7: #cecece;
-        --neutral-8: #bbbbbb;
-        --neutral-9: #8d8d8d;
-        --neutral-10: #838383;
-        --neutral-11: #646464;
-        --neutral-11-5: #424242;
-        --neutral-12: #202020;
+        --neutral-1: var(--light-1);
+        --neutral-2: var(--light-2);
+        --neutral-3: var(--light-3);
+        --neutral-4: var(--light-4);
+        --neutral-5: var(--light-5);
+        --neutral-6: var(--light-6);
+        --neutral-7: var(--light-7);
+        --neutral-8: var(--light-8);
+        --neutral-9: var(--light-9);
+        --neutral-10: var(--light-10);
+        --neutral-11: var(--light-11);
+        --neutral-11-5: var(--light-11-5);
+        --neutral-12: var(--light-12);
       }
     }
   }

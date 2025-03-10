@@ -1,33 +1,98 @@
-:where(main#index) {
-  h1 {
-    margin-bottom: var(--space-5);
+:where(#index) {
+  &:not(:has(aside)) {
+    display: grid;
+    grid-template:
+      'filters' max-content
+      'content' max-content
+      / max-content;
+    grid-row-gap: var(--space-3);
+    justify-content: center;
+    container: main / inline-size;
+  }
+
+  &:has(aside) {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: start;
+    gap: var(--space-5);
+
+    container: main / inline-size;
+
+    > :nth-child(1) {
+      position: sticky;
+      top: 0;
+      left: 0;
+
+      @container main (width >= 100vw) {
+        position: static;
+        --strength: 0;
+      }
+
+      /*
+      Trick to only apply padding when fixed position
+      takes over
+      */
+      padding-top: var(--space-5);
+      margin-top: calc(var(--space-5) * -1);
+    }
+
+    > :nth-child(2) {
+      max-width: 100%;
+
+      @container main (width < 55ch) {
+        article {
+          border-radius: 0;
+        }
+      }
+    }
   }
 
   h2 {
     margin-bottom: var(--space-3);
   }
+}
 
-  jb-divider {
-    margin: var(--space-8) auto;
+main div[role="group"] {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+
+  @container main (width < 55ch) {
+    margin-left: var(--space-3);
+    margin-right: var(--space-3);
   }
 
-  p {
-    margin: var(--text-leading-3) 0;
+  button {
+    border: none;
+    border-radius: 8px;
+    color: var(--dark-12);
+    padding: var(--space-1) var(--space-3);
 
-    &:last-of-type {
-      margin-bottom: var(--space-8);
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    &:active {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    &[aria-pressed="true"] {
+      background-color: var(--light-1);
+      color: var(--light-12);
     }
   }
+}
 
-  a {
-    display: inline;
-    font-weight: 500;
-    border-bottom: 1px solid currentColor;
-  }
+:where(ol#content-list) {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: var(--space-4);
+}
 
-  address {
-    display: flex;
-    flex-flow: row wrap;
-    gap: var(--space-3);
-  }
+#kirby {
+  position: absolute;
+  top: 650px;
+  transform: scaleX(-1);
 }

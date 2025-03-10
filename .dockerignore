@@ -15,7 +15,9 @@
 !deno.json
 !deno.lock
 
-fly.toml
+!service-account.json
+
+!fly.toml
 
 # Override excluding some internals
 **/*.log

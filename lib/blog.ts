@@ -1,12 +1,17 @@
 import { Hono } from "hono"
 import { createFactory } from 'hono/factory'
+import { contextStorage, getContext } from 'hono/context-storage'
 import { walk } from "@std/fs";
-import { relative, resolve } from "@std/path";
-import { zip } from '@std/collections'
+import { join, relative, resolve } from "@std/path";
 import { secureHeaders } from "hono/secure-headers"
 import { serveStatic } from "hono/deno"
 import { jsxRenderer } from "hono/jsx-renderer"
 import { z } from "zod"
+import { JSX } from "hono/jsx/jsx-runtime"
+import { FC } from "hono/jsx"
+import { Cls, use } from "@/mixins.ts"
+
+// MARK: Type definitions
 
 type Me = {
   name?: string
@@ -21,51 +26,252 @@ interface Source {
 type BlogOpts = {
   title?: string,
   me?: Me,
-  collections: { [collectionName:string]: Source },
+  collections?: { [collectionName:string]: Source },
   plugs?: Hono[]
 }
-
-const factory = createFactory()
 
 const entrySchema = z.object({
   id: z.string(),
   title: z.string(),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),
-  html: z.string()
+  html: z.string(),
+  properties: z.object({}).passthrough()
 })
 
 export type Entry = z.infer<typeof entrySchema>
 export type Collection = Entry[]
 
+// MARK: Blog
+
+interface Servable {
+  fetch(request: Request): Response | Promise<Response>
+}
+
+const Http = (cls: Cls<Servable>) => class Http extends cls {
+  /**
+   * Listen for HTTP requests on port `8080`
+   */
+  serve(port = 8080) {
+    Deno.serve({ port }, this.fetch ? (request) => this.fetch(request) : (() => new Response('Hello, world!')))
+  }
+}
+
+interface Syncable {
+  refresh(): Promise<void>
+}
+
+const Sync = (cls: Cls<Syncable>) => class Sync extends cls {
+  /**
+   * Schedule an action to happen later
+   */
+  schedule(schedule: string | Deno.CronSchedule) {
+    Deno.cron("pulling latest content", schedule, () => {
+      const handler = super.refresh()
+      if (!handler) return
+
+      handler.catch(e => {
+        console.error(e)
+      })
+    })
+  }
+}
+
+const FilesystemTemplates = (cls: Cls) => class FilesystemRouter extends cls {
+  async templates() {
+    return await blogPages()
+  }
+}
+
+class Blog extends use(Http, Sync, FilesystemTemplates) {
+  #sources: Map<string, Source> = new Map()
+  #collections: Map<string, Entry[]> = new Map()
+  #router?: Hono
+
+  /**
+   * Pull content from all sources and setup routing defined
+   * by the local filesystem
+   */
+  async init(opts: BlogOpts = {}) {
+    this.#router = router(
+      await super.templates(),
+      opts?.plugs ?? [],
+      { collections: this.#collections }
+    )
+
+    if (opts?.collections) this.#sources = new Map(Object.entries(opts?.collections))
+
+    await this.refresh()
+  }
+
+  /**
+   * Pull latest content from all sources
+   */
+  async refresh() {
+    // Clear old collections before pulling new content
+    this.#collections.clear()
+
+    for (const [name, source] of this.#sources) {
+      try {
+        const entries: Entry[] = []
+        // We set the collection entries immediately
+        // because it'll only copy a reference to the
+        // `entries` array. Pushing items to that
+        // array here will also update the collection.
+        //
+        // We do this so entries populate the collection
+        // as they are loaded, rather than waiting
+        // until all entries have loaded before saving any
+        this.#collections.set(name, entries)
+        for await (const rawEntry of source.entries()) {
+          const { success, data: entry, error } = entrySchema.safeParse(rawEntry)
+          if (!success) console.error(error.toString(), rawEntry)
+          else entries.push(entry)
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    }
+  }
+
+  /**
+   * Route a `Request -> Response`
+   */
+  fetch(request: Request) {
+    return this.#router?.fetch(request) ?? new Response('Blog not initialized')
+  }
+}
+
+
+export default function(opts: BlogOpts) {
+  const blog = new Blog()
+
+  // Sync content on startup, but don't block server
+  // startup
+  blog.init(opts)
+
+  // Start http server
+  blog.serve()
+
+  // Refresh nightly at midnight
+  blog.schedule("0 0 * * *")
+}
+
+// MARK: Router
+
 /**
  * A `Hono` router
  * 
- * Preconfigured with the following:
+ * Pre-configured with the following:
  * 1. Secure request headers by default
  * 2. Serve static assets at `/assets`
  */
-function router() {
+function router(fileHandlers: Awaited<ReturnType<typeof blogPages>>, plugins: Hono[] = [], ctx: Record<string, any> = {}) {
   const router = new Hono()
 
+  // General middleware
   router.use(secureHeaders())
 
+  // Serve static files
   const staticHandler = serveStatic({ root: "./assets" })
   router.use("/styles/*", staticHandler)
   router.use("/scripts/*", staticHandler)
   router.use("/favicon.*", staticHandler)
+  router.use("/img/*", staticHandler)
+
+  // Use context storage for fetching collections in handlers
+  router.use(contextStorage())
+
+  // Build routes from filesystem
+  const { layout, notFound, pages } = fileHandlers
+  if (layout) router.get("/*", jsxRenderer(layout.template, { docType: true }))
+  if (notFound) router.notFound((c) => c.render(notFound.template()))
+
+  // Ensure plugs are applied last so notFound works
+  plugins.forEach(p => router.route('/', p))
+
+  Object.entries(ctx).forEach(([key, val]) => (
+    router.use('*', async (c, next) => {
+      c.set(key, val)
+      await next()
+    })
+  ))
+
+  for (const [filePath, page] of pages) {
+    router.get(filePathToUrlPath(filePath), pageHandler(page))
+  }
 
   return router
 }
 
+function pageHandler(page: Page): unknown {
+  return createFactory().createHandlers((c) => {
+    if (c.req.param('collection')) {
+      const collection = useCollection(c.req.param('collection'))
+      if (!collection) return c.notFound();
+
+      if (c.req.param('entry')) {
+        const entry = collection?.find(e => e?.id === c.req.param('entry'))
+        if (!entry) return c.notFound()
+        if (page.head) c.set('head', typeof page.head === 'function' ? page.head({ collection, entry }) : page.head)
+        return c.render(page.template({ collection, entry }))
+      }
+
+      return c.render(page.template({ collection }))
+    }
+
+    return c.render(page.template({}))
+  }).at(0)
+}
+
+// MARK: Filesystem
+
+type Page = {template: ((...props: any) => JSX.Element), head?: object}
+
+async function blogPages(): Promise<{ layout?: Page, notFound?: Page, pages: [string, Page][] }> {
+  const root = join(Deno.cwd(), 'layout')
+  const layout = await importPage(join(root, 'page.tsx'))
+  const notFound = await importPage(join(root, '404.tsx'))
+
+  const pages: [string, Page][] = []
+  for (const filePath of await pagePaths(join(root, 'pages'))) {
+    const page = await importPage(resolve(root, 'pages', filePath))
+    if (!page) continue
+    pages.push([filePath, page])
+  }
+
+  return {
+    layout, notFound, pages
+  }
+}
+
 /**
- * Returns the list of filenames in `layout/pages` relative
- * to the current working directory
+ * Imports and returns the default export if is
+ * JSX, otherwise `undefined`
  */
-async function pagePaths() {
-  return (await Array.fromAsync(walk('./layout/pages')))
-    .filter(e => e.isFile)
-    .map(e => relative(resolve(Deno.cwd(), './layout/pages'), e.path))
+async function importPage(path: string): Promise<Page | undefined> {
+  let module
+  try {
+    module = await import(path)
+  } catch (e) {
+    console.error(e)
+    return
+  }
+
+  return {template: module.default, head: module?.head}
+}
+
+/**
+ * Returns a list of filepaths relative to `Deno.cwd()`
+ */
+async function pagePaths(rootPath: string): Promise<string[]> {
+  const paths = []
+  for await (const entry of walk(rootPath)) {
+    if (!entry.isFile) continue
+    paths.push(relative(resolve(Deno.cwd(), rootPath), entry.path))
+  }
+
+  return paths
 }
 
 /**
@@ -87,156 +293,12 @@ function filePathToUrlPath(filePath: string) {
   return /^\//.test(urlPath) ? urlPath : '/' + urlPath
 }
 
-class Blog {
-  #sources: Map<string, Source>
-  collections: Map<string, Entry[]>
-  #router: Hono
-  #plugs: Hono[] = []
 
-  constructor(opts: BlogOpts) {
-    this.#sources = new Map(Object.entries(opts.collections))
-    this.collections = new Map()
-    this.#router = router()
-    this.#plugs = opts?.plugs ?? []
-  }
+// Context hooks
 
-  /**
-   * Pull content from all sources and setup routes for
-   * layout files
-   */
-  async build() {
-    // Run these concurrently so building layouts
-    // isn't blocked by pulling content
-    await Promise.allSettled([
-      this.pull(),
-      this.#layout()
-    ])
-  }
+export function useCollection(name?: string): Collection | undefined {
+  if (!name) return
 
-  /**
-   * Pull latest content from all sources
-   */
-  async pull() {
-    // Clear old collections before pulling new content
-    this.collections.clear()
-
-    for (const [key, source] of this.#sources) {
-      try {
-        const entries: Entry[] = []
-        // We set the collection entries immediately
-        // because it'll only copy a reference to the
-        // `entries` array. Pushing items to that
-        // array here will also update the collection.
-        //
-        // We do this so entries populate the collection
-        // as they become available, rather than waiting
-        // until all entries have loaded
-        this.collections.set(key, entries)
-        for await (const rawEntry of source.entries()) {
-          const { success, data: entry, error } = entrySchema.safeParse(rawEntry)
-          if (!success) throw new Error(error.toString())
-
-          entries.push(entry)
-        }
-      } catch (e) {
-        console.error(e)
-      }
-    }
-  }
-
-  /**
-   * Build router from local filesystem
-   */
-  async #layout() {
-    await this.#loadPageShell()
-    await this.#loadNotFound()
-
-    // Ensure plugs are applied last so notFound works
-    this.#setPlugs()
-
-    await this.#loadPageHandlers()
-  }
-
-  async #loadPageShell() {
-    try {
-      const page = (await import(resolve(Deno.cwd(), './layout/page.tsx'))).default
-      this.#router.get("/*", jsxRenderer(page, { docType: true }))
-    } catch (e) {
-      console.error(e)
-    }
-  }
-
-  async #loadNotFound() {
-    try {
-      const notFound = (await import(resolve(Deno.cwd(), './layout/404.tsx'))).default
-      this.#router.notFound((c) => {
-        return c.render(notFound())
-      })
-    } catch (e) {
-      console.error(e)
-    }
-  }
-
-  #setPlugs() {
-    this.#plugs.forEach(plug => this.#router.route('/', plug))
-  }
-
-  async #loadPageHandlers() {
-    const filePaths = await pagePaths()
-    const urlPaths = filePaths.map(filePathToUrlPath)
-
-    for (const [filePath, urlPath] of zip(filePaths, urlPaths)) {
-      try {
-        const handler = (await import(resolve(Deno.cwd(), './layout/pages', filePath))).default
-        this.#router.get(urlPath, this.#buildRouteHandler(handler))
-      } catch (e) {
-        console.error(e)
-      }
-    }
-  }
-
-  #buildRouteHandler(handler: any) {
-    return factory.createHandlers((c) => {
-      if (c.req.param('collection')) {
-        const collection = this.collections.get(c.req.param('collection'))
-        if (!collection) return c.notFound();
-
-        if (c.req.param('entry')) {
-          const entry = collection?.find(e => e?.id === c.req.param('entry'))
-          if (!entry) return c.notFound()
-          return c.render(handler({ collection, entry }))
-        }
-
-        return c.render(handler({ collection }))
-      }
-
-      return c.render(handler({}))
-    })[0]
-  }
-
-  /**
-   * Return a built html page
-   */
-  page(request: Request) {
-    return this.#router.fetch(request)
-  }
-}
-
-export default async function(opts: BlogOpts) {
-  const blog = new Blog(opts)
-
-  // Sync content on startup, but don't block server
-  // startup
-  blog.build()
-
-  Deno.serve({ port: 8080 }, (req) => blog.page(req))
-
-  // Sync content every overnight
-  Deno.cron("pulling latest content", "0 0 * * *", async () => {
-    try {
-      await blog.pull()
-    } catch (e) {
-      console.error(e)
-    }
-  })
+  const ctx = getContext()
+  return ctx.get('collections')?.get(name)
 }

@@ -1,18 +1,16 @@
-@layers preflight, theme, elements, components, syntax;
+@layers preflight, theme, components, pages, syntax;
 
-@import "/styles/preflight.css";
+@import "/styles/preflight.css" layer(preflight);
 
-@import "/styles/theme/color.css";
-@import "/styles/theme/spacing.css";
-@import "/styles/theme/typography.css";
-@import "/styles/theme/syntax.css";
+@import "/styles/theme/color.css" layer(theme);
+@import "/styles/theme/spacing.css" layer(theme);
+@import "/styles/theme/typography.css" layer(theme);
+@import "/styles/theme/syntax.css" layer(syntax);
 
-@import "/styles/components/page.css";
-@import "/styles/components/nav.css";
-@import "/styles/components/footer.css";
-@import "/styles/components/divider.css";
+@import "/styles/components/page.css" layer(components);
+@import "/styles/components/article.css" layer(components);
+@import "/styles/components/profile-card.css" layer(components);
 
-@import "/styles/pages/index.css";
-@import "/styles/pages/notes.css";
-@import "/styles/pages/note.css";
-@import "/styles/pages/404.css";
+@import "/styles/pages/index.css" layer(pages);
+@import "/styles/pages/entry.css" layer(pages);
+@import "/styles/pages/404.css" layer(pages);

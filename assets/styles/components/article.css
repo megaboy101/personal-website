@@ -1,0 +1,331 @@
+article {
+  background: var(--light-1);
+  border-radius: 8px;
+  padding: var(--space-5);
+  max-width: 55ch;
+
+  h1, h2, h3, h4, p, a {
+    color: var(--light-12);
+  }
+
+  time {
+    font-size: var(--text-size-2);
+    letter-spacing: var(--text-tracking-2);
+    line-height: var(--text-leading-2);
+    color: var(--light-11);
+  }
+
+  svg {
+    width: 20px;
+    aspect-ratio: 1 / 1;
+    display: inline-block;
+  }
+
+  header {
+    a {
+      display: inline;
+    }
+
+    h1 {
+      color: inherit;
+      margin-bottom: var(--space-5);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .icon {
+      width: var(--space-4);
+      fill: currentColor;
+
+      &:is(.leaf, .plant, .tree) {
+        color: #26997B;
+      }
+
+      &.pepper {
+        color: #DD4425;
+      }
+
+      &.books {
+        color: #0588F0;
+      }
+
+      &.moon {
+        color: #5151CD;
+      }
+    }
+  }
+
+  &:not(:has(header)) :is(p, a) {
+    font-size: var(--text-size-6);
+    letter-spacing: var(--text-tracking-6);
+    line-height: var(--text-leading-6);
+
+    margin-bottom: var(--text-size-3);
+  }
+
+  a {
+    color: #0D74CE;
+    border: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    margin-bottom: -2px;
+
+    &:hover {
+      color: #0588F0;
+      border-bottom: 1px solid currentColor;
+    }
+
+    &:visited {
+      color: #5753C6;
+    }
+
+    &:visited:hover {
+      color: #5151CD;
+    }
+  }
+
+  a.keep-reading {
+    display: block;
+    margin-top: var(--space-5);
+  }
+
+  &:has(a.keep-reading) footer {
+    margin-top: var(--space-3);
+  }
+
+  footer {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: var(--space-1);
+    margin-top: var(--space-5);
+
+    display: grid;
+    grid-template:
+      'time repost heart' min-content
+      / 1fr min-content min-content;
+
+    time {
+      grid-area: time;
+    }
+
+    button:nth-child(1) {
+      grid-area: repost;
+    }
+
+    button:nth-child(2) {
+      grid-area: heart;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: var(--space-2);
+
+      /* Use the line height of the contained svg icon */
+      line-height: normal;
+
+      &:hover {
+        background: var(--light-4);
+      }
+
+      &:active {
+        background: var(--light-5);
+      }
+    }
+
+    svg {
+      color: var(--dark-9);
+    }
+
+    button[aria-pressed="true"] svg.i-repost * {
+      color: #29A383;
+    }
+
+    button[aria-pressed="true"] svg.i-heart * {
+      color: #E54666;
+      fill: #E54666;
+    }
+  }
+}
+
+article .content {
+  h1 {
+    color: var(--light-12);
+    font-size: var(--text-size-7);
+    letter-spacing: var(--text-tracking-7);
+    line-height: var(--text-leading-7);
+    margin-top: var(--space-5);
+    margin-bottom: var(--space-4);
+    font-weight: 500;
+  }
+
+  h2 {
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-3);
+
+    color: var(--light-12);
+    font-family: var(--text-sans);
+    font-size: var(--text-size-6);
+    letter-spacing: var(--text-tracking-6);
+    line-height: var(--text-leading-6);
+    font-weight: 500;
+  }
+
+  h3 {
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-2);
+
+    color: var(--light-12);
+    font-family: var(--text-sans);
+    font-size: var(--text-size-5);
+    letter-spacing: var(--text-tracking-5);
+    line-height: var(--text-leading-5);
+    font-weight: 500;
+  }
+
+  p {
+    color: var(--light-12);
+    font-family: var(--text-sans);
+    font-size: var(--text-size-3);
+    letter-spacing: var(--text-tracking-3);
+    line-height: var(--text-leading-3);
+    margin: var(--text-size-3) 0;
+  }
+
+  /*
+  Paragraphs tags a list item should not be
+  spaced like paragraphs
+  */
+  li > p {
+    margin: 0;
+  }
+
+  a {
+    color: #0D74CE;
+    text-decoration: underline;
+    border: none;
+    margin: 0;
+    padding: 0;
+
+    &:hover {
+      color: #0588F0;
+    }
+
+    &:visited {
+      color: #5753C6;
+    }
+
+    &:visited:hover {
+      color: #5151CD;
+    }
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  ul, ol {
+    list-style-position: outside;
+
+    margin-left: var(--space-5);
+  }
+
+  & > :is(p + :is(ul, ol)) {
+    /*
+    Fix so that text that appears just above
+    a list doesn't have added spacing
+    */
+    margin-top: calc(-1 * var(--space-2));
+  }
+
+  /* Change the list style based on depth */
+  ul { list-style-type: disc; }
+  ul > ul { list-style-type: circle; }
+  ul > ul > ul { list-style-type: square; }
+
+  /* Change the list style based on depth */
+  ol { list-style-type: decimal; }
+  ol > ol { list-style-type: lower-alpha; }
+  ol > ol > ol { list-style-type: lower-roman; }
+
+  li {
+    color: var(--light-12);
+    font-family: var(--text-sans);
+    font-size: var(--text-size-3);
+    letter-spacing: var(--text-tracking-4);
+    line-height: var(--text-leading-5);
+  }
+
+  ul > li::marker {
+    font-size: var(--text-size-4);
+    color: var(--neutral-8);
+  }
+
+  ol > li::marker {
+    color: var(--neutral-8);
+  }
+
+  blockquote {
+    padding: var(--space-2) var(--space-3);
+    border-radius: 4px;
+    background: var(--light-3);
+
+    &.callout {
+      .callout-icon {
+        display: none;
+      }
+    }
+  }
+
+  pre {
+    border-radius: 8px;
+    overflow: hidden;
+    margin: var(--space-3) 0;
+
+    code {
+      font-size: var(--text-size-2);
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      padding: 1em;
+      margin: 0;
+
+      /*
+      This is a hard-coded hack to get Atom One colors
+      for the code block background 
+      */
+      /* color: #abb2bf; */
+      background-color: var(--shiki-dark-bg);
+
+      span {
+        font-family: inherit;
+        font-size: var(--text-size-2);
+        letter-spacing: inherit;
+        line-height: inherit;
+      }
+    }
+  }
+
+  code {
+    display: inline;
+    font-size: var(--text-size-2);
+    color: var(--light-12);
+    background: var(--light-3);
+    padding: 4px 6px;
+    margin: -5px 0;
+    border-radius: 5px;
+  }
+
+  /* Use dark mode for syntax highlighting */
+  .shiki,
+  .shiki span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+    /* Optional, if you also want font styles */
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+}

@@ -1,0 +1,210 @@
+cursor-tracker {
+  display: block;
+
+  transform:
+    perspective(5000px)
+    rotateY(var(--rotateX))
+    rotateX(var(--rotateY));
+  
+  --strength: 9;
+}
+
+#profile-card {
+  --width: 320px;
+  --inner-radius: 8px;
+  --padding: 4px;
+
+  background-color: var(--dark-6);
+
+  width: min-content;
+  padding: var(--padding);
+  border-radius: calc(var(--inner-radius) + var(--padding));
+  background: linear-gradient(to right, #E83F1B, #7065AB);
+
+  > .inner {
+    /*
+    Kinda a hack, gets the _minimum_ aspect-ratio
+    to 2 / 3, but lets the height expand if longer
+    */
+    width: calc(var(--width) - var(--padding) * 2);
+    min-height: calc(var(--width) / 2 * 3);
+
+    border-radius: var(--inner-radius);
+    background-color: rgba(0, 0, 0, 0.75);
+    height: 100%;
+
+    display: grid;
+    grid-template:
+      '. . .' max-content
+      '. . .' min-content
+      '. . .' min-content
+      '. . .' 1fr
+      / 1fr 2fr 4fr;
+    
+    > .banner {
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      grid-row: 1 / span 2;
+      grid-column: 1 / span 3;
+    }
+
+    > .pfp {
+      grid-row: 2 / span 2;
+      grid-column: 2 / span 1;
+      /* align-self: end; */
+      z-index: 1;
+    }
+
+    > .content {
+      grid-row: 4 / span 1;
+      grid-column: 1 / span 3;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+  }
+
+  .banner {
+    aspect-ratio: 5 / 2;
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  svg.banner {
+    --border-width: 5px;
+
+    mask {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      rect {
+        width: 100%;
+        height: 100%;
+        fill: white;
+      }
+
+      circle {
+        fill: black;
+        cx: calc(100% / 7 * 2); /* Based on the grid column widths */
+        cy: 86%; /* Guesstimate because math is hard */
+        r: calc(100% / 7 + 10px + var(--border-width));
+      }
+    }
+
+    foreignObject {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .pfp {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  
+    border-radius: 100%;
+  }
+
+  .content {
+    color: white;
+    padding: var(--space-4);
+    padding-top: 0;
+
+    h1, h2, h3, h4, h5, h6, li, p, span {
+      color: inherit;
+    }
+
+    /* .icon {
+      fill: var(--dark-12);
+      transition: fill 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+      a:hover &,
+      a[aria-current] & {
+        fill: var(--text-color-bright);
+      }
+    } */
+
+    .icon#signature {
+      fill: var(--dark-12);
+      width: 150px;
+    }
+
+    .follows {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+
+      color: var(--dark-11);
+      font-size: var(--text-size-2);
+      letter-spacing: var(--text-tracking-2);
+      line-height: var(--text-leading-2);
+
+      > div:first-child::before {
+        content: '•';
+        margin-left: var(--space-1);
+      }
+
+      > div {
+        display: flex;
+        flex-flow: row-reverse nowrap;
+        gap: var(--space-1);
+      }
+
+      dd {
+        font-weight: bold;
+      }
+    }
+
+    .bio {
+      margin-top: var(--space-3);
+
+      p {
+        font-size: var(--text-size-2);
+        letter-spacing: var(--text-tracking-2);
+        line-height: var(--text-leading-2);
+      }
+    }
+
+    .socials {
+      margin-top: var(--space-4);
+      display: flex;
+      flex-flow: column nowrap;
+      gap: var(--space-2);
+
+      a {
+        display: grid;
+        grid-template-columns: max-content 1fr max-content;
+        grid-template-rows: 1fr;
+        gap: var(--space-3);
+        align-items: center;
+
+        width: 100%;
+        border-radius: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: var(--space-2);
+
+        color: var(--dark-12);
+        font-weight: 500;
+
+        font-size: var(--text-size-2);
+        letter-spacing: var(--text-tracking-2);
+        line-height: var(--text-leading-2);
+
+        &:hover {
+          border-color: rgba(255, 255, 255, 0.5);
+        }
+      }
+
+      .icon {
+        fill: var(--dark-12);
+        width: var(--space-5);
+        aspect-ratio: 1 / 1;
+      }
+
+      .icon:last-child {
+        flex: 1;
+      }
+    }
+  }
+}

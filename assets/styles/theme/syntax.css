@@ -20,6 +20,9 @@
     color: #abb2bf;
     background: #282c34
   }
+  .hljs-tag {
+    color: #abb2bf;
+  }
   .hljs-comment,
   .hljs-quote {
     color: #5c6370;
@@ -80,7 +83,7 @@
     text-decoration: underline
   }
 
-  @media (prefers-color-scheme: light) {
+  /* @media (prefers-color-scheme: light) {
     .hljs {
       display: block;
       overflow-x: auto;
@@ -157,5 +160,5 @@
     .hljs-link {
       text-decoration: underline;
     }
-  }
+  } */
 }
