@@ -1,0 +1,59 @@
+main > header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  height: min-content;
+
+  nav {
+    ol {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: var(--space-2);
+
+      span {
+        color: var(--neutral-10);
+        font-size: var(--text-size-2);
+        letter-spacing: var(--text-tracking-2);
+        line-height: var(--text-leading-2);
+        margin: 3px 0;
+      }
+    }
+    a {
+      font-size: var(--text-size-2);
+      font-weight: 400;
+      color: var(--neutral-10);
+  
+      border: none;
+  
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .settings {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: var(--space-1);
+
+    button {
+      background: none;
+      border: none;
+      border-radius: 4px;
+      padding: var(--space-1);
+      
+      &:hover {
+        background: var(--neutral-3);
+      }
+
+      .icon {
+        width: 20px;
+        aspect-ratio: 1 / 1;
+        stroke-width: 1px;
+        color: var(--neutral-10);
+        fill: var(--neutral-10);
+      }
+    }
+  }
+}

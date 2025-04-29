@@ -12,8 +12,8 @@ blog({
   collections: {
     // 'posts': markdown('./content/posts'),
     // 'notes': notion({ id: 'dc4d0731cf0a4fcc93c9c93de9c8927a', token: Deno.env.get("NOTION_API_TOKEN") }),
-    // 'posts': json('./obsidian.json'),
-    'posts': drive({ fileId: '1POpOZcyRcZ4Bq6TWxSQ5xcTVRzDUEps1', keyFile: './service-account.json' })
+    // 'writing': json('./obsidian.json'),
+    'writing': drive({ fileId: '1POpOZcyRcZ4Bq6TWxSQ5xcTVRzDUEps1', keyFile: './service-account.json' })
   },
 
   plugs: [

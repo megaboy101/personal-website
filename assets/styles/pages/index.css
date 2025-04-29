@@ -1,98 +1,158 @@
-:where(#index) {
-  &:not(:has(aside)) {
+#index {
+  display: grid;
+  grid-template:
+    'header header header' 2fr
+    '. card .' max-content
+    '. sub-card .' 1fr
+    '. . .' 1fr
+    / 1fr max-content 1fr;
+  
+  header { grid-area: header; }
+  .settings {
+    grid-area: settings;
+    place-self: start end;
+  }
+  .card { grid-area: card };
+  .sub-card { grid-area: sub-card }
+
+  .card {
+    padding: var(--space-5) var(--space-6);
+    width: 500px;
+    aspect-ratio: 16 / 9;
+
+    background-image: url('/img/card-gradient.jpg');
+    background-color: var(--dark-1);
+    background-position: center;
+    background-size: cover;
+    border-radius: 12px;
+    box-shadow: 0px 2px 4px rgb(0 0 0 / 0.1);
+
     display: grid;
     grid-template:
-      'filters' max-content
-      'content' max-content
-      / max-content;
-    grid-row-gap: var(--space-3);
-    justify-content: center;
-    container: main / inline-size;
-  }
+      'heading' max-content
+      'social' max-content
+      '.' 1fr
+      'details' max-content
+      / 1fr;
 
-  &:has(aside) {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-items: start;
-    gap: var(--space-5);
+    h1 { grid-area: heading; }
+    .social { grid-area: social; }
+    dl { grid-area: details; }
 
-    container: main / inline-size;
-
-    > :nth-child(1) {
-      position: sticky;
-      top: 0;
-      left: 0;
-
-      @container main (width >= 100vw) {
-        position: static;
-        --strength: 0;
-      }
-
-      /*
-      Trick to only apply padding when fixed position
-      takes over
-      */
-      padding-top: var(--space-5);
-      margin-top: calc(var(--space-5) * -1);
+    h1 {
+      font-size: var(--text-size-6);
+      color: var(--dark-12);
     }
 
-    > :nth-child(2) {
-      max-width: 100%;
+    .social {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: var(--space-2);
 
-      @container main (width < 55ch) {
-        article {
-          border-radius: 0;
+      a {
+        background-color: transparent;
+        padding: var(--space-1);
+        border-radius: 4px;
+
+        &:hover { background-color: rgb(255 255 255 / 0.13) }
+
+        .icon {
+          width: 20px;
+          aspect-ratio: 1 / 1;
+          color: var(--dark-12);
+          circle { fill: var(--dark-12); }
         }
       }
     }
+
+    dl {
+      margin-top: auto;
+
+      display: grid;
+      grid-template:
+        'first-label .'max-content
+        'first-content .' max-content
+        '. .' var(--space-3)
+        'second-label third-label' max-content
+        'second-content third-content' max-content
+        / 1fr 1fr;
+      
+      :nth-child(1) { grid-area: first-label; }
+      :nth-child(2) { grid-area: first-content; }
+      :nth-child(3) { grid-area: second-label; }
+      :nth-child(4) { grid-area: second-content; }
+      :nth-child(5) { grid-area: third-label; }
+      :nth-child(6) { grid-area: third-content; }
+
+      dt {
+        font-size: var(--text-size-1);
+        color: var(--dark-11);
+        text-transform: uppercase;
+      }
+
+      dd, a {
+        font-size: var(--text-size-4);
+        color: var(--dark-12);
+      }
+
+      a {
+        &:hover {
+          text-decoration: underline;
+          text-decoration-style: wavy;
+          text-decoration-color: #D9D9D9;
+          text-underline-offset: 4px;
+        }
+        border: none;
+      }
+    }
   }
 
-  h2 {
-    margin-bottom: var(--space-3);
+  .squiggle {
+    stroke-width: 1.5px;
+    stroke: #E1D9FF;
+    width: 500px;
+    height: 10px;
+    margin: var(--space-5) 0 var(--space-4) 0;
+  }
+
+  .links {
+    margin-top: var(--space-2);
+    display: flex;
+    flex-flow: row nowrap;
+    gap: var(--space-1);
+    justify-content: center;
+
+    a {
+      flex: 1;
+      color: var(--neutral-12);
+      border-radius: 4px;
+      padding: var(--space-1) 0;
+
+      display: flex;
+      flex-flow: row nowrap;
+      gap: var(--space-1);
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid var(--neutral-6);
+      &:hover { border: 1px solid var(--neutral-7); }
+      &:active { border: 1px solid var(--neutral-8); }
+
+      .icon {
+        width: 20px;
+        aspect-ratio: 1 / 1;
+      }
+    }
   }
 }
 
-main div[role="group"] {
-  display: flex;
-  flex-flow: row nowrap;
-  gap: var(--space-3);
-  margin-bottom: var(--space-3);
+cursor-tracker {
+  display: block;
 
-  @container main (width < 55ch) {
-    margin-left: var(--space-3);
-    margin-right: var(--space-3);
-  }
-
-  button {
-    border: none;
-    border-radius: 8px;
-    color: var(--dark-12);
-    padding: var(--space-1) var(--space-3);
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.15);
-    }
-
-    &:active {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    &[aria-pressed="true"] {
-      background-color: var(--light-1);
-      color: var(--light-12);
-    }
-  }
-}
-
-:where(ol#content-list) {
-  display: flex;
-  flex-flow: column nowrap;
-  gap: var(--space-4);
-}
-
-#kirby {
-  position: absolute;
-  top: 650px;
-  transform: scaleX(-1);
+  transform:
+    perspective(5000px)
+    rotateY(var(--rotateX))
+    rotateX(var(--rotateY));
+  
+  --strength: 9;
 }

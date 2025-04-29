@@ -1287,7 +1287,6 @@
       "npm:@googleapis/drive@*",
       "npm:@notionhq/client@*",
       "npm:@shikijs/rehype@*",
-      "npm:chroma-js@*",
       "npm:gcp-metadata@6.1.0",
       "npm:highlight.js@*",
       "npm:isbot@*",

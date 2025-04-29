@@ -19,7 +19,7 @@
     --dark-11-5: #D1D1D1;
     --dark-12: #eeeeee;
 
-    --light-1: #fcfcfc;
+    --light-1: white;
     --light-2: #f9f9f9;
     --light-3: #f0f0f0;
     --light-4: #e8e8e8;
@@ -64,32 +64,37 @@
         --neutral-12: var(--light-12);
       }
     }
-  }
 
-  /* 3rd Party brand colors */
-  :root {
-    --color-discord: #5865F2;
-    --color-marriagepact: rgba(255, 0, 59, 0.8);
-    --color-twitter: #ffffff;
-    --color-github: #fafbfc;
-    --color-linkedin: #0A66C2;
-    --color-google-docs: #4285F4;
-    --color-digital-garden: rgb(4, 164, 186);
-
-    @media (prefers-color-scheme: light) {
-      & {
-        --color-twitter: #14171a;
-        --color-github: #181717;
-      }
+    &[data-theme="light"] {
+      --neutral-1: var(--light-1);
+      --neutral-2: var(--light-2);
+      --neutral-3: var(--light-3);
+      --neutral-4: var(--light-4);
+      --neutral-5: var(--light-5);
+      --neutral-6: var(--light-6);
+      --neutral-7: var(--light-7);
+      --neutral-8: var(--light-8);
+      --neutral-9: var(--light-9);
+      --neutral-10: var(--light-10);
+      --neutral-11: var(--light-11);
+      --neutral-11-5: var(--light-11-5);
+      --neutral-12: var(--light-12);
     }
 
-    /* Color links based on domain */
-    a[href*="discord"] { color: var(--color-discord); }
-    a[href*="marriagepact"] { color: var(--color-marriagepact); }
-    a[href*="twitter"] { color: var(--color-twitter); }
-    a[href*="github"] { color: var(--color-github); }
-    a[href*="linkedin"] { color: var(--color-linkedin); }
-    a[href*="docs.google"] { color: var(--color-google-docs); }
-    a[href*="maggieappleton"] { color: var(--color-digital-garden); }
+    &[data-theme="dark"] {
+      --neutral-1: var(--dark-1);
+      --neutral-2: var(--dark-2);
+      --neutral-3: var(--dark-3);
+      --neutral-4: var(--dark-4);
+      --neutral-5: var(--dark-5);
+      --neutral-6: var(--dark-6);
+      --neutral-7: var(--dark-7);
+      --neutral-8: var(--dark-8);
+      --neutral-9: var(--dark-9);
+      --neutral-10: var(--dark-10);
+      --neutral-11: var(--dark-11);
+      --neutral-11-5: var(--dark-11-5);
+      --neutral-12: var(--dark-12);
+    }
   }
 }

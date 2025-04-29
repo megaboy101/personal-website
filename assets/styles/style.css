@@ -9,8 +9,9 @@
 
 @import "/styles/components/page.css" layer(components);
 @import "/styles/components/article.css" layer(components);
-@import "/styles/components/profile-card.css" layer(components);
+@import "/styles/components/header.css" layer(components);
 
 @import "/styles/pages/index.css" layer(pages);
+@import "/styles/pages/writing.css" layer(pages);
 @import "/styles/pages/entry.css" layer(pages);
 @import "/styles/pages/404.css" layer(pages);

@@ -8,7 +8,6 @@ import { serveStatic } from "hono/deno"
 import { jsxRenderer } from "hono/jsx-renderer"
 import { z } from "zod"
 import { JSX } from "hono/jsx/jsx-runtime"
-import { FC } from "hono/jsx"
 import { Cls, use } from "@/mixins.ts"
 
 // MARK: Type definitions
@@ -214,13 +213,13 @@ function pageHandler(page: Page): unknown {
         const entry = collection?.find(e => e?.id === c.req.param('entry'))
         if (!entry) return c.notFound()
         if (page.head) c.set('head', typeof page.head === 'function' ? page.head({ collection, entry }) : page.head)
-        return c.render(page.template({ collection, entry }))
+        return c.render(page.template({ collection, entry, ctx: c.req }))
       }
 
-      return c.render(page.template({ collection }))
+      return c.render(page.template({ collection, ctx: c.req }))
     }
 
-    return c.render(page.template({}))
+    return c.render(page.template({ctx: c.req}))
   }).at(0)
 }
 

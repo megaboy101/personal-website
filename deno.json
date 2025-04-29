@@ -23,7 +23,6 @@
     "notion-to-md": "npm:notion-to-md",
     "markdown-it": "npm:markdown-it",
     "highlight.js": "npm:highlight.js",
-    "chroma": "npm:chroma-js",
     "rehype-sanitize": "npm:rehype-sanitize",
     "rehype-stringify": "npm:rehype-stringify",
     "remark-parse": "npm:remark-parse",

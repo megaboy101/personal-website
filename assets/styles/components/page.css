@@ -1,8 +1,7 @@
 body {
-  margin: auto;
-  width: min(100%, 932px);
+  background: var(--neutral-1);
 
-  background-color: var(--day-night-color, --dark-1);
+  padding: var(--space-5);
 
   display: grid;
   grid-auto-flow: column;
@@ -12,12 +11,5 @@ body {
 
   > main {
     grid-area: main;
-
-    /*
-    Defined in relation to the smaller screen dimension
-    so thin-but-tall and wide-but-short screens have
-    a small degree of padding
-    */
-    margin: 10vmin 0;
   }
 }
