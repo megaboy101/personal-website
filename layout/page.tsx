@@ -16,7 +16,7 @@ export default ({ children }: { children?: Child }) => {
 
         <link rel="stylesheet" href="/styles/style.css" />
 
-        <link rel="shortcut icon" type="image/jpg" href="/favicon.png" />
+        <link rel="icon" href="/favicon.ico" />
 
         <title>{head?.title ?? 'Jacob Bleser'}</title>
       </head>

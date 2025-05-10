@@ -175,7 +175,7 @@ function router(fileHandlers: Awaited<ReturnType<typeof blogPages>>, plugins: Ho
   const staticHandler = serveStatic({ root: "./assets" })
   router.use("/styles/*", staticHandler)
   router.use("/scripts/*", staticHandler)
-  router.use("/favicon.*", staticHandler)
+  router.use("/favicon.ico", staticHandler)
   router.use("/img/*", staticHandler)
 
   // Use context storage for fetching collections in handlers
