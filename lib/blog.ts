@@ -216,9 +216,11 @@ function pageHandler(page: Page): unknown {
         return c.render(page.template({ collection, entry, ctx: c.req }))
       }
 
+      if (page.head) c.set('head', typeof page.head === 'function' ? page.head({ collection }) : page.head)
       return c.render(page.template({ collection, ctx: c.req }))
     }
-
+    
+    if (page.head) c.set('head', page.head)
     return c.render(page.template({ctx: c.req}))
   }).at(0)
 }

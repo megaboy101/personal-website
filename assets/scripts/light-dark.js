@@ -8,7 +8,6 @@ if (document.readyState !== 'loading') {
 }
 
 function init() {
-  console.log('initializing')
   html = document.querySelector('html')
   btn = document.querySelector('#theme-toggle')
   const theme = localStorage.getItem('theme')

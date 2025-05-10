@@ -3,7 +3,7 @@ import Header from "../header.tsx"
 import { HonoRequest } from "hono"
 
 export const head = {
-  title: 'Jacob Bleser'
+  title: 'Writing // Jacob Bleser'
 }
 
 
