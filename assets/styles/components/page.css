@@ -1,3 +1,7 @@
+html {
+  background: var(--neutral-1);
+}
+
 body {
   background: var(--neutral-1);
 
