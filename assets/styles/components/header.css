@@ -67,6 +67,7 @@ main > header {
   }
 
   .settings {
+    grid-column: 3 / span 1;
     justify-self: end;
     display: flex;
     flex-flow: row nowrap;

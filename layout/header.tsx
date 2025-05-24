@@ -14,12 +14,12 @@ export default () => {
         </div>
       </div>
 
-      <nav>
+      {/* <nav>
         <a href="/writing">writing</a>
         <a href="/photos">photos</a>
         <a href="/doodles">doodles</a>
         <a href="/cool-stuff">cool stuff</a>
-      </nav>
+      </nav> */}
   
       <div class="settings" role="group">
         <button type="button" aria-pressed="false">
