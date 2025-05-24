@@ -1,38 +1,73 @@
 main > header {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: minmax(max-content, 1fr) 3fr 1fr;
   align-items: center;
   height: min-content;
 
-  nav {
-    ol {
+  a:hover {
+    text-decoration: underline var(--neutral-6) wavy;
+    text-underline-offset: 2px;
+  }
+
+  .profile {
+    display: grid;
+    grid-template:
+      'img name' 1fr
+      'img handle' 1fr
+      / 44px 1fr;
+    grid-column-gap: var(--space-3);
+
+    > a:first-child {
+      grid-area: img;
+      aspect-ratio: 1 / 1;
+      
+      img { border-radius: 1000px; }
+    }
+
+    > div {
+      grid-area: handle;
       display: flex;
       flex-flow: row nowrap;
-      gap: var(--space-2);
+      gap: var(--space-1);
 
-      span {
+      a {
+        font-size: var(--text-size-1);
+        letter-spacing: var(--text-tracking-1);
+        line-height: var(--text-leading-1);
         color: var(--neutral-10);
-        font-size: var(--text-size-2);
-        letter-spacing: var(--text-tracking-2);
-        line-height: var(--text-leading-2);
-        margin: 3px 0;
       }
     }
+
+    a:nth-child(2) {
+      grid-area: name;
+      font-size: var(--text-size-3);
+      letter-spacing: var(--text-tracking-3);
+      line-height: var(--text-leading-3);
+      font-weight: 500;
+    }
+
+    .icon {
+      width: 16px;
+    }
+  }
+
+  nav {
+    justify-self: center;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: var(--space-6);
+
     a {
       font-size: var(--text-size-2);
-      font-weight: 400;
-      color: var(--neutral-10);
-  
-      border: none;
-  
-      &:hover {
-        text-decoration: underline;
-      }
+      letter-spacing: var(--text-tracking-2);
+      line-height: var(--text-leading-2);
+      color: var(--neutral-11);
     }
   }
 
   .settings {
+    justify-self: end;
     display: flex;
     flex-flow: row nowrap;
     gap: var(--space-1);
@@ -54,6 +89,52 @@ main > header {
         color: var(--neutral-10);
         fill: var(--neutral-10);
       }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+    @media (pointer: coarse) {
+      main > header .settings button {
+        border: 1px solid var(--neutral-6);
+        border-radius: 1000px;
+
+        &:hover {
+          background: transparent;
+        }
+      }
+    }
+  main > header {
+    grid-template-columns: 1fr max-content 1fr;
+
+    .profile {
+      display: grid;
+      grid-template-rows: 1fr;
+      grid-template-columns: subgrid;
+      align-items: center;
+      grid-column: 1 / span 2;
+
+      a:first-child {
+        width: 38px;
+        grid-column: 1 / span 1;
+      }
+
+      a:nth-child(2) {
+        grid-column: 2 / span 1;
+      }
+
+      > div {
+        display: none;
+      }
+    }
+
+    nav {
+      display: none;
+    }
+
+    .settings {
+      grid-column: 3 / span 1;
+      
     }
   }
 }

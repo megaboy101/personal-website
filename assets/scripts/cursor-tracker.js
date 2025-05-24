@@ -2,6 +2,10 @@ customElements.define('cursor-tracker', class extends HTMLElement {
   #strength = 0;
 
   connectedCallback() {
+    // Disable all logic on coarse pointers where the pointer isn't
+    // "dragged" around
+    if (window.matchMedia('(pointer: coarse)').matches) return
+
     this.observeStrength()
     this.observeCursor()
   }

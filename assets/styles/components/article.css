@@ -1,6 +1,5 @@
 article {
   border-radius: 8px;
-  width: max-content;
   max-width: 62ch;
 
   h1, h2, h3, h4, p, a {

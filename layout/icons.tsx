@@ -357,6 +357,28 @@ export const LinkedIn = () => (
   </svg>
 );
 
+export const Email = () => (
+  <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+    <rect width="256" height="256" fill="none" />
+    <path
+      d="M32,56H224a0,0,0,0,1,0,0V192a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V56A0,0,0,0,1,32,56Z"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="16"
+    />
+    <polyline
+      points="224 56 128 144 32 56"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="16"
+    />
+  </svg>
+);
+
 export const Writing = () => (
   <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
     <line
@@ -586,6 +608,31 @@ export const Link = () => (
     />
     <path
       d="M114.62,191.32l-11,11a46.63,46.63,0,0,1-66-.05h0a46.63,46.63,0,0,1,.06-65.89L72.4,101.66a46.62,46.62,0,0,1,65.94,0h0A46.45,46.45,0,0,1,152,135.94"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="16"
+    />
+  </svg>
+);
+
+export const Arrow = () => (
+  <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+    <rect width="256" height="256" fill="none" />
+    <line
+      x1="64"
+      y1="192"
+      x2="192"
+      y2="64"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="16"
+    />
+    <polyline
+      points="88 64 192 64 192 168"
       fill="none"
       stroke="currentColor"
       stroke-linecap="round"

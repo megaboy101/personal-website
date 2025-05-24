@@ -1,20 +1,24 @@
-import { Dots, Sun } from "./icons.tsx"
+import { Bluesky, Dots, Email, Github, LinkedIn, Sun } from "./icons.tsx"
 
-export default ({ path }: { path: string[] }) => {
-  const fullPath = ['@me', ...path]
+export default () => {
   return (
     <header>
+      <div class="profile">
+        <a href="/"><img src="/img/pfp.jpg" alt="Profile picture" /></a>
+        <a href="/">Jacob Bleser</a>
+        <div>
+          <a href="mailto:bleserjacob@gmail.com"><Email /></a>
+          <a href="https://bsky.app/profile/jacobb.nyc"><Bluesky /></a>
+          <a href="https://github.com/megaboy101"><Github /></a>
+          <a href="https://linkedin.com/in/jacobbleser"><LinkedIn /></a>
+        </div>
+      </div>
+
       <nav>
-        <ol>
-          {fullPath.map((segment, idx) => (
-            <>
-              <li>
-                <a href={`/${path.slice(0, idx).join('/')}`} aria-current={idx === fullPath.length-1 ? 'page' : undefined}>{segment}</a>
-              </li>
-              {idx !== fullPath.length-1 && <span> / </span>}
-            </>
-          ))}
-        </ol>
+        <a href="/writing">writing</a>
+        <a href="/photos">photos</a>
+        <a href="/doodles">doodles</a>
+        <a href="/cool-stuff">cool stuff</a>
       </nav>
   
       <div class="settings" role="group">

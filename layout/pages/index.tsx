@@ -1,5 +1,7 @@
 import { Bluesky, Camera, Github, Link, LinkedIn, Sparkle, Writing } from "../icons.tsx"
 import Header from "../header.tsx"
+import { Entry, useCollection } from "@/blog.ts"
+import { Category, usePosts } from "./writing.tsx"
 
 export const head = {
   title: 'Jacob Bleser',
@@ -22,36 +24,36 @@ export const head = {
 }
 
 export default () => {
+  const posts = usePosts()
+
   return (
     <main id="index">
-      <Header path={[]} />
+      <Header />
 
-      <cursor-tracker class="card">
-        <h1>Jacob Bleser</h1>
-        <div role="group" class="social">
-          <a href="https://github.com/megaboy101"><Github /></a>
-          <a href="https://bsky.app/profile/jacobb.nyc"><Bluesky /></a>
-          <a href="https://linkedin.com/in/jacobbleser"><LinkedIn /></a>
-        </div>
+      <section id="welcome">
+        <span>🏕️</span>
+        <h1>welcome to my ~space~</h1>
 
-        <dl>
-          <dt>Location</dt>
-          <dd><a href="https://maps.app.goo.gl/hR68MSbcZ6oShAqc7">Brooklyn, NY</a></dd>
-          <dt>Occupation</dt>
-          <dd><a href="https://leerob.com/n/product-engineers">Product Engineer</a></dd>
-          <dt>Company</dt>
-          <dd><a href="https://youtu.be/hX9MOVIMYkg?si=cu0lSZh9iiPKZpEs">Discord</a></dd>
-        </dl>
-      </cursor-tracker>
+        <p>
+          Fiancé // writer // photographer // product engineer at Discord
+        </p>
+        <br />
+        <p>
+          Collecting thoughts and musings on browser tech, ADHD, Dungeons and Dragons, startup culture, gaming, and social media.
+        </p>
+        <br />
+        <p>
+          Most reachable via email or Discord. I don't check LinkedIn
+        </p>
+        <br />
+        <p>
+          Living with Kat and Miles in Brooklyn, NY
+        </p>
+      </section>
 
-      <div class="sub-card">
-        <div class="links sub-card" role="group">
-          <a href="/writing"><Writing /> Writing</a>
-          <a href="/photography"><Camera /> Photos</a>
-          <a href="/doodles"><Sparkle /> Doodles</a>
-          <a href="/links"><Link /> Links</a>
-        </div>
-      </div>
+      {Object.entries(posts).map(([section, entries]) => (
+        <Category label={section} items={entries} limit={5} />
+      ))}
     </main>
   )
 }
