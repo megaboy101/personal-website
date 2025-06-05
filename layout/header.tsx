@@ -14,17 +14,7 @@ export default () => {
         </div>
       </div>
 
-      {/* <nav>
-        <a href="/writing">writing</a>
-        <a href="/photos">photos</a>
-        <a href="/doodles">doodles</a>
-        <a href="/cool-stuff">cool stuff</a>
-      </nav> */}
-  
       <div class="settings" role="group">
-        <button type="button" aria-pressed="false">
-          <Dots />
-        </button>
         <button id="theme-toggle" type="button" aria-pressed="false">
           <Sun />
         </button>
