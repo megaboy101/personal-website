@@ -94,11 +94,25 @@
     }
 
     a {
-      &:hover {
+      @media (pointer: fine) {
+        transition:
+          font-variation-settings 0.2s ease,
+          text-decoration-color 0.2s ease;
+        font-variation-settings:
+          'GRAD' 400;
+
         text-decoration: underline;
         text-decoration-style: wavy;
-        text-decoration-color: #D9D9D9;
+        text-decoration-color: transparent;
+
+        &:hover {
+          font-variation-settings:
+          'GRAD' 600;
+
+          text-decoration-color: #D9D9D9;
+        }
       }
+
       border: none;
     }
   }
