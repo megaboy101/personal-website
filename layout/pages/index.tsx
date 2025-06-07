@@ -31,8 +31,10 @@ export default () => {
       <Header />
 
       <section id="welcome">
-        <span>🏕️</span>
-        <h1>welcome to my ~space~</h1>
+        <header>
+          <span>🏕️</span>
+          <h1>welcome to my ~space~</h1>
+        </header>
 
         <p>
           Fiancé // writer // photographer // product engineer at Discord

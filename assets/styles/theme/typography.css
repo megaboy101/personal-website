@@ -107,9 +107,7 @@
       font-size: inherit;
       letter-spacing: inherit;
       line-height: inherit;
-      font-weight: 500;
-      color: var(--text-color-bright);
-      border-bottom: 1px solid currentColor;
+      font-weight: inherit;
     }
 
     p, li {
@@ -118,7 +116,7 @@
       letter-spacing: var(--text-tracking-3);
       line-height: var(--text-leading-3);
       font-weight: 400;
-      color: var(--text-color-neutral);
+      color: var(--text-color-bright);
     }
 
     span {

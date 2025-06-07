@@ -5,13 +5,13 @@ export default () => {
     <header>
       <div class="profile">
         <a href="/"><img src="/img/pfp.jpg" alt="Profile picture" /></a>
-        <a href="/">Jacob Bleser</a>
-        <div>
+        <h1><a href="/">Jacob Bleser</a></h1>
+        <address>
           <a href="mailto:bleserjacob@gmail.com"><Email /></a>
           <a href="https://bsky.app/profile/jacobb.nyc"><Bluesky /></a>
           <a href="https://github.com/megaboy101"><Github /></a>
           <a href="https://linkedin.com/in/jacobbleser"><LinkedIn /></a>
-        </div>
+        </address>
       </div>
 
       <div class="settings" role="group">

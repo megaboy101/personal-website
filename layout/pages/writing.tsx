@@ -23,18 +23,16 @@ export default ({ ctx }: { ctx: HonoRequest }) => {
 
 export const Category = ({ label, items, limit }: { label?: string, items?: Entry[], limit?: number }) => (
   <section>
-    <div>
+    <header>
       <h1>{label}</h1>
       {limit && <a href="/writing">see all <Arrow /></a>}
-    </div>
+    </header>
     <ol>
       {
         items?.filter((_, idx) => !limit || idx < limit)?.map(item => (
           <li>
-            <article>
-              <Time time={typeof item.properties?.['created-time'] === 'string' ? item.properties?.['created-time'] : item.createdAt} />
-              <h2><a href={`/writing/${item.id}`}>{item.title}</a></h2>
-            </article>
+            <Time time={typeof item.properties?.['created-time'] === 'string' ? item.properties?.['created-time'] : item.createdAt} />
+            <h2><a href={`/writing/${item.id}`}>{item.title}</a></h2>
           </li>
         ))
       }
@@ -43,7 +41,7 @@ export const Category = ({ label, items, limit }: { label?: string, items?: Entr
 )
 
 
-const Time = ({ time }: { time: string }) => <time datetime={time}>{formatDate(time)}</time>
+const Time = ({ time }: { time: string }) => <time pubdate datetime={time}>{formatDate(time)}</time>
 
 function formatDate(dateStr: string) {
   const date = new Date(dateStr)
