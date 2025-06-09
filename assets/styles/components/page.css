@@ -4,16 +4,40 @@ html {
 
 body {
   background: var(--neutral-1);
-
-  padding: var(--space-5);
+  padding: var(--space-2);
 
   display: grid;
   grid-auto-flow: column;
   grid-template:
     '. main .' 1fr
-    / 1fr 100% 1fr;
+    / 1fr min(100%, 1200px) 1fr;
 
   > main {
     grid-area: main;
+  }
+}
+
+main {
+  /*
+  Stretch the header to the page width limit
+  But limit the main content to a readable width
+  */
+
+  display: grid;
+  grid-template-columns: 1fr min(100%, 62ch) 1fr;
+  grid-template-rows: var(--space-8);
+  grid-auto-rows: max-content;
+  grid-row-gap: var(--space-8);
+
+  > header { grid-column: 1 / span 3; }
+  > :not(:first-child) { grid-column: 2 / span 1; }
+
+  @media (max-width: 500px) {
+    grid-template:
+      'header' var(--space-8)
+      'content' 1fr
+      / 1fr;
+
+    grid-row-gap: var(--space-6);
   }
 }
