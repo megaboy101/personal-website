@@ -43,46 +43,7 @@ export type Collection = Entry[]
 
 // MARK: Blog
 
-interface Servable {
-  fetch(request: Request): Response | Promise<Response>
-}
-
-const Http = (cls: Cls<Servable>) => class Http extends cls {
-  /**
-   * Listen for HTTP requests on port `8080`
-   */
-  serve(port = 8080) {
-    Deno.serve({ port }, this.fetch ? (request) => this.fetch(request) : (() => new Response('Hello, world!')))
-  }
-}
-
-interface Syncable {
-  refresh(): Promise<void>
-}
-
-const Sync = (cls: Cls<Syncable>) => class Sync extends cls {
-  /**
-   * Schedule an action to happen later
-   */
-  schedule(schedule: string | Deno.CronSchedule) {
-    Deno.cron("pulling latest content", schedule, () => {
-      const handler = super.refresh()
-      if (!handler) return
-
-      handler.catch(e => {
-        console.error(e)
-      })
-    })
-  }
-}
-
-const FilesystemTemplates = (cls: Cls) => class FilesystemRouter extends cls {
-  async templates() {
-    return await blogPages()
-  }
-}
-
-class Blog extends use(Http, Sync, FilesystemTemplates) {
+class Blog {
   #sources: Map<string, Source> = new Map()
   #collections: Map<string, Entry[]> = new Map()
   #router?: Hono
@@ -93,7 +54,7 @@ class Blog extends use(Http, Sync, FilesystemTemplates) {
    */
   async init(opts: BlogOpts = {}) {
     this.#router = router(
-      await super.templates(),
+      await blogPages(),
       opts?.plugs ?? [],
       { collections: this.#collections }
     )
@@ -150,10 +111,14 @@ export default function(opts: BlogOpts) {
   blog.init(opts)
 
   // Start http server
-  blog.serve()
+  Deno.serve({ port: 8080 }, (res) => blog.fetch(res))
 
   // Refresh nightly at midnight
-  blog.schedule("0 0 * * *")
+  Deno.cron("pulling latest content", "0 0 * * *", () => {
+      blog
+        .refresh()
+        ?.catch(console.error)
+    })
 }
 
 // MARK: Router
