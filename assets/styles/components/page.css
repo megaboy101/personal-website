@@ -8,7 +8,7 @@ body {
   margin-bottom: var(--space-9);
 
   @media (max-width: 650px) {
-    padding: var(--space-3) var(--space-5);
+    padding: var(--space-3) var(--space-4);
     margin-bottom: var(--space-5);
   }
 
@@ -39,11 +39,6 @@ main {
   > :not(:first-child) { grid-column: 2 / span 1; }
 
   @media (max-width: 500px) {
-    grid-template:
-      'header' var(--space-8)
-      'content' 1fr
-      / 1fr;
-
     grid-row-gap: var(--space-6);
   }
 }
