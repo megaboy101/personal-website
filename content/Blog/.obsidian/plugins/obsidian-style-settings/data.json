@@ -1,0 +1,14 @@
+{
+  "minimal-style@@inline-title-size": "2em",
+  "minimal-style@@h2-size": "1.4em",
+  "minimal-style@@h1-size": "1.7em",
+  "minimal-style@@bg1@@dark": "#191919",
+  "minimal-style@@base@@dark": "#202020",
+  "minimal-style@@minimal-tab-text-color@@dark": "#9B9B9B",
+  "minimal-style@@minimal-tab-text-color-active@@dark": "#D4D4D4",
+  "minimal-style@@tx1@@dark": "#D4D4D4",
+  "minimal-style@@bg2@@dark": "#202020",
+  "minimal-style@@h3-size": "1.2em",
+  "minimal-style@@h3-weight": 600,
+  "minimal-style@@bg2@@light": "#FCFCFC"
+}

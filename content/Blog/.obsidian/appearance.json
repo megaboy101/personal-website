@@ -1,0 +1,12 @@
+{
+  "cssTheme": "Minimal",
+  "theme": "system",
+  "interfaceFontFamily": "Inter",
+  "textFontFamily": "Inter",
+  "translucency": false,
+  "enabledCssSnippets": [
+    "file-margins"
+  ],
+  "accentColor": "#5753c6",
+  "showRibbon": false
+}

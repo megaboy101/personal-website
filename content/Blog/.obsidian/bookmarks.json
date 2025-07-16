@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "type": "file",
+      "ctime": 1748120035532,
+      "path": "Inbox/Inbox.md"
+    },
+    {
+      "type": "file",
+      "ctime": 1748119984814,
+      "path": "Newsstand.md"
+    },
+    {
+      "type": "file",
+      "ctime": 1748121408361,
+      "path": "Notebook/Notebook.md"
+    },
+    {
+      "type": "file",
+      "ctime": 1748120762857,
+      "path": "Journal/Journal.md"
+    },
+    {
+      "type": "file",
+      "ctime": 1748116876870,
+      "path": "Blog/Blog.md",
+      "title": "Blog"
+    },
+    {
+      "type": "file",
+      "ctime": 1748121464904,
+      "path": "Sketchbook/Projects.md"
+    },
+    {
+      "type": "file",
+      "ctime": 1748119939595,
+      "path": "Dungeons and Dragons.md"
+    }
+  ]
+}

@@ -15,31 +15,49 @@ import rehype from "remark-rehype"
 import obsidian from 'remark-obsidian'
 import { matter } from "vfile-matter"
 import slugify from 'slugify'
+import { walk } from "@std/fs"
 
 class Markdown {
-  #html = markdownit({
-    highlight(str: string, lang: string) {
-      if (lang && hljs.getLanguage(lang)) {
-        return hljs.highlight(str, { language: lang }).value
+  #htmlBuilder = unified()
+    .use(parse)
+    .use(frontmatter)
+    .use(obsidian, { titleToUrl: (link) => `/posts/${slugify(link, { lower: true })}` })
+    .use(() => (_tree, file) => matter(file))
+    .use(github)
+    .use(rehype, { allowDangerousHtml: true })
+    .use(shiki, {
+      themes: {
+        light: 'one-light',
+        dark: 'one-dark-pro',
       }
-  
-      return ""
-    },
-  })
+    })
+    .use(stringify, { allowDangerousHtml: true })
 
-  #folder?: string
+  #folder: string
 
-  constructor(folder: string) {
+  constructor(folder: string = '.') {
     this.#folder = folder
   }
 
-  async *entries(): AsyncGenerator<[string, string], void, unknown> {
-    for await (const entry of Deno.readDir(this.#folder ?? './content')) {
-      const file = await Deno.readTextFile(`${Deno.cwd()}/${this.#folder}/${entry.name}`)
+  async *entries() {
+    for await (const entry of walk(this.#folder, { exts: ['md'] })) {
+      if (!entry.isFile) continue
+      const content = await Deno.readTextFile(entry.path)
+      const meta = await Deno.stat(entry.path)
 
-      const html = this.#html.render(file)
-      // collection[entry.name.split('.')[0]] = html
-      yield [entry.name.split('.')[0], html]
+      const html = await this.#htmlBuilder.process(content)
+      const properties = mapKeys(html.data.matter, k => slugify(k, { lower: true }))
+      const title = entry.name.replace(/\.[^/.]+$/, "")
+      const id = slugify(title, { lower: true })
+
+      yield {
+        id,
+        title,
+        createdAt: meta.mtime?.toISOString(),
+        updatedAt: meta.birthtime?.toISOString(),
+        html: html.toString(),
+        properties
+      }
     }
   }
 }

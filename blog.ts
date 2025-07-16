@@ -1,5 +1,5 @@
 import blog from '@/blog.ts'
-import { drive, json, notion } from "@/blog/sources.ts"
+import { drive, json, markdown, notion } from "@/blog/sources.ts"
 import insights from "@/insights/plug.ts"
 
 blog({
@@ -13,7 +13,7 @@ blog({
     // 'posts': markdown('./content/posts'),
     // 'notes': notion({ id: 'dc4d0731cf0a4fcc93c9c93de9c8927a', token: Deno.env.get("NOTION_API_TOKEN") }),
     // 'writing': json('./obsidian.json'),
-    'writing': drive({ fileId: '1POpOZcyRcZ4Bq6TWxSQ5xcTVRzDUEps1', keyFile: './service-account.json' })
+    'writing': markdown('./content/Blog'),
   },
 
   plugs: [
