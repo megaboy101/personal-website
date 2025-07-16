@@ -15,37 +15,87 @@ import rehype from "remark-rehype"
 import obsidian from 'remark-obsidian'
 import { matter } from "vfile-matter"
 import slugify from 'slugify'
+import { walk } from "@std/fs"
 
 class Markdown {
-  #html = markdownit({
-    highlight(str: string, lang: string) {
-      if (lang && hljs.getLanguage(lang)) {
-        return hljs.highlight(str, { language: lang }).value
-      }
-  
-      return ""
-    },
+  #htmlBuilder = unified()
+  .use(parse)
+  .use(frontmatter)
+  .use(obsidian, { titleToUrl: (link) => `/posts/${slugify(link, { lower: true })}` })
+  .use(() => (_tree, file) => matter(file))
+  .use(github)
+  .use(rehype, { allowDangerousHtml: true })
+  .use(shiki, {
+    themes: {
+      light: 'one-light',
+      dark: 'one-dark-pro',
+    }
   })
+  .use(stringify, { allowDangerousHtml: true })
 
-  #folder?: string
+  #folder: string
 
-  constructor(folder: string) {
+  constructor(folder: string = '.') {
     this.#folder = folder
   }
 
-  async *entries(): AsyncGenerator<[string, string], void, unknown> {
-    for await (const entry of Deno.readDir(this.#folder ?? './content')) {
-      const file = await Deno.readTextFile(`${Deno.cwd()}/${this.#folder}/${entry.name}`)
+  async *entries() {
+    for await (const entry of walk(this.#folder, { exts: ['md'] })) {
+      if (!entry.isFile) continue
+      const content = await Deno.readTextFile(entry.path)
+      const meta = await Deno.stat(entry.path)
 
-      const html = this.#html.render(file)
-      // collection[entry.name.split('.')[0]] = html
-      yield [entry.name.split('.')[0], html]
+      const html = await this.#htmlBuilder.process(content)
+      const properties = mapKeys(html.data.matter, k => slugify(k, { lower: true }))
+      const title = entry.name.replace(/\.[^/.]+$/, "")
+      const id = slugify(title, { lower: true })
+
+      yield {
+        id,
+        title,
+        createdAt: meta.mtime?.toISOString(),
+        updatedAt: meta.birthtime?.toISOString(),
+        html: html.toString(),
+        properties
+      }
     }
   }
 }
 
 export function markdown(opts: any) {
   return new Markdown(opts)
+}
+
+class Photos {
+  constructor(url?: string) {
+    if (!url) throw new Error('Missing photos URL')
+
+    this.url = url
+  }
+
+  async *entries() {
+    const response = await fetch(this.url)
+    const html = await response.text()
+
+    for (const url of this.#toPhotoUrls(html)) {
+      yield url
+    }
+  }
+
+  #toPhotoUrls(html: string): Set<string> {
+    const regex = /\["(https:\/\/lh3\.googleusercontent\.com\/pw\/[a-zA-Z0-9\-_]*)"/g // the only difference is the [ at the beginning
+
+    const links = new Set()
+    let match
+    while (match = regex.exec(html)) {
+      links.add(match[1])
+    } 
+    return links
+  }
+}
+
+export function photos(url?: string) {
+  return new Photos(url)
 }
 
 

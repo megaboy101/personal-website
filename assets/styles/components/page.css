@@ -4,7 +4,7 @@ html {
 
 body {
   background: var(--neutral-1);
-  padding: var(--space-2);
+  padding: var(--space-6);
   margin-bottom: var(--space-9);
 
   @media (max-width: 650px) {
@@ -13,22 +13,138 @@ body {
   }
 
   display: grid;
-  grid-auto-flow: column;
   grid-template:
-    '. main .' 1fr
-    / 1fr min(100%, 1200px) 1fr;
+    'header . content .' auto
+    / 1fr var(--space-8) 62ch 1fr;
+
+  > header {
+    grid-area: header;
+    justify-self: end;
+    max-width: 220px;
+  }
 
   > main {
-    grid-area: main;
+    grid-area: content;
+  }
+
+  @media (max-width: 1000px) {
+    grid-template:
+      'header' max-content
+      'content' 1fr
+      / 1fr;
+    grid-row-gap: var(--space-8);
+
+    > header {
+      justify-self: stretch;
+      max-width: unset;
+    }
+  }
+
+  @media (max-width: 500px) {
+    gap: var(--space-3);
   }
 }
 
-main {
-  /*
-  Stretch the header to the page width limit
-  But limit the main content to a readable width
-  */
+body > header {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: var(--space-6);
+  height: min-content;
+  position: sticky;
+  top: var(--space-6);
 
+  @media (max-width: 1000px) {
+    position: static;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: minmax(0, 220px) minmax(0, 220px);
+  }
+
+  @media (max-width: 500px) {
+    display: block;
+    padding: var(--space-4) 0;
+
+    > :not(#self) {
+      display: none;
+    }
+
+    #self {
+      display: flex;
+      justify-content: center;
+
+      :not(h1) { display: none; }
+
+      h1 {
+        margin: 0;
+        text-decoration: underline;
+        text-decoration-style: wavy;
+        text-decoration-color: var(--neutral-7);
+        text-underline-offset: 4px;
+        text-underline-thickness: 2px;
+      }
+    }
+  }
+
+  h1 {
+    font-weight: 500;
+    font-size: var(--text-size-4);
+    line-height: var(--text-leading-4);
+    letter-spacing: var(--text-tracking-4);
+    margin-bottom: var(--space-3);
+
+    &:has(.icon) {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+
+      .icon {
+        display: inline-block;
+        width: 16px;
+      }
+    }
+  }
+
+  div:first-of-type h1 {
+    font-size: var(--text-size-5);
+    line-height: var(--text-leading-5);
+    letter-spacing: var(--text-tracking-5);
+  }
+
+  p {
+    color: var(--neutral-11);
+  }
+
+  #wiggle {
+    color: var(--neutral-6);
+
+    @media (max-width: 1000px) {
+      display: none;
+    }
+  }
+
+  div[role="group"] {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+
+    .icon {
+      width: 22px;
+      color: var(--neutral-12);
+      stroke-width: 2px;
+
+      * {
+        stroke-width: 12px;
+      }
+
+      &:hover * {
+        stroke-width: 16px;
+      }
+    }
+  }
+}
+
+/* main {
   display: grid;
   grid-template-columns: 1fr min(100%, 62ch) 1fr;
   grid-template-rows: var(--space-8);
@@ -41,4 +157,4 @@ main {
   @media (max-width: 500px) {
     grid-row-gap: var(--space-6);
   }
-}
+} */

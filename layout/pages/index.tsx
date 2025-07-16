@@ -1,4 +1,4 @@
-import { Bluesky, Camera, Github, Link, LinkedIn, Sparkle, Writing } from "../icons.tsx"
+import { Arrow, Bluesky, Camera, Github, Link, LinkedIn, Sparkle, Sun, Writing } from "../icons.tsx"
 import Header from "../header.tsx"
 import { Entry, useCollection } from "@/blog.ts"
 import { Category, usePosts } from "./writing.tsx"
@@ -23,7 +23,7 @@ export const head = {
   }
 }
 
-export default () => {
+const _ = () => {
   const posts = usePosts()
 
   return (
@@ -58,4 +58,39 @@ export default () => {
       ))}
     </main>
   )
+}
+
+export default () => {
+  const posts = usePosts()
+  const photos = usePhotos()
+
+  return (
+    <main id="index">
+      <section>
+        <header>
+          <h1>photos</h1>
+          <a href="/photos">see all <Arrow /></a>
+        </header>
+        <ol>
+          {
+            photos.map(photo => (
+              <li>
+                <img src={photo} alt="" />
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      {Object.entries(posts).map(([section, entries]) => (
+        <Category label={section} items={entries} />
+      ))}
+    </main>
+  )
+}
+
+function usePhotos(): string[] {
+  const photos = useCollection('photos')
+
+  return photos ?? []
 }

@@ -84,9 +84,10 @@ class Blog {
         // until all entries have loaded before saving any
         this.#collections.set(name, entries)
         for await (const rawEntry of source.entries()) {
-          const { success, data: entry, error } = entrySchema.safeParse(rawEntry)
-          if (!success) console.error(error.toString(), rawEntry)
-          else entries.push(entry)
+          // const { success, data: entry, error } = entrySchema.safeParse(rawEntry)
+          // if (!success) console.error(error.toString(), rawEntry)
+          // else entries.push(entry)
+          entries.push(rawEntry)
         }
       } catch (e) {
         console.error(e)

@@ -34,14 +34,15 @@ ol:has(li time + :is(h1, h2, h3, p, a)) {
 
       text-decoration: underline;
       text-decoration-style: wavy;
-      text-decoration-color: #D9D9D9;
+      text-decoration-color: var(--neutral-7);
       text-underline-offset: 4px;
+      text-underline-thickness: 2px;
 
       &:hover {
         font-variation-settings:
         'GRAD' 600;
 
-        text-decoration-color: #D9D9D9;
+        text-decoration-color: var(--neutral-9);
       }
     }
   }
