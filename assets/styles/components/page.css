@@ -8,7 +8,7 @@ body {
   margin-bottom: var(--space-9);
 
   @media (max-width: 650px) {
-    padding: var(--space-3);
+    padding: var(--space-3) var(--space-4);
     margin-bottom: var(--space-5);
   }
 
