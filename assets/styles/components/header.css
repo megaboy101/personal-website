@@ -48,7 +48,9 @@ main > header {
         grid-column: 1 / span 1;
       }
 
-      img { border-radius: 1000px; }
+      img {
+        border-radius: 1000px;
+      }
     }
 
     img {
@@ -115,7 +117,8 @@ main > header {
       }
     }
 
-    button, a {
+    button,
+    a {
       display: flex;
       flex-flow: row nowrap;
       gap: var(--space-1);
@@ -130,8 +133,7 @@ main > header {
       line-height: var(--text-leading-2);
       font-weight: 400;
 
-      transition:
-        background-color 0.2s ease;
+      transition: background-color 0.2s ease;
 
       @media (max-width: 650px) and (pointer: coarse) {
         border: 1px solid var(--neutral-6);

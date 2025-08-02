@@ -2,8 +2,19 @@ article {
   border-radius: 8px;
   max-width: 62ch;
 
-  h1, h2, h3, h4, p, a {
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  a {
     color: var(--neutral-12);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--text-serif) !important;
   }
 
   time {
@@ -36,19 +47,19 @@ article {
       fill: currentColor;
 
       &:is(.leaf, .plant, .tree) {
-        color: #26997B;
+        color: #26997b;
       }
 
       &.pepper {
-        color: #DD4425;
+        color: #dd4425;
       }
 
       &.books {
-        color: #0588F0;
+        color: #0588f0;
       }
 
       &.moon {
-        color: #5151CD;
+        color: #5151cd;
       }
     }
   }
@@ -62,23 +73,23 @@ article {
   }
 
   a {
-    color: #0D74CE;
+    color: #0d74ce;
     border: none;
     border-bottom: 1px solid transparent;
     padding-bottom: 2px;
     margin-bottom: -2px;
 
     &:hover {
-      color: #0588F0;
+      color: #0588f0;
       border-bottom: 1px solid currentColor;
     }
 
     &:visited {
-      color: #5753C6;
+      color: #5753c6;
     }
 
     &:visited:hover {
-      color: #5151CD;
+      color: #5151cd;
     }
   }
 
@@ -100,7 +111,7 @@ article {
 
     display: grid;
     grid-template:
-      'time repost heart' min-content
+      "time repost heart" min-content
       / 1fr min-content min-content;
 
     time {
@@ -137,12 +148,12 @@ article {
     }
 
     button[aria-pressed="true"] svg.i-repost * {
-      color: #29A383;
+      color: #29a383;
     }
 
     button[aria-pressed="true"] svg.i-heart * {
-      color: #E54666;
-      fill: #E54666;
+      color: #e54666;
+      fill: #e54666;
     }
   }
 }
@@ -200,22 +211,22 @@ article .content {
   }
 
   a {
-    color: #0D74CE;
+    color: #0d74ce;
     text-decoration: underline;
     border: none;
     margin: 0;
     padding: 0;
 
     &:hover {
-      color: #0588F0;
+      color: #0588f0;
     }
 
     &:visited {
-      color: #5753C6;
+      color: #5753c6;
     }
 
     &:visited:hover {
-      color: #5151CD;
+      color: #5151cd;
     }
   }
 
@@ -223,7 +234,8 @@ article .content {
     font-weight: 700;
   }
 
-  ul, ol {
+  ul,
+  ol {
     list-style-position: outside;
 
     margin-left: var(--space-5);
@@ -238,14 +250,33 @@ article .content {
   }
 
   /* Change the list style based on depth */
-  ul { list-style-type: disc; }
-  ul > ul { list-style-type: circle; }
-  ul > ul > ul { list-style-type: square; }
+  ul {
+    list-style-type: disc;
+  }
+  ul > ul {
+    list-style-type: circle;
+  }
+  ul > ul > ul {
+    list-style-type: square;
+  }
 
   /* Change the list style based on depth */
-  ol { list-style-type: decimal; }
-  ol > ol { list-style-type: lower-alpha; }
-  ol > ol > ol { list-style-type: lower-roman; }
+  ol {
+    list-style-type: decimal;
+  }
+  ol > ol {
+    list-style-type: lower-alpha;
+  }
+  ol > ol > ol {
+    list-style-type: lower-roman;
+  }
+
+  ol a {
+    &:hover {
+      font-variation-settings: "wght" 400;
+      text-decoration-color: inherit;
+    }
+  }
 
   li {
     color: var(--neutral-12);
@@ -265,9 +296,14 @@ article .content {
   }
 
   blockquote {
-    padding: var(--space-2) var(--space-3);
-    border-radius: 4px;
-    background: var(--neutral-3);
+    padding: var(--space-4) var(--space-5);
+    background: var(--neutral-2);
+    border-left: 1px solid var(--neutral-6);
+
+    p {
+      color: var(--neutral-11);
+      margin: 0;
+    }
 
     &.callout {
       .callout-icon {

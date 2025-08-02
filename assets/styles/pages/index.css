@@ -3,6 +3,36 @@
   flex-flow: column nowrap;
   gap: var(--space-8);
 
+  #photos {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: var(--space-3);
+
+    @media (max-width: 500px) {
+      grid-template-columns: 1fr;
+    }
+
+    .row {
+      display: flex;
+      flex-flow: column nowrap;
+      gap: var(--space-3);
+
+      img {
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        max-width: 100%;
+
+        @media (pointer: fine) {
+          &:hover {
+            z-index: 1;
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+  }
+
   section {
     @media (max-width: 500px) {
       ol {
@@ -62,14 +92,10 @@
   }
 }
 
-
 cursor-tracker {
   display: block;
 
-  transform:
-    perspective(5000px)
-    rotateY(var(--rotateX))
-    rotateX(var(--rotateY));
+  transform: perspective(5000px) rotateY(var(--rotateX)) rotateX(var(--rotateY));
 
   --strength: 9;
 }

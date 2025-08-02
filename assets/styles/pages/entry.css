@@ -1,8 +1,26 @@
 main#entry {
+  grid-area: none;
+  grid-row: 1;
+  grid-column: 1 / span 2;
+  justify-self: center;
+
+  @media (max-width: 1150px) {
+    grid-area: content;
+  }
+
   article {
+    @media (max-width: 650px) {
+      pre {
+        width: calc(100dvw - var(--space-4) - var(--space-4));
+      }
+    }
+    table {
+      display: none;
+    }
+
     header {
       margin-bottom: var(--space-6);
-  
+
       h1 {
         margin-bottom: var(--space-2);
       }
