@@ -40,7 +40,7 @@ body {
       "header" max-content
       "content" 1fr
       / 1fr;
-    grid-row-gap: var(--space-8);
+    grid-row-gap: var(--space-9);
 
     > header {
       justify-self: stretch;
@@ -107,17 +107,23 @@ body > header {
       }
 
       nav {
-        display: block;
+        display: flex;
+        flex-flow: row nowrap;
+        align-item: center;
+        gap: var(--space-2);
 
         select {
+          -webkit-appearance: none;
           border: none;
-          width: 105%;
-          margin-left: -4px;
           font-size: var(--text-size-6);
           letter-spacing: var(--text-tracking-6);
           line-height: var(--text-leading-6);
           background: none;
           color: var(--neutral-12);
+        }
+
+        .icon {
+          width: 16px;
         }
       }
 

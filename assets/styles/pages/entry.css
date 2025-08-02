@@ -10,9 +10,10 @@ main#entry {
 
   article {
     @media (max-width: 650px) {
-      pre {
+      max-width: calc(100dvw - var(--space-4) - var(--space-4));
+      /* pre {
         width: calc(100dvw - var(--space-4) - var(--space-4));
-      }
+      } */
     }
     table {
       display: none;
