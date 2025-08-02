@@ -109,7 +109,7 @@ body > header {
       nav {
         display: flex;
         flex-flow: row nowrap;
-        align-item: center;
+        align-items: center;
         gap: var(--space-2);
 
         select {
@@ -120,10 +120,14 @@ body > header {
           line-height: var(--text-leading-6);
           background: none;
           color: var(--neutral-12);
+          width: calc(130px + var(--space-2) + 16px);
+          outline: none;
         }
 
         .icon {
+          margin-left: calc(-16px - var(--space-2));
           width: 16px;
+          color: var(--neutral-12);
         }
       }
 
