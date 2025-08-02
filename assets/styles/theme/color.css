@@ -19,6 +19,21 @@
     --dark-11-5: #D1D1D1;
     --dark-12: #eeeeee;
 
+    @media (color-gamut: p3) {
+      --dark-1: color(display-p3 0.067 0.067 0.067);
+      --dark-2: color(display-p3 0.098 0.098 0.098);
+      --dark-3: color(display-p3 0.135 0.135 0.135);
+      --dark-4: color(display-p3 0.163 0.163 0.163);
+      --dark-5: color(display-p3 0.192 0.192 0.192);
+      --dark-6: color(display-p3 0.228 0.228 0.228);
+      --dark-7: color(display-p3 0.283 0.283 0.283);
+      --dark-8: color(display-p3 0.375 0.375 0.375);
+      --dark-9: color(display-p3 0.431 0.431 0.431);
+      --dark-10: color(display-p3 0.484 0.484 0.484);
+      --dark-11: color(display-p3 0.706 0.706 0.706);
+      --dark-12: color(display-p3 0.933 0.933 0.933);
+    }
+
     --light-1: white;
     --light-2: #f9f9f9;
     --light-3: #f0f0f0;

@@ -25,7 +25,6 @@ export default ({ entry, ctx }: { entry: Entry, ctx: HonoRequest }) => {
 
   return (
     <main id="entry">
-      <Header path={pathSegments} />
       <Article {...entry} />
     </main>
   )

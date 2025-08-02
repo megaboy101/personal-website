@@ -13,8 +13,6 @@ export default ({ ctx }: { ctx: HonoRequest }) => {
 
   return (
     <main id="writing">
-      <Header />
-
       <Category label="Guides" items={guides} />
       <Category label="Editorial" items={opinions} />
     </main>

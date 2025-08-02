@@ -15,7 +15,7 @@
     "hono": "jsr:@hono/hono@~4.6.0",
     "@std/dotenv": "jsr:@std/dotenv@~0.224.0",
     "@std/path": "jsr:@std/path",
-    "@std/fs": "jsr:@std/fs",
+    "@std/fs": "jsr:@std/fs@^1.0.19",
     "@std/collections": "jsr:@std/collections",
     "isbot": "npm:isbot",
     "@db/sqlite": "jsr:@db/sqlite@^0.12.0",

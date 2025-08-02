@@ -10,6 +10,7 @@
 
 # secrets
 service-account.json
+*.pem
 
 # next.js
 /.next/
@@ -18,9 +19,12 @@ service-account.json
 # production
 /build
 
-# misc
+# Mac
 .DS_Store
-*.pem
+Icon*
+
+# Obsidian
+.obsidian
 
 # debug
 npm-debug.log*
