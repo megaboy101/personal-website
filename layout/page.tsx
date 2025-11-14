@@ -103,10 +103,6 @@ const Header = () => {
           Fiance, writer, photographer, product engineer at Discord
           <br />
           <br />
-          Web dev, ADHD, Dungeons and Dragons, tech culture, gaming, and social
-          media.
-          <br />
-          <br />
           Living in Brooklyn
         </p>
 
@@ -138,11 +134,7 @@ const Header = () => {
           </a>
         </h1>
         <p>
-          Obsessing over personal sites with the aesthetics of social media
-          pages
-          <br />
-          <br />
-          muan.co
+          XMLHttpRequest to fetch really was a generational glowup
         </p>
       </div>
 
@@ -151,7 +143,7 @@ const Header = () => {
       <div id="posts">
         <h1>
           <a href="/writing">
-            Posts <Arrow />
+            Blog <Arrow />
           </a>
         </h1>
 
