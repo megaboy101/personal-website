@@ -36,22 +36,5 @@ ol {
   }
 
   a {
-    text-decoration: underline;
-    text-decoration-style: wavy;
-    text-decoration-color: var(--neutral-6);
-    text-underline-offset: 2px;
-    text-underline-thickness: 1px;
-
-    @media (pointer: fine) {
-      transition: font-variation-settings 0.2s ease, color 0.2s ease;
-      font-variation-settings: "wght" 400;
-
-      &:hover {
-        color: var(--neutral-12);
-        font-variation-settings: "wght" 600;
-
-        text-decoration-color: var(--neutral-7);
-      }
-    }
   }
 }

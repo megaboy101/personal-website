@@ -39,7 +39,7 @@ export const Category = ({ label, items, limit }: { label?: string, items?: Entr
 )
 
 
-const Time = ({ time }: { time: string }) => <time pubdate datetime={time}>{formatDate(time)}</time>
+export const Time = ({ time }: { time: string }) => <time pubdate datetime={time}>{formatDate(time)}</time>
 
 function formatDate(dateStr: string) {
   const date = new Date(dateStr)

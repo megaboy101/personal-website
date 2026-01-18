@@ -16,6 +16,7 @@
 @import "/styles/pages/writing.css" layer(pages);
 @import "/styles/pages/entry.css" layer(pages);
 @import "/styles/pages/404.css" layer(pages);
+@import "/styles/pages/home.css" layer(pages);
 
 @layer components {
   section {
