@@ -47,6 +47,16 @@ main#home {
   p {
     letter-spacing: var(--text-tracking-7);
     margin-block: var(--text-leading-3);
+    display: flex;
+    align-items: baseline;
+
+    small {
+      font-size: var(--text-size-2);
+      letter-spacing: var(--text-tracking-2);
+      line-height: var(--text-leading-2);
+      margin-inline: 0.5rem;
+      color: var(--neutral-10);
+    }
   }
 
   ol {

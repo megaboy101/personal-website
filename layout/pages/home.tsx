@@ -42,16 +42,7 @@ export default () => {
 
       <div class="animated" style="--i:1">
         <p>
-          A static blog theme based on Astro, designed for clarity and focus.
-        </p>
-        <p>
-          With a deliberately minimal design, this layout ensures your content takes center stage. It’s built for flexibility, offering customization options that honor its clean and elegant aesthetic.
-        </p>
-        <p>
-          Effortlessly share your thoughts in a calm & dustless space.
-        </p>
-        <p>
-          Check posts for details and view source on GitHub.
+          Working at Discord in Brooklyn NY <small>We're hiring</small>
         </p>
       </div>
 
