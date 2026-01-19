@@ -54,6 +54,11 @@ export default ({ children }: { children?: Child }) => {
 
 const Layout = ({ children }: { children: Child }) => (
   <body>
+    <nav>
+      <button id="theme-toggle" type="button">
+        <Sun />
+      </button>
+    </nav>
     {children}
   </body>
 );
