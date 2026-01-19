@@ -19,6 +19,20 @@
     --dark-11-5: #D1D1D1;
     --dark-12: #eeeeee;
 
+    --dark-1: #111111;
+    --dark-2: #191919;
+    --dark-3: #222222;
+    --dark-4: #2a2a2a;
+    --dark-5: #313131;
+    --dark-6: #3a3a3a;
+    --dark-7: #484848;
+    --dark-8: #606060;
+    --dark-9: #6e6e6e;
+    --dark-10: #7b7b7b;
+    --dark-11: #b4b4b4;
+    --dark-11-5: #D1D1D1;
+    --dark-12: #eeeeee;
+
     @media (color-gamut: p3) {
       --dark-1: color(display-p3 0.067 0.067 0.067);
       --dark-2: color(display-p3 0.098 0.098 0.098);

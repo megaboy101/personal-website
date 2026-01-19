@@ -42,7 +42,7 @@ export default () => {
 
       <div class="animated" style="--i:1">
         <p>
-          Working at Discord in Brooklyn NY <small>We're hiring</small>
+          Product Engineer at Discord, based in Brooklyn NY <small>We're hiring</small>
         </p>
       </div>
 

@@ -155,6 +155,7 @@ article {
 article .content {
   h1 {
     color: var(--neutral-12);
+    font-family: var(--text-serif);
     font-size: var(--text-size-7);
     letter-spacing: var(--text-tracking-7);
     line-height: var(--text-leading-7);
@@ -168,7 +169,7 @@ article .content {
     margin-bottom: var(--space-3);
 
     color: var(--neutral-12);
-    font-family: var(--text-sans);
+    font-family: var(--text-serif);
     font-size: var(--text-size-6);
     letter-spacing: var(--text-tracking-7);
     line-height: var(--text-leading-6);
@@ -180,7 +181,7 @@ article .content {
     margin-bottom: var(--space-2);
 
     color: var(--neutral-12);
-    font-family: var(--text-sans);
+    font-family: var(--text-serif);
     font-size: var(--text-size-5);
     letter-spacing: var(--text-tracking-7);
     line-height: var(--text-leading-5);
@@ -189,10 +190,10 @@ article .content {
 
   p {
     color: var(--neutral-12);
-    font-family: var(--text-sans);
+    font-family: var(--text-serif);
     font-size: var(--text-size-3);
     letter-spacing: var(--text-tracking-7);
-    line-height: var(--text-leading-5);
+    line-height: 1.6em;
     margin: var(--text-size-3) 0;
   }
 
@@ -274,10 +275,10 @@ article .content {
 
   li {
     color: var(--neutral-12);
-    font-family: var(--text-sans);
+    font-family: var(--text-serif);
     font-size: var(--text-size-3);
     letter-spacing: var(--text-tracking-7);
-    line-height: var(--text-leading-5);
+    line-height: 1.6em;
   }
 
   ul > li::marker {

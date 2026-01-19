@@ -47,8 +47,6 @@ main#home {
   p {
     letter-spacing: var(--text-tracking-7);
     margin-block: var(--text-leading-3);
-    display: flex;
-    align-items: baseline;
 
     small {
       font-size: var(--text-size-2);
@@ -68,16 +66,42 @@ main#home {
     li {
       a {
         display: grid;
-        grid-template-rows: 1fr;
-        grid-template-columns: max-content 1fr max-content;
+        grid-template-rows: max-content;
+        grid-template-columns: auto 1fr max-content;
         grid-column-gap: var(--space-6);
         align-items: center;
         width: auto;
         padding-block: calc(1.3em / 2);
 
+        @media (max-width: 500px) {
+          grid-template-rows: max-content max-content;
+          grid-template-columns: auto;
+          grid-row-gap: var(--space-1);
+          padding-block: calc(1.3em / 3);
+
+          span {
+            grid-row: 1 / span 1;
+            grid-column: 1 / span 1;
+          }
+
+          div {
+            display: none;
+          }
+
+          time {
+            grid-row: 2 / span 1;
+            grid-column: 1 / span 1;
+          }
+        }
+
         span {
           order: 1;
           letter-spacing: var(--text-tracking-7);
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          width: 100%;
+          min-width: 0;
         }
         div {
           order: 2;
@@ -88,19 +112,20 @@ main#home {
           order: 3;
           letter-spacing: var(--text-tracking-7);
         }
-
-        &:hover {
-          div {
-            background-color: var(--neutral-6);
-          }
-          time {
-            color: var(--neutral-11-5);
-          }
-        }
       }
     }
 
-    &:has(a:hover) a:not(:hover) {
+    @media (pointer: fine) {
+      li a:hover {
+        div {
+          background-color: var(--neutral-6);
+        }
+        time {
+          color: var(--neutral-11-5);
+        }
+      }
+
+      &:has(a:hover) a:not(:hover) {
         span {
           color: var(--neutral-10);
         }
@@ -111,10 +136,13 @@ main#home {
           color: var(--neutral-9);
         }
       }
+    }
   }
 
   #photos {
-    display: flex;
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
     gap: var(--space-3);
     margin-block: 4.5em;
 
@@ -125,21 +153,38 @@ main#home {
 
       img {
         content-visibility: auto;
-
-        transition:
-          transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-          opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-
-        &:hover {
-          transform: scale(1.5);
-          z-index: 2;
-        }
+        min-width: 0;
+        width: 100%;
       }
     }
 
-    &:has(img:hover) img:not(:hover) {
+    @media (pointer: fine) {
+      img {
+        transition:
+          transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
 
-      opacity: 50%;
+      img:hover {
+        transform: scale(1.5);
+        z-index: 2;
+      }
+
+      &:has(img:hover) img:not(:hover) {
+        opacity: 50%;
+      }
+    }
+  }
+
+  @media (max-width: 500px) {
+    ol {
+      margin-block: 2.5em;
+    }
+
+    #photos {
+      margin-top: 2.5em;
+      margin-bottom: 0;
+      margin-inline: calc(-1 * var(--space-4));
     }
   }
 }
