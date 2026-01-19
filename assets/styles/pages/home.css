@@ -111,6 +111,11 @@ main#home {
         time {
           order: 3;
           letter-spacing: var(--text-tracking-7);
+          font-family: var(--text-monospace);
+          font-size: var(--text-size-2);
+          letter-spacing: var(--text-tracking-2);
+          line-height: var(--text-leading-2);
+          color: var(--neutral-11);
         }
       }
     }
