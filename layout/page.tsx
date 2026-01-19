@@ -1,7 +1,6 @@
 import { Child } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
-import { Arrow, Bluesky, Github, LinkedIn, Sun } from "./icons.tsx";
-import { usePosts } from "./pages/writing.tsx";
+import { HalfCirle } from "./icons.tsx";
 
 export default ({ children }: { children?: Child }) => {
   const ctx = useRequestContext();
@@ -56,7 +55,7 @@ const Layout = ({ children }: { children: Child }) => (
   <body>
     <nav>
       <button id="theme-toggle" type="button">
-        <Sun />
+        <HalfCirle />
       </button>
     </nav>
     {children}
