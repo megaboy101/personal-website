@@ -30,7 +30,7 @@ class Markdown {
     .use(shiki, {
       themes: {
         light: "one-light",
-        dark: "one-dark-pro",
+        dark: "vitesse-dark",
       },
     })
     .use(stringify, { allowDangerousHtml: true });
@@ -217,7 +217,7 @@ class Drive {
     .use(shiki, {
       themes: {
         light: "one-light",
-        dark: "one-dark-pro",
+        dark: "vitesse-dark",
       },
     })
     .use(stringify, { allowDangerousHtml: true });

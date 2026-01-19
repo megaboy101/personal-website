@@ -11,15 +11,9 @@ article {
     color: var(--neutral-12);
   }
 
-  h1,
-  h2,
-  h3 {
-    font-family: var(--text-serif) !important;
-  }
-
   time {
     font-size: var(--text-size-2);
-    letter-spacing: var(--text-tracking-2);
+    letter-spacing: var(--text-tracking-7);
     line-height: var(--text-leading-2);
     color: var(--neutral-11);
   }
@@ -66,7 +60,7 @@ article {
 
   &:not(:has(header)) :is(p, a) {
     font-size: var(--text-size-6);
-    letter-spacing: var(--text-tracking-6);
+    letter-spacing: var(--text-tracking-7);
     line-height: var(--text-leading-6);
 
     margin-bottom: var(--text-size-3);
@@ -166,7 +160,7 @@ article .content {
     line-height: var(--text-leading-7);
     margin-top: var(--space-5);
     margin-bottom: var(--space-4);
-    font-weight: 500;
+    font-weight: 400;
   }
 
   h2 {
@@ -176,9 +170,9 @@ article .content {
     color: var(--neutral-12);
     font-family: var(--text-sans);
     font-size: var(--text-size-6);
-    letter-spacing: var(--text-tracking-6);
+    letter-spacing: var(--text-tracking-7);
     line-height: var(--text-leading-6);
-    font-weight: 500;
+    font-weight: 400;
   }
 
   h3 {
@@ -188,16 +182,16 @@ article .content {
     color: var(--neutral-12);
     font-family: var(--text-sans);
     font-size: var(--text-size-5);
-    letter-spacing: var(--text-tracking-5);
+    letter-spacing: var(--text-tracking-7);
     line-height: var(--text-leading-5);
-    font-weight: 500;
+    font-weight: 400;
   }
 
   p {
     color: var(--neutral-12);
     font-family: var(--text-sans);
     font-size: var(--text-size-3);
-    letter-spacing: var(--text-tracking-3);
+    letter-spacing: var(--text-tracking-7);
     line-height: var(--text-leading-5);
     margin: var(--text-size-3) 0;
   }
@@ -282,7 +276,7 @@ article .content {
     color: var(--neutral-12);
     font-family: var(--text-sans);
     font-size: var(--text-size-3);
-    letter-spacing: var(--text-tracking-3);
+    letter-spacing: var(--text-tracking-7);
     line-height: var(--text-leading-5);
   }
 
@@ -313,9 +307,10 @@ article .content {
   }
 
   pre {
-    border-radius: 8px;
+    border-radius: 16px;
     overflow: hidden;
-    margin: var(--space-3) 0;
+    margin: var(--space-5) 0;
+    border: 1px solid var(--neutral-3);
 
     code {
       font-size: var(--text-size-2);

@@ -24,8 +24,40 @@ export default ({ entry, ctx }: { entry: Entry, ctx: HonoRequest }) => {
   const pathSegments = ctx.path.split('/').slice(1)
 
   return (
-    <main id="entry">
-      <Article {...entry} />
-    </main>
+    <>
+      <aside>
+        <a href="/home">
+          <BackArrow />
+          index
+        </a>
+      </aside>
+      <main id="entry">
+        <Article {...entry} />
+      </main>
+    </>
   )
 }
+
+const BackArrow = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 256 256"
+  >
+    <polyline
+      points="80 136 32 88 80 40"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="16"
+    />
+    <path
+      d="M80,200h88a56,56,0,0,0,56-56h0a56,56,0,0,0-56-56H32"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="16"
+    />
+  </svg>
+)

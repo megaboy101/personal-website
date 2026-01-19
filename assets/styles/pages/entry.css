@@ -1,11 +1,36 @@
-main#entry {
-  grid-area: none;
-  grid-row: 1;
-  grid-column: 1 / span 2;
+aside {
   justify-self: center;
+  position: sticky;
+  top: 10dvh;
+  height: max-content;
 
-  @media (max-width: 1150px) {
-    grid-area: content;
+  a[href="/home"] {
+    color: var(--neutral-10);
+    font-family: var(--text-serif);
+    display: flex;
+    flex-flow: row nowrap;
+    gap: var(--space-2);
+    font-style: italic;
+    font-weight: 500;
+
+    &:hover {
+      color: var(--neutral-12);
+    }
+
+    svg {
+      aspect-ratio: 1 / 1;
+      width: 1cap;
+    }
+  }
+}
+
+main#entry {
+  header h1 {
+    font-size: var(--text-size-5);
+    letter-spacing: var(--text-tracking-8);
+    line-height: var(--text-leading-5);
+    font-weight: 400;
+    margin-bottom: 0;
   }
 
   article {
@@ -23,7 +48,7 @@ main#entry {
       margin-bottom: var(--space-6);
 
       h1 {
-        margin-bottom: var(--space-2);
+        margin-bottom: 0;
       }
     }
   }

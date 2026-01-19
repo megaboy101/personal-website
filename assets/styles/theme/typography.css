@@ -44,7 +44,7 @@
       Roboto, "Helvetica Neue", "Open Sans (Custom)", system-ui, sans-serif,
       "Apple Color Emoji", "Segoe UI Emoji";
 
-    --text-serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
+    --text-serif: Besley, "Bitstream Charter", "Sitka Text", Cambria, serif;
 
     --text-monospace: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo,
       Consolas, "DejaVu Sans Mono", monospace;
