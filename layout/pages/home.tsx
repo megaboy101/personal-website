@@ -32,7 +32,8 @@ export default () => {
   return (
     <main id="home">
       <div id="profile" class="animated" style="--i:0">
-        <img src="/img/pfp.jpg" alt="Jacob Bleser" />
+        <img id="pfp" src="/img/pfp.jpg" alt="Jacob Bleser" />
+        <img id="pfp-deco" src="/img/cat.png" alt="" />
 
         <hgroup>
           <h1>Jacob Bleser</h1>

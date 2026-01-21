@@ -2,11 +2,11 @@ main#home {
   #profile {
     display: grid;
     grid-template:
-      'avatar .' 3fr
+      'avatar .' 6fr
       'avatar name' min-content
-      'avatar .' 2fr
+      'avatar .' 5fr
       'avatar handle' min-content
-      'avatar .' 3fr
+      'avatar .' 6fr
       / auto 1fr;
     grid-column-gap: var(--space-2);
     
@@ -15,6 +15,11 @@ main#home {
       aspect-ratio: 1 / 1;
       border-radius: 1000px;
       width: 50px;
+    }
+
+    img#pfp-deco {
+      transform: scale(1.7) translateY(3px);
+      border-radius: 0;
     }
 
     hgroup {
