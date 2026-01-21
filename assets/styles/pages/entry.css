@@ -35,11 +35,12 @@ aside {
 
 main#entry {
   header h1 {
-    font-size: var(--text-size-5);
-    letter-spacing: var(--text-tracking-8);
-    line-height: var(--text-leading-5);
-    font-weight: 400;
-    margin-bottom: 0;
+    font-family: var(--text-serif);
+    font-size: var(--text-size-7);
+    letter-spacing: var(--text-tracking-7);
+    line-height: var(--text-leading-7);
+    font-weight: 500;
+    margin-bottom: 0.25em;
   }
 
   article {
@@ -55,10 +56,6 @@ main#entry {
 
     header {
       margin-bottom: var(--space-6);
-
-      h1 {
-        margin-bottom: 0;
-      }
     }
   }
 }

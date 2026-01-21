@@ -23,17 +23,21 @@ main#home {
 
     h1 {
       grid-area: name;
+      font-family: var(--text-sans);
       font-size: var(--text-size-3);
-      letter-spacing: var(--text-tracking-3);
+      letter-spacing: var(--text-tracking-7);
       line-height: 1cap;
+      font-weight: 400;
     }
 
     h2 {
       grid-area: handle;
+      font-family: var(--text-sans);
       color: var(--neutral-11);
       font-size: var(--text-size-2);
-      letter-spacing: var(--text-tracking-2);
+      letter-spacing: var(--text-tracking-7);
       line-height: 1cap;
+      font-weight: 400;
     }
 
     a {
@@ -45,6 +49,7 @@ main#home {
   }
 
   p {
+    font-family: var(--text-serif);
     letter-spacing: var(--text-tracking-7);
     margin-block: var(--text-leading-3);
 
@@ -96,6 +101,7 @@ main#home {
 
         span {
           order: 1;
+          font-family: var(--text-serif);
           letter-spacing: var(--text-tracking-7);
           overflow: hidden;
           white-space: nowrap;
@@ -195,7 +201,7 @@ main#home {
 }
 
 
-@keyframes fade-in-stagger {
+/* @keyframes fade-in-stagger {
   from {
     opacity: 0;
     top: 20px;
@@ -212,6 +218,5 @@ main#home {
   top: 20px;
   animation: fade-in-stagger 0.5s forwards;
   animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
-  /* Example delay calculation from Cassidoo's CodePen [9] */
   animation-delay: calc(0.5s + var(--i, 0) * 0.075s);
-}
+} */

@@ -25,6 +25,45 @@ export default ({ children }: { children?: Child }) => {
         {/* Twitter card tags */}
         {head?.opengraph && <Twitter {...head.twitter} />}
 
+        {/* Critical CSS */}
+        <style>{`
+          @view-transition {
+            navigation: auto;
+          }
+
+          view-transition-old(root) {
+            animation: slide-out 0.5s forwards;
+            cubic-bezier(0.33, 1, 0.68, 1);
+          }
+
+          ::view-transition-new(root) {
+            animation: slide-in 0.3s forwards;
+            cubic-bezier(0.33, 1, 0.68, 1);
+          }
+
+          @keyframes slide-in {
+            from {
+              transform: translateX(3vw);
+              opacity: 0;
+            }
+            to {
+              transform: translateX(0);
+              opacity: 1;
+            }
+          }
+
+          @keyframes slide-out {
+            from {
+              transform: translateX(0);
+              opacity: 1;
+            }
+            to {
+              transform: translateX(-3vw);
+              opacity: 0;
+            }
+          }
+        `}</style>
+
         {/* Scripts */}
         <script type="module" async src="/scripts/cursor-tracker.js"></script>
         <script type="module" async src="/scripts/insights.js"></script>
