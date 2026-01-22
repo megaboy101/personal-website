@@ -171,6 +171,16 @@ main#index {
         content-visibility: auto;
         min-width: 0;
         width: 100%;
+
+        /* Hack to select on iOS Safari specifically */
+        @supports (hanging-punctuation: first) {
+          /*
+          Disable intelligent content-visibility on
+          iOS Safari because it's broken with our
+          layout rules
+          */
+          content-visibility: visible;
+        }
       }
     }
 
