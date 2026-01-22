@@ -311,6 +311,21 @@ article .content {
     margin: var(--space-5) 0;
     border: 1px solid var(--neutral-3);
 
+    counter-reset: codeblock-line;
+
+    .line {
+      counter-increment: codeblock-line;
+
+      &::before {
+        content: counter(codeblock-line);
+        margin-right: var(--space-5);
+        text-align: right;
+        width: 3cap;
+        display: inline-block;
+        color: var(--neutral-7);
+      }
+    }
+
     code {
       font-size: var(--text-size-2);
       display: block;
@@ -330,7 +345,11 @@ article .content {
         font-family: inherit;
         font-size: var(--text-size-2);
         letter-spacing: inherit;
-        line-height: inherit;
+        line-height: 1.6em;
+      }
+
+      span.line {
+
       }
     }
   }
