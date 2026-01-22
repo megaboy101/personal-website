@@ -43,7 +43,10 @@ export default () => {
 
       <div class="animated" style="--i:1">
         <p>
-          Product Engineer at Discord, based in Brooklyn NY <small>We're hiring</small>
+          Product Engineer at Discord, writing about web development, creativity, ADHD, and Cyberpunk
+        </p>
+        <p>
+          Living in Brooklyn NY with Katherine and Miles
         </p>
       </div>
 
@@ -52,7 +55,7 @@ export default () => {
           opinions?.slice(0, 7)?.map((post) => (
             <li>
               <a href={`/writing/${post.id}`}>
-                <Time time={post.createdAt} />
+                <Time time={post.properties['created-time'] ?? post.createdAt} />
                 <div></div>
                 <span>{post.title}</span>
               </a>
