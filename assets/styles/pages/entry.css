@@ -13,7 +13,7 @@ aside {
     justify-self: start;
   }
 
-  a[href="/home"] {
+  > a {
     color: var(--neutral-10);
     font-family: var(--text-serif);
     display: flex;

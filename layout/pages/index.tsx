@@ -1,17 +1,6 @@
-import {
-  Arrow,
-  Bluesky,
-  Camera,
-  Github,
-  Link,
-  LinkedIn,
-  Sparkle,
-  Sun,
-  Writing,
-} from "../icons.tsx";
 import Header from "../header.tsx";
-import { Entry, useCollection } from "@/blog.ts";
-import { Category, usePosts } from "./writing.tsx";
+import { useCollection } from "@/blog.ts";
+import { Category, Time, usePosts } from "./writing.tsx";
 
 export const head = {
   title: "Jacob Bleser",
@@ -36,86 +25,61 @@ export const head = {
   },
 };
 
-const _ = () => {
-  const posts = usePosts();
-
-  return (
-    <main id="index">
-      <Header />
-
-      <section id="welcome">
-        <header>
-          <span>🏕️</span>
-          <h1>welcome to my ~space~</h1>
-        </header>
-
-        <p>Fiancé // writer // photographer // product engineer at Discord</p>
-        <br />
-        <p>
-          Collecting thoughts and musings on browser tech, ADHD, Dungeons and
-          Dragons, startup culture, gaming, and social media.
-        </p>
-        <br />
-        <p>Most reachable via email or Discord. I don't check LinkedIn</p>
-        <br />
-        <p>Living with Kat and Miles in Brooklyn, NY</p>
-      </section>
-
-      {Object.entries(posts).map(([section, entries]) => (
-        <Category label={section} items={entries} limit={5} />
-      ))}
-    </main>
-  );
-};
-
 export default () => {
-  const posts = usePosts();
+  const { opinions } = usePosts()
   const photos = usePhotos();
 
   return (
     <main id="index">
-      {/* <section>
-        <header>
-          <h1>photos</h1>
-          <a href="/photos">see all <Arrow /></a>
-        </header>
-        <ol>
-          {
-            photos.map(photo => (
-              <li>
-                <img src={photo} alt="" />
-              </li>
-            ))
-          }
-        </ol>
-      </section> */}
+      <div id="profile" class="animated" style="--i:0">
+        <img id="pfp" src="/img/pfp.jpg" alt="Jacob Bleser" />
+        <img id="pfp-deco" src="/img/cat.png" alt="" />
 
-      <div id="photos">
-        <div class="row">
-          {photos.slice(0, Math.floor(photos.length / 3)).map((photo) => (
-            <img src={photo} alt="" />
-          ))}
-        </div>
-        <div class="row">
-          {photos
-            .slice(
-              Math.floor(photos.length / 3),
-              Math.floor((photos.length / 3) * 2)
-            )
-            .map((photo) => (
-              <img src={photo} alt="" />
-            ))}
-        </div>
-        <div class="row">
-          {photos.slice(Math.floor((photos.length / 3) * 2)).map((photo) => (
-            <img src={photo} alt="" />
-          ))}
-        </div>
+        <hgroup>
+          <h1>Jacob Bleser</h1>
+          <h2><a href="https://bsky.app/profile/jacobb.nyc">@jacobb.nyc</a></h2>
+        </hgroup>
       </div>
 
-      {/* {Object.entries(posts).map(([section, entries]) => (
-        <Category label={section} items={entries} />
-      ))} */}
+      <div class="animated" style="--i:1">
+        <p>
+          Product Engineer at Discord, writing about web development, creativity, ADHD, and Cyberpunk
+        </p>
+        <p>
+          Living in Brooklyn NY with Katherine and Miles
+        </p>
+      </div>
+
+      <ol class="animated" style="--i:2">
+        {
+          opinions?.slice(0, 7)?.map((post) => (
+            <li>
+              <a href={`/writing/${post.id}`}>
+                <Time time={post.properties['created-time'] ?? post.createdAt} />
+                <div></div>
+                <span>{post.title}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div id="photos" class="animated" style="--i:3">
+        <div>
+          {
+            photos.slice(0, Math.floor(photos.length / 2)).map(pic => (
+              <img src={pic} alt="" />
+            ))
+          }
+        </div>
+        <div>
+          {
+            photos.slice(Math.ceil(photos.length / 2)).map(pic => (
+              <img src={pic} alt="" />
+            ))
+          }
+        </div>
+      </div>
     </main>
   );
 };

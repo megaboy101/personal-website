@@ -26,7 +26,7 @@ export default ({ entry, ctx }: { entry: Entry, ctx: HonoRequest }) => {
   return (
     <>
       <aside>
-        <a href="/home">
+        <a href="/">
           <BackArrow />
           index
         </a>
