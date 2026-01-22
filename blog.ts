@@ -1,5 +1,5 @@
 import blog from "@/blog.ts";
-import { json, markdown } from "@/blog/sources.ts";
+import { json, drive } from "@/blog/sources.ts";
 import insights from "@/insights/plug.ts";
 
 blog({
@@ -11,7 +11,11 @@ blog({
 
   collections: {
     photos: json("./content/photos.json"),
-    writing: markdown("./content/Blog"),
+    writing: drive({
+      fileId: '1eqm-olaERjJlQLOHQOq_QnNpIRUoH1LY', // Blog
+      keyFile: './service-account.json'
+    }),
+    // writing: json("./obsidian.json"),
   },
 
   plugs: [insights()],
