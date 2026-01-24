@@ -29,15 +29,15 @@ export default () => {
 
   return (
     <main id="index">
-      <div id="profile" class="animated" style="--i:0">
+      <figure id="profile" class="animated" style="--i:0">
         <img id="pfp" src="/img/pfp.jpg" alt="Jacob Bleser" />
         <img id="pfp-deco" src="/img/cat.png" alt="" />
 
-        <hgroup>
-          <h1>Jacob Bleser</h1>
-          <h2><a href="https://bsky.app/profile/jacobb.nyc">@jacobb.nyc</a></h2>
-        </hgroup>
-      </div>
+        <figcaption>
+          <span>Jacob Bleser</span>
+          <span><a href="https://bsky.app/profile/jacobb.nyc">@jacobb.nyc</a></span>
+        </figcaption>
+      </figure>
 
       <div class="animated" style="--i:1">
         <p>

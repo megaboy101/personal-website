@@ -22,33 +22,33 @@ main#index {
       border-radius: 0;
     }
 
-    hgroup {
+    figcaption {
       display: contents;
-    }
 
-    h1 {
-      grid-area: name;
-      font-family: var(--text-sans);
-      font-size: var(--text-size-3);
-      letter-spacing: var(--text-tracking-7);
-      line-height: 1cap;
-      font-weight: 400;
-    }
+      span:nth-child(1) {
+        grid-area: name;
+        font-family: var(--text-sans);
+        font-size: var(--text-size-3);
+        letter-spacing: var(--text-tracking-7);
+        line-height: 1cap;
+        font-weight: 400;
+      }
 
-    h2 {
-      grid-area: handle;
-      font-family: var(--text-sans);
-      color: var(--neutral-11);
-      font-size: var(--text-size-2);
-      letter-spacing: var(--text-tracking-7);
-      line-height: 1cap;
-      font-weight: 400;
-    }
+      span:nth-child(2) {
+        grid-area: handle;
+        line-height: 1cap;
 
-    a {
-      color: #76B6FF;
-      &:hover {
-        text-decoration: underline;
+        a {
+          font-family: var(--text-sans);
+          font-size: var(--text-size-2);
+          letter-spacing: var(--text-tracking-7);
+          line-height: 1cap;
+          font-weight: 400;
+          color: #76B6FF;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
     }
   }
@@ -184,6 +184,7 @@ main#index {
       }
     }
 
+    /* Enable image scale-on-hover on desktop */
     @media (pointer: fine) {
       img {
         transition:
