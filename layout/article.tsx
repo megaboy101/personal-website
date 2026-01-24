@@ -2,7 +2,6 @@ import { Entry } from '@/blog.ts'
 
 export default ({ title, createdAt, html, properties }: Entry) => {
   const manualCreatedAt = properties?.['created-time']
-
   const publicCreatedAt = typeof manualCreatedAt === 'string' ? manualCreatedAt : createdAt
 
   return (

@@ -1,6 +1,4 @@
-import Header from "../header.tsx";
-import { useCollection } from "@/blog.ts";
-import { Category, Time, usePosts } from "./writing.tsx";
+import { Entry, useCollection } from "@/blog.ts";
 
 export const head = {
   title: "Jacob Bleser",
@@ -55,7 +53,7 @@ export default () => {
           opinions?.slice(0, 7)?.map((post) => (
             <li>
               <a href={`/writing/${post.id}`}>
-                <Time time={post.properties['created-time'] ?? post.createdAt} />
+                <Time time={typeof post.properties?.['created-time'] === 'string' ? post.properties?.['created-time'] : post.createdAt} />
                 <div></div>
                 <span>{post.title}</span>
               </a>
@@ -84,8 +82,32 @@ export default () => {
   );
 };
 
+export const Time = ({ time }: { time: string }) => <time pubdate datetime={time}>{formatDate(time)}</time>
+
+function formatDate(dateStr: string) {
+  const date = new Date(dateStr)
+
+  return `${(date.getMonth()+1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}-${date.getFullYear()}`
+}
+
 function usePhotos(): string[] {
   const photos = useCollection("photos");
 
   return photos ?? [];
+}
+
+export function usePosts() {
+  const posts = useCollection('writing')
+  
+  const guides = posts?.filter(p => p.properties?.type === 'Guide').toSorted(sortCreatedTime)
+  const opinions = posts?.filter(p => p.properties?.type === 'Opinion').toSorted(sortCreatedTime)
+
+  return { guides, opinions }
+}
+
+function sortCreatedTime(first: Entry, second: Entry) {
+  const firstCreatedAt = typeof first.properties?.['created-time'] === 'string' ? first.properties?.['created-time'] : first.createdAt
+  const secondCreatedAt = typeof second.properties?.['created-time'] === 'string' ? second.properties?.['created-time'] : second.createdAt
+
+  return firstCreatedAt < secondCreatedAt ? 1 : -1
 }

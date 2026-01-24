@@ -1,7 +1,7 @@
 import { Entry } from "@/blog.ts"
 import Article from "../../article.tsx"
-import Header from "../../header.tsx"
 import { HonoRequest } from "hono"
+import { BackArrow } from "../../icons.tsx"
 
 export const head = ({ entry }: { entry: Entry }) => ({
   title: `${entry.title} // Jacob Bleser`,
@@ -20,9 +20,7 @@ export const head = ({ entry }: { entry: Entry }) => ({
   }
 })
 
-export default ({ entry, ctx }: { entry: Entry, ctx: HonoRequest }) => {
-  const pathSegments = ctx.path.split('/').slice(1)
-
+export default ({ entry }: { entry: Entry, ctx: HonoRequest }) => {
   return (
     <>
       <aside>
@@ -37,27 +35,3 @@ export default ({ entry, ctx }: { entry: Entry, ctx: HonoRequest }) => {
     </>
   )
 }
-
-const BackArrow = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 256 256"
-  >
-    <polyline
-      points="80 136 32 88 80 40"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="16"
-    />
-    <path
-      d="M80,200h88a56,56,0,0,0,56-56h0a56,56,0,0,0-56-56H32"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="16"
-    />
-  </svg>
-)
