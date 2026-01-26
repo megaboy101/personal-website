@@ -9,49 +9,8 @@
 
 @import "/styles/components/page.css" layer(components);
 @import "/styles/components/article.css" layer(components);
-@import "/styles/components/header.css" layer(components);
 
 @import "/styles/pages/index.css" layer(pages);
 @import "/styles/pages/writing.css" layer(pages);
 @import "/styles/pages/entry.css" layer(pages);
 @import "/styles/pages/404.css" layer(pages);
-@import "/styles/pages/home.css" layer(pages);
-
-@layer components {
-  section {
-    h1 {
-      margin-bottom: var(--space-5);
-    }
-
-    p {
-      a {
-        text-decoration: underline;
-        text-decoration-style: wavy;
-        text-decoration-color: #d9d9d9;
-        text-underline-offset: 2px;
-      }
-    }
-
-    header {
-      display: flex;
-      flex-flow: row nowrap;
-      align-items: baseline;
-      gap: var(--space-4);
-
-      a {
-        color: var(--neutral-9);
-        font-size: var(--text-size-2);
-        letter-spacing: var(--text-tracking-2);
-        line-height: var(--text-leading-2);
-        display: flex;
-        align-items: center;
-
-        .icon {
-          width: 16px;
-          display: inline;
-          margin-left: var(--space-1);
-        }
-      }
-    }
-  }
-}
