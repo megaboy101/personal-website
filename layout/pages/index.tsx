@@ -39,14 +39,11 @@ export default () => {
         </figcaption>
       </figure>
 
-      <div class="animated" style="--i:1">
-        <p>
-          Product Engineer at Discord, writing about web development, creativity, ADHD, and Cyberpunk
-        </p>
-        <p>
-          Living in Brooklyn NY with Katherine and Miles
-        </p>
-      </div>
+      <p class="animated" style="--i:1">
+        Product Engineer at Discord, writing about web development, creativity, ADHD, and Cyberpunk
+        <br /><br />
+        Living in Brooklyn NY with Katherine and Miles
+      </p>
 
       <ol class="animated" style="--i:2">
         {
