@@ -1,0 +1,209 @@
+@keyframes reveal-background {
+  from {
+    background-color: transparent;
+    border-color: transparent;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    background-color: color-mix(in srgb, var(--neutral-2), transparent 10%);
+    border-color: color-mix(in srgb, var(--neutral-6), transparent 10%);
+    backdrop-filter: blur(5px);
+  }
+}
+
+nav:has(~ main#photos) {
+  position: sticky;
+  top: var(--space-4);
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: max-content max-content max-content;
+  justify-content: space-between;
+  align-items: center;
+  margin-inline: var(--space-4);
+
+  a {
+    grid-column: 1 / span 1;
+    color: var(--neutral-10);
+    font-family: var(--text-serif);
+    display: flex;
+    flex-flow: row nowrap;
+    gap: var(--space-2);
+    font-style: italic;
+    font-weight: 500;
+    padding: 6px;
+    border-radius: 4px;
+
+    padding: var(--space-2);
+    background: linear-gradient(35deg, var(--neutral-2) ,rgba(30,30,30,.8));
+    box-shadow: 0 3px 10px 4px rgba(0,0,0,.2);
+    border-radius: 8px;
+    border: 1px solid color-mix(in srgb, var(--neutral-6), transparent 10%);
+
+    &:hover {
+      background-color: var(--neutral-3);
+      color: var(--neutral-12);
+    }
+
+    .icon {
+      width: 18px;
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  button#album {
+    grid-column: 2 / span 1;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: var(--space-1);
+
+    font-size: var(--text-size-3);
+    line-height: var(--text-leading-3);
+    letter-spacing: var(--text-tracking-3);
+    color: var(--neutral-12);
+    font-weight: 400;
+
+    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-3);
+    /* background: linear-gradient(35deg, var(--neutral-2) ,rgba(30,30,30,.8)); */
+    background: transparent;
+    box-shadow: 0 3px 10px 4px rgba(0,0,0,.2);
+    border-radius: 8px;
+    /* border: 1px solid color-mix(in srgb, var(--neutral-6), transparent 10%); */
+    border: 1px solid transparent;
+    /* backdrop-filter: blur(5px); */
+    backdrop-filter: blur(0px);
+
+    anchor-name: --anchor;
+
+    animation: reveal-background;
+    animation-timeline: scroll();
+    animation-range: 0% 15%;
+    animation-fill-mode: forwards;
+
+    .icon {
+      aspect-ratio: 1 / 1;
+      width: 1em;
+      color: var(--neutral-11);
+    }
+  }
+
+  button#theme-toggle {
+    grid-column: 3 / span 1;
+    padding: 6px;
+    border: none;
+    border-radius: 4px;
+    background-color: transparent;
+    color: var(--neutral-10);
+
+    padding: var(--space-2);
+    background: linear-gradient(35deg, var(--neutral-2) ,rgba(30,30,30,.8));
+    box-shadow: 0 3px 10px 4px rgba(0,0,0,.2);
+    border-radius: 8px;
+    border: 1px solid color-mix(in srgb, var(--neutral-6), transparent 10%);
+
+    &:hover {
+      background-color: var(--neutral-3);
+      color: var(--neutral-12);
+    }
+
+    .icon {
+      width: 18px;
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  #album-list {
+    position: absolute;
+    position-anchor: --anchor;
+    top: calc(anchor(bottom) + var(--space-4));
+    justify-self: anchor-center;
+    /*
+    Popover elements will be placed in a dedicated top-level,
+    full-screen "box" with margin: auto applied. We are doing our
+    own positioning, so we disable this
+    */
+    margin: unset;
+
+    width: 240px;
+    padding-top: var(--space-4);
+    padding-bottom: calc(var(--space-4) / 2);
+    padding-inline: 0;
+
+    background: linear-gradient(35deg, var(--neutral-2) ,rgba(30,30,30,.8));
+    box-shadow: 0 3px 10px 4px rgba(0,0,0,.2);
+    border-radius: 12px;
+    border: 1px solid color-mix(in srgb, var(--neutral-6), transparent 10%);
+    backdrop-filter: blur(10px);
+
+    /* Animation */
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 0.3s,
+      transform 0.3s,
+      overlay 0.3s allow-discrete,
+      display 0.3s allow-discrete;
+    
+      &:popover-open {
+        opacity: 1;
+        transform: translateY(0px); /* end at full size */
+
+        @starting-style {
+          opacity: 0;
+          transform: translateY(10px); /* must match the default state values */
+        }
+      }
+
+    .header {
+      font-size: var(--text-size-1);
+      letter-spacing: var(--text-tracking-1);
+      line-height: var(--text-leading-1);
+      color: var(--neutral-11);
+      margin: 0 var(--space-4) var(--space-3) var(--space-4);
+    }
+
+    li {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      padding: calc(var(--space-3) / 2) var(--space-4);
+
+      font-size: var(--text-size-2);
+      letter-spacing: var(--text-tracking-2);
+      line-height: var(--text-leading-2);
+      color: var(--neutral-12);
+
+      &:hover {
+        background-color: #0090FF;
+        cursor: pointer;
+        color: #C2E6FF;
+
+        > span {
+          color: #C2E6FF;
+        }
+      }
+    }
+
+    li > span {
+      font-family: var(--text-monospace);
+      font-size: var(--text-size-1);
+      letter-spacing: var(--text-tracking-1);
+      line-height: var(--text-leading-1);
+      color: var(--neutral-11);
+    }
+  }
+}
+
+main#photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: var(--space-1);
+  grid-row-gap: var(--space-1);
+  grid-auto-rows: 1fr;
+  grid-column: 1 / span 3;
+
+  img {
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    width: 100%;
+  }
+}

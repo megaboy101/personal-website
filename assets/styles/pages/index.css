@@ -160,7 +160,7 @@ main#index {
     display: grid;
     grid-auto-flow: dense;
     grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
-    gap: var(--space-3);
+    gap: var(--space-1);
     margin-block: 4.5em;
 
     @media (max-width: 500px) {
@@ -172,7 +172,7 @@ main#index {
     > div {
       display: flex;
       flex-flow: column nowrap;
-      gap: var(--space-3);
+      gap: var(--space-1);
 
       img {
         content-visibility: auto;

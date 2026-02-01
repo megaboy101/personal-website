@@ -42,7 +42,7 @@ body {
   }
 }
 
-nav {
+nav:has(~ main#index, ~ main#entry) {
   display: flex;
   flex-flow: row nowrap;
   justify-content: end;

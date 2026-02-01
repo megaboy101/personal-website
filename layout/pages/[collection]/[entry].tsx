@@ -1,7 +1,7 @@
 import { Entry } from "@/blog.ts"
 import Article from "../../article.tsx"
 import { HonoRequest } from "hono"
-import { BackArrow } from "../../icons.tsx"
+import { BackArrow, HalfCircle } from "../../icons.tsx"
 
 export const head = ({ entry }: { entry: Entry }) => ({
   title: `${entry.title} // Jacob Bleser`,
@@ -23,6 +23,11 @@ export const head = ({ entry }: { entry: Entry }) => ({
 export default ({ entry }: { entry: Entry, ctx: HonoRequest }) => {
   return (
     <>
+      <nav>
+        <button id="theme-toggle" type="button">
+          <HalfCircle />
+        </button>
+      </nav>
       <aside>
         <a href="/">
           <BackArrow />

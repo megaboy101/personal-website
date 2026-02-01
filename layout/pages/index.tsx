@@ -1,4 +1,5 @@
 import { Entry, useCollection } from "@/blog.ts";
+import { HalfCircle } from "../icons.tsx"
 
 export const head = {
   title: "Jacob Bleser",
@@ -28,54 +29,61 @@ export default () => {
   const photos = usePhotos();
 
   return (
-    <main id="index">
-      <figure id="profile" class="animated" style="--i:0">
-        <img id="pfp" src="/img/pfp.jpg" alt="Jacob Bleser" />
-        <img id="pfp-deco" src="/img/cat.png" alt="" />
+    <>
+      <nav>
+        <button id="theme-toggle" type="button">
+          <HalfCircle />
+        </button>
+      </nav>
+      <main id="index">
+        <figure id="profile" class="animated" style="--i:0">
+          <img id="pfp" src="/img/pfp.jpg" alt="Jacob Bleser" />
+          <img id="pfp-deco" src="/img/cat.png" alt="" />
 
-        <figcaption>
-          <span>Jacob Bleser</span>
-          <span><a href="https://bsky.app/profile/jacobb.nyc">@jacobb.nyc</a></span>
-        </figcaption>
-      </figure>
+          <figcaption>
+            <span>Jacob Bleser</span>
+            <span><a href="https://bsky.app/profile/jacobb.nyc">@jacobb.nyc</a></span>
+          </figcaption>
+        </figure>
 
-      <p class="animated" style="--i:1">
-        Product Engineer at Discord, writing about web development, creativity, ADHD, and Cyberpunk
-        <br /><br />
-        Living in Brooklyn NY with Katherine and Miles
-      </p>
+        <p class="animated" style="--i:1">
+          Product Engineer at Discord, writing about web development, creativity, ADHD, and Cyberpunk
+          <br /><br />
+          Living in Brooklyn NY with Katherine and Miles
+        </p>
 
-      <ol class="animated" style="--i:2">
-        {
-          opinions?.slice(0, 7)?.map((post) => (
-            <li>
-              <a href={`/writing/${post.id}`}>
-                <Time time={typeof post.properties?.['created-time'] === 'string' ? post.properties?.['created-time'] : post.createdAt} />
-                <div></div>
-                <span>{post.title}</span>
-              </a>
-            </li>
-          ))
-        }
-      </ol>
-
-      <div id="photos" class="animated" style="--i:3">
-        <div>
+        <ol class="animated" style="--i:2">
           {
-            photos.slice(0, Math.floor(photos.length / 2)).map(pic => (
-              <img src={pic} alt="" />
+            opinions?.slice(0, 7)?.map((post) => (
+              <li>
+                <a href={`/writing/${post.id}`}>
+                  <Time time={typeof post.properties?.['created-time'] === 'string' ? post.properties?.['created-time'] : post.createdAt} />
+                  <div></div>
+                  <span>{post.title}</span>
+                </a>
+              </li>
             ))
           }
+        </ol>
+
+        <div id="photos" class="animated" style="--i:3">
+          <div>
+            {
+              photos.slice(0, Math.floor(photos.length / 2)).map(pic => (
+                <img src={pic} alt="" />
+              ))
+            }
+          </div>
+          <div>
+            {
+              photos.slice(Math.ceil(photos.length / 2)).map(pic => (
+                <img src={pic} alt="" />
+              ))
+            }
+          </div>
         </div>
-        <div>
-          {
-            photos.slice(Math.ceil(photos.length / 2)).map(pic => (
-              <img src={pic} alt="" />
-            ))
-          }
-        </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 };
 
@@ -87,7 +95,7 @@ function formatDate(dateStr: string) {
   return `${(date.getMonth()+1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}-${date.getFullYear()}`
 }
 
-function usePhotos(): string[] {
+export function usePhotos(): string[] {
   const photos = useCollection("photos");
 
   return photos ?? [];
