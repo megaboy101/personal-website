@@ -1,4 +1,4 @@
-import { Entry } from "@/blog.ts"
+import { Entry } from '@/includes/types.ts'
 import { BackArrow, HalfCircle } from "@/includes/icons.tsx"
 import Article from "@/includes/article.tsx"
 

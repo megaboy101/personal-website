@@ -1,4 +1,4 @@
-import { Entry } from '@/blog.ts'
+import { Entry } from '@/includes/types.ts'
 
 export default ({ title, createdAt, html, properties }: Entry) => {
   const manualCreatedAt = properties?.['created-time']

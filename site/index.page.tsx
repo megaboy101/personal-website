@@ -1,4 +1,4 @@
-import { Entry, useCollection } from "@/blog.ts";
+import { Entry } from "@/includes/types.ts";
 import { HalfCircle } from "@/includes/icons.tsx";
 
 export const title = 'Jacob Bleser'
@@ -108,19 +108,6 @@ function formatDate(dateStr: string) {
   const date = new Date(dateStr);
 
   return `${(date.getMonth() + 1).toString().padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}-${date.getFullYear()}`;
-}
-
-export function usePosts() {
-  const posts = useCollection("writing");
-
-  const guides = posts
-    ?.filter((p) => p.properties?.type === "Guide")
-    .toSorted(sortCreatedTime);
-  const opinions = posts
-    ?.filter((p) => p.properties?.type === "Opinion")
-    .toSorted(sortCreatedTime);
-
-  return { guides, opinions };
 }
 
 function sortCreatedTime(first: Entry, second: Entry) {
