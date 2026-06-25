@@ -19,6 +19,10 @@ service-account.json
 # production
 /build
 
+# Lume
+_site
+_cache
+
 # Mac
 .DS_Store
 Icon*

@@ -1,28 +1,11 @@
-import { Child } from "hono/jsx";
-import { useRequestContext } from "hono/jsx-renderer";
-
-export default ({ children }: { children?: Child }) => {
-  const ctx = useRequestContext();
-  const head = ctx.get("head");
-
+export default ({content, title}: Lume.Data) => {
   return (
     <html lang="en">
       <head>
-        <meta charset="UTF-8" />
-
         {/* Basic metadata */}
-        <title>{head?.title ?? "Jacob Bleser"}</title>
+        <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        {head?.author && <meta name="author" content={head.author} />}
-        {head?.description && (
-          <meta name="description" content={head.description} />
-        )}
-
-        {/* Opengraph tags */}
-        {head?.opengraph && <Opengraph {...head.opengraph} />}
-
-        {/* Twitter card tags */}
-        {head?.opengraph && <Twitter {...head.twitter} />}
+        <title>{title ?? "Jacob Bleser"}</title>
 
         {/* Critical CSS */}
         <style>{`
@@ -69,9 +52,6 @@ export default ({ children }: { children?: Child }) => {
         <script type="module" async src="/scripts/light-dark.js"></script>
         <script type="module" async src="/scripts/select-link.js"></script>
 
-        {/* Stylesheets */}
-        <link rel="stylesheet" href="/styles/style.css" />
-
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
 
@@ -84,33 +64,7 @@ export default ({ children }: { children?: Child }) => {
         />
       </head>
 
-      <Layout>{children}</Layout>
+      <body>{content}</body>
     </html>
-  );
-};
-
-const Layout = ({ children }: { children: Child }) => (
-  <body>
-    {children}
-  </body>
-);
-
-const Opengraph = ({ children, ...tags }) => {
-  return (
-    <>
-      {Object.entries(tags).map(([key, val]) => (
-        <meta property={`og:${key}`} content={val} />
-      ))}
-    </>
-  );
-};
-
-const Twitter = ({ children, ...tags }) => {
-  return (
-    <>
-      {Object.entries(tags).map(([key, val]) => (
-        <meta name={`twitter:${key}`} content={val} />
-      ))}
-    </>
   );
 };

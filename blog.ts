@@ -11,11 +11,11 @@ blog({
 
   collections: {
     photos: json("./content/photos.json"),
-    writing: drive({
-      fileId: '1eqm-olaERjJlQLOHQOq_QnNpIRUoH1LY', // Blog
-      keyFile: './service-account.json'
-    }),
-    // writing: json("./obsidian.json"),
+    // writing: drive({
+    //   fileId: '1eqm-olaERjJlQLOHQOq_QnNpIRUoH1LY', // Blog
+    //   keyFile: './service-account.json'
+    // }),
+    writing: json("./obsidian.json"),
   },
 
   plugs: [insights()],

@@ -250,6 +250,17 @@ class Drive {
     }
   }
 
+  async *entriesRaw() {
+    for await (const [meta, content] of this.#downloadAll(this.#fileId)) {
+      yield {
+        title: meta.name.replace(/\.[^/.]+$/, ""),
+        createdAt: meta.createdTime,
+        updatedAt: meta.modifiedTime,
+        md: content,
+      };
+    }
+  }
+
   async #list(id: string) {
     // This is a simple sample script for retrieving the file list.
     const response = await this.#client.files.list({

@@ -1,6 +1,5 @@
-export const head = {
-  title: 'Not Found'
-}
+export const title = 'Not Found'
+export const layout = 'page.tsx'
 
 export default () => (
   <main id="not-found">
