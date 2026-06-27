@@ -18,7 +18,7 @@ export default function*({ obsidian }: SiteData) {
     yield {
       ...entry,
       url: `/writing/${entry.id}`,
-      title: `${entry.title} // Jacob Bleser`,
+      title: entry.title,
       metas,
       layout,
     }
