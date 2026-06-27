@@ -6,13 +6,28 @@ import metas from "lume/plugins/metas.ts";
 import sitemap from "lume/plugins/sitemap.ts";
 import seo from "lume/plugins/seo.ts";
 import mdx from "lume/plugins/mdx.ts";
+import rehypePrettyCode from "rehype-pretty-code"
+import { CodeFigure } from "@/includes/code.tsx"
 
 const site = lume({
   src: './site'
 });
 
 site.use(jsx());
-site.use(mdx());
+site.use(mdx({
+  rehypePlugins: [
+    [rehypePrettyCode, {
+      theme: {
+        light: 'gruvbox-light-hard',
+        dark: 'gruvbox-dark-hard',
+      },
+      keepBackground: false,
+    }]
+  ],
+  components: {
+    figure: CodeFigure
+  }
+}));
 site.use(robots());
 site.use(slugify_urls());
 site.use(metas());

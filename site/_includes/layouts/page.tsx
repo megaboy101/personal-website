@@ -48,9 +48,8 @@ export default ({content, title}: Lume.Data) => {
 
         {/* Scripts */}
         <script type="module" async src="/scripts/cursor-tracker.js"></script>
-        <script type="module" async src="/scripts/insights.js"></script>
         <script type="module" async src="/scripts/light-dark.js"></script>
-        <script type="module" async src="/scripts/select-link.js"></script>
+        <script type="module" async src="/scripts/copy-button.js"></script>
 
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />

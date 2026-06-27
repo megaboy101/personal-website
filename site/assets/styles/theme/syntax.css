@@ -1,164 +1,197 @@
-@layer syntax {
+[data-rehype-pretty-code-figure] {
+  background-color: var(--neutral-2);
+  border-radius: 16px;
+  margin: var(--space-5) calc(-1 * var(--space-4));
+  border: 1px solid var(--neutral-6);
+
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+
+  button {
+    border: none;
+    padding: var(--space-2);
+    margin: var(--space-2);
+
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+
+    &:hover {
+      background-color: var(--neutral-4);
+    }
+
+    &:active {
+      background-color: var(--neutral-6);
+    }
+
+    .icon {
+      aspect-ratio: 1 / 1;
+      width: 18px;
+      color: var(--neutral-11);
+    }
+  }
+
+  .copy {
+    /* Make sure copy button is always the topmost element so it's interactive */
+    z-index: 1;
+  }
+
   /*
-  Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
-
-  base:    #282c34
-  mono-1:  #abb2bf
-  mono-2:  #818896
-  mono-3:  #5c6370
-  hue-1:   #56b6c2
-  hue-2:   #61aeee
-  hue-3:   #c678dd
-  hue-4:   #98c379
-  hue-5:   #e06c75
-  hue-5-2: #be5046
-  hue-6:   #d19a66
-  hue-6-2: #e6c07b
+  If there's a title in the block, align the copy button
+  with the title. Otherwise align it with the top right of the
+  pre content
   */
-
-  .hljs {
-    color: #abb2bf;
-    background: #282c34;
-  }
-  .hljs-tag {
-    color: #abb2bf;
-  }
-  .hljs-comment,
-  .hljs-quote {
-    color: #5c6370;
-    font-style: italic;
-  }
-  .hljs-doctag,
-  .hljs-keyword,
-  .hljs-formula {
-    color: #c678dd;
-  }
-  .hljs-section,
-  .hljs-name,
-  .hljs-selector-tag,
-  .hljs-deletion,
-  .hljs-subst {
-    color: #e06c75;
-  }
-  .hljs-literal {
-    color: #56b6c2;
-  }
-  .hljs-string,
-  .hljs-regexp,
-  .hljs-addition,
-  .hljs-attribute,
-  .hljs-meta .hljs-string {
-    color: #98c379;
-  }
-  .hljs-attr,
-  .hljs-variable,
-  .hljs-template-variable,
-  .hljs-type,
-  .hljs-selector-class,
-  .hljs-selector-attr,
-  .hljs-selector-pseudo,
-  .hljs-number {
-    color: #d19a66;
-  }
-  .hljs-symbol,
-  .hljs-bullet,
-  .hljs-link,
-  .hljs-meta,
-  .hljs-selector-id,
-  .hljs-title {
-    color: #61aeee;
-  }
-  .hljs-built_in,
-  .hljs-title.class_,
-  .hljs-class .hljs-title {
-    color: #e6c07b;
-  }
-  .hljs-emphasis {
-    font-style: italic;
-  }
-  .hljs-strong {
-    font-weight: bold;
-  }
-  .hljs-link {
-    text-decoration: underline;
-  }
-
-  /* @media (prefers-color-scheme: light) {
-    .hljs {
-      display: block;
-      overflow-x: auto;
-      padding: 0.5em;
-      color: #383a42;
-      background: #fafafa;
+  &:has(> [data-rehype-pretty-code-title]) {
+    [data-rehype-pretty-code-title] {
+      grid-row: 1 / span 1;
+      grid-column: 1 / span 2;
     }
 
-    .hljs-comment,
-    .hljs-quote {
-      color: #a0a1a7;
-      font-style: italic;
+    .copy {
+      grid-row: 1 / span 1;
+      grid-column: 2 / span 1;
     }
 
-    .hljs-doctag,
-    .hljs-keyword,
-    .hljs-formula {
-      color: #a626a4;
+    pre {
+      grid-row: 2 / span 1;
+      grid-column: 1 / span 2;
+
+      border-top: 1px solid var(--neutral-3);
+      padding-top: var(--space-3);
+      margin-left: var(--space-4);
+      margin-right: var(--space-4);
+      margin-bottom: var(--space-4);
+    }
+  }
+
+  /*
+  If there's a title in the block, align the copy button
+  with the title. Otherwise align it with the top right of the
+  pre content
+  */
+  &:not(:has(> [data-rehype-pretty-code-title])) {
+    row-gap: 0;
+
+    .copy {
+      grid-row: 1 / span 1;
+      grid-column: 2 / span 1;
     }
 
-    .hljs-section,
-    .hljs-name,
-    .hljs-selector-tag,
-    .hljs-deletion,
-    .hljs-subst {
-      color: #e45649;
-    }
+    pre {
+      grid-row: 1 / span 2;
+      grid-column: 1 / span 2;
 
-    .hljs-literal {
-      color: #0184bb;
+      margin: var(--space-4);
     }
+  }
+}
 
-    .hljs-string,
-    .hljs-regexp,
-    .hljs-addition,
-    .hljs-attribute,
-    .hljs-meta-string {
-      color: #50a14f;
-    }
+/* Use theme setup for syntax highlighting */
+[data-rehype-pretty-code-figure]
+  [data-rehype-pretty-code-title] {
+  font-family: monospace;
+  color: var(--neutral-11);
+  margin: var(--space-2) var(--space-4);
+}
 
-    .hljs-built_in,
-    .hljs-class .hljs-title {
-      color: #c18401;
-    }
+[data-rehype-pretty-code-figure] pre {
+  overflow: hidden;
 
-    .hljs-attr,
-    .hljs-variable,
-    .hljs-template-variable,
-    .hljs-type,
-    .hljs-selector-class,
-    .hljs-selector-attr,
-    .hljs-selector-pseudo,
-    .hljs-number {
-      color: #986801;
-    }
+  counter-reset: codeblock-line;
 
-    .hljs-symbol,
-    .hljs-bullet,
-    .hljs-link,
-    .hljs-meta,
-    .hljs-selector-id,
-    .hljs-title {
-      color: #4078f2;
-    }
+  ::selection {
+    background-color: var(--neutral-6);
+  }
 
-    .hljs-emphasis {
-      font-style: italic;
-    }
+  code {
+    font-size: var(--text-size-2);
+    display: block;
+    width: 100%;
+    overflow-x: auto;
 
-    .hljs-strong {
-      font-weight: bold;
+    span {
+      font-family: inherit;
+      font-size: inherit;
+      letter-spacing: inherit;
     }
+  }
+}
 
-    .hljs-link {
-      text-decoration: underline;
-    }
-  } */
+/* Theme support */
+pre [data-line] {
+  color: var(--shiki-light);
+}
+
+pre,
+code[data-theme*=" "],
+code[data-theme*=" "] span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  pre,
+  code[data-theme*=" "],
+  code[data-theme*=" "] span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
+  }
+}
+
+:root[data-theme="dark"]
+  :is(
+    pre,
+    code[data-theme*=" "],
+    code[data-theme*=" "] span
+  ) {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+/* Line Number support */
+code[data-line-numbers] {
+  counter-reset: line;
+}
+
+code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+
+  /* Other styling */
+  display: inline-block;
+  width: 0.75rem;
+  margin-right: 2rem;
+  text-align: right;
+  color: gray;
+}
+
+code[data-line-numbers-max-digits="2"]
+  > [data-line]::before {
+  width: 1.25rem;
+}
+
+code[data-line-numbers-max-digits="3"]
+  > [data-line]::before {
+  width: 1.75rem;
+}
+
+code[data-line-numbers-max-digits="4"]
+  > [data-line]::before {
+  width: 2.25rem;
+}
+
+/* Terminal command $ support */
+pre[data-language="bash"] [data-line]::before {
+  content: "$";
+
+  /* Other styling */
+  display: inline-block;
+  width: 0.75rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: gray;
 }

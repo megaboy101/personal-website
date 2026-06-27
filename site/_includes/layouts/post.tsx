@@ -24,7 +24,7 @@ export default (entry: Entry & {content?: unknown}) => {
   )
 }
 
-const Article = ({ title, createdAt, html, properties, content, children }: Entry & {content?: unknown}) => {
+const Article = ({ title, createdAt, html, properties, children }: Entry & {children: JSX.Children}) => {
   const manualCreatedAt = properties?.['created-time']
   const publicCreatedAt = typeof manualCreatedAt === 'string' ? manualCreatedAt : createdAt
 
