@@ -5,8 +5,16 @@
     backdrop-filter: blur(0px);
   }
   to {
-    background-color: color-mix(in srgb, var(--neutral-2), transparent 10%);
-    border-color: color-mix(in srgb, var(--neutral-6), transparent 10%);
+    background-color: color-mix(
+      in srgb,
+      var(--neutral-2),
+      transparent 10%
+    );
+    border-color: color-mix(
+      in srgb,
+      var(--neutral-6),
+      transparent 10%
+    );
     backdrop-filter: blur(5px);
   }
 }
@@ -34,10 +42,15 @@ nav:has(~ main#photos) {
     border-radius: 4px;
 
     padding: var(--space-2);
-    background: linear-gradient(35deg, var(--neutral-2) ,rgba(30,30,30,.8));
-    box-shadow: 0 3px 10px 4px rgba(0,0,0,.2);
+    background: linear-gradient(
+      35deg,
+      var(--neutral-2),
+      rgba(30, 30, 30, 0.8)
+    );
+    box-shadow: 0 3px 10px 4px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-    border: 1px solid color-mix(in srgb, var(--neutral-6), transparent 10%);
+    border: 1px solid
+      color-mix(in srgb, var(--neutral-6), transparent 10%);
 
     &:hover {
       background-color: var(--neutral-3);
@@ -57,15 +70,16 @@ nav:has(~ main#photos) {
     gap: var(--space-1);
 
     font-size: var(--text-size-3);
-    line-height: var(--text-leading-3);
-    letter-spacing: var(--text-tracking-3);
+    line-height: var(--line-height-3);
+    letter-spacing: var(--letter-spacing-3);
     color: var(--neutral-12);
     font-weight: 400;
 
-    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-3);
+    padding: var(--space-2) var(--space-2) var(--space-2)
+      var(--space-3);
     /* background: linear-gradient(35deg, var(--neutral-2) ,rgba(30,30,30,.8)); */
     background: transparent;
-    box-shadow: 0 3px 10px 4px rgba(0,0,0,.2);
+    box-shadow: 0 3px 10px 4px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     /* border: 1px solid color-mix(in srgb, var(--neutral-6), transparent 10%); */
     border: 1px solid transparent;
@@ -95,10 +109,15 @@ nav:has(~ main#photos) {
     color: var(--neutral-10);
 
     padding: var(--space-2);
-    background: linear-gradient(35deg, var(--neutral-2) ,rgba(30,30,30,.8));
-    box-shadow: 0 3px 10px 4px rgba(0,0,0,.2);
+    background: linear-gradient(
+      35deg,
+      var(--neutral-2),
+      rgba(30, 30, 30, 0.8)
+    );
+    box-shadow: 0 3px 10px 4px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-    border: 1px solid color-mix(in srgb, var(--neutral-6), transparent 10%);
+    border: 1px solid
+      color-mix(in srgb, var(--neutral-6), transparent 10%);
 
     &:hover {
       background-color: var(--neutral-3);
@@ -128,10 +147,15 @@ nav:has(~ main#photos) {
     padding-bottom: calc(var(--space-4) / 2);
     padding-inline: 0;
 
-    background: linear-gradient(35deg, var(--neutral-2) ,rgba(30,30,30,.8));
-    box-shadow: 0 3px 10px 4px rgba(0,0,0,.2);
+    background: linear-gradient(
+      35deg,
+      var(--neutral-2),
+      rgba(30, 30, 30, 0.8)
+    );
+    box-shadow: 0 3px 10px 4px rgba(0, 0, 0, 0.2);
     border-radius: 12px;
-    border: 1px solid color-mix(in srgb, var(--neutral-6), transparent 10%);
+    border: 1px solid
+      color-mix(in srgb, var(--neutral-6), transparent 10%);
     backdrop-filter: blur(10px);
 
     /* Animation */
@@ -142,21 +166,23 @@ nav:has(~ main#photos) {
       transform 0.3s,
       overlay 0.3s allow-discrete,
       display 0.3s allow-discrete;
-    
-      &:popover-open {
-        opacity: 1;
-        transform: translateY(0px); /* end at full size */
 
-        @starting-style {
-          opacity: 0;
-          transform: translateY(10px); /* must match the default state values */
-        }
+    &:popover-open {
+      opacity: 1;
+      transform: translateY(0px); /* end at full size */
+
+      @starting-style {
+        opacity: 0;
+        transform: translateY(
+          10px
+        ); /* must match the default state values */
       }
+    }
 
     .header {
       font-size: var(--text-size-1);
-      letter-spacing: var(--text-tracking-1);
-      line-height: var(--text-leading-1);
+      letter-spacing: var(--letter-spacing-1);
+      line-height: var(--line-height-1);
       color: var(--neutral-11);
       margin: 0 var(--space-4) var(--space-3) var(--space-4);
     }
@@ -168,17 +194,17 @@ nav:has(~ main#photos) {
       padding: calc(var(--space-3) / 2) var(--space-4);
 
       font-size: var(--text-size-2);
-      letter-spacing: var(--text-tracking-2);
-      line-height: var(--text-leading-2);
+      letter-spacing: var(--letter-spacing-2);
+      line-height: var(--line-height-2);
       color: var(--neutral-12);
 
       &:hover {
-        background-color: #0090FF;
+        background-color: #0090ff;
         cursor: pointer;
-        color: #C2E6FF;
+        color: #c2e6ff;
 
         > span {
-          color: #C2E6FF;
+          color: #c2e6ff;
         }
       }
     }
@@ -186,8 +212,8 @@ nav:has(~ main#photos) {
     li > span {
       font-family: var(--text-monospace);
       font-size: var(--text-size-1);
-      letter-spacing: var(--text-tracking-1);
-      line-height: var(--text-leading-1);
+      letter-spacing: var(--letter-spacing-1);
+      line-height: var(--line-height-1);
       color: var(--neutral-11);
     }
   }

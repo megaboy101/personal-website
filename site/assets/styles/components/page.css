@@ -1,7 +1,9 @@
 html {
   /* On <html> so overscroll on mac is colored */
   background-color: var(--neutral-1);
-  font-feature-settings: "liga" 1, "calt" 1; /* fix for Chrome */
+  font-feature-settings:
+    "liga" 1,
+    "calt" 1; /* fix for Chrome */
 }
 
 /* Smooth animate theme color changes */
@@ -23,8 +25,12 @@ body {
   margin-block: var(--space-4);
   margin-inline: auto;
   display: grid;
-  grid-template-rows: min-content clamp(0px, calc(100dvw - 62ch), 6dvh) auto 1fr;
-  grid-template-columns: minmax(var(--space-4), 1fr) minmax(0, 62ch) minmax(var(--space-4), 1fr);
+  grid-template-rows:
+    min-content clamp(0px, calc(100dvw - 62ch), 6dvh)
+    auto 1fr;
+  grid-template-columns:
+    minmax(var(--space-4), 1fr)
+    minmax(0, 62ch) minmax(var(--space-4), 1fr);
 
   > nav {
     grid-column: 1 / span 3;

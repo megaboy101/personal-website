@@ -5,12 +5,14 @@ import slugify_urls from "lume/plugins/slugify_urls.ts";
 import metas from "lume/plugins/metas.ts";
 import sitemap from "lume/plugins/sitemap.ts";
 import seo from "lume/plugins/seo.ts";
+import mdx from "lume/plugins/mdx.ts";
 
 const site = lume({
   src: './site'
 });
 
 site.use(jsx());
+site.use(mdx());
 site.use(robots());
 site.use(slugify_urls());
 site.use(metas());

@@ -8,7 +8,6 @@
 @import "/styles/theme/syntax.css" layer(syntax);
 
 @import "/styles/components/page.css" layer(components);
-@import "/styles/components/article.css" layer(components);
 
 @import "/styles/pages/index.css" layer(pages);
 @import "/styles/pages/writing.css" layer(pages);

@@ -1,5 +1,0 @@
-main#writing {
-  display: flex;
-  flex-flow: column nowrap;
-  gap: var(--space-8);
-}

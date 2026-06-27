@@ -2,14 +2,14 @@ main#index {
   #profile {
     display: grid;
     grid-template:
-      'avatar .' 6fr
-      'avatar name' min-content
-      'avatar .' 5fr
-      'avatar handle' min-content
-      'avatar .' 6fr
+      "avatar ." 6fr
+      "avatar name" min-content
+      "avatar ." 5fr
+      "avatar handle" min-content
+      "avatar ." 6fr
       / auto 1fr;
     grid-column-gap: var(--space-2);
-    
+
     img {
       grid-area: avatar;
       aspect-ratio: 1 / 1;
@@ -29,7 +29,7 @@ main#index {
         grid-area: name;
         font-family: var(--text-sans);
         font-size: var(--text-size-3);
-        letter-spacing: var(--text-tracking-7);
+        letter-spacing: var(--letter-spacing-7);
         line-height: 1cap;
         font-weight: 400;
       }
@@ -41,10 +41,10 @@ main#index {
         a {
           font-family: var(--text-sans);
           font-size: var(--text-size-2);
-          letter-spacing: var(--text-tracking-7);
+          letter-spacing: var(--letter-spacing-7);
           line-height: 1cap;
           font-weight: 400;
-          color: #76B6FF;
+          color: #76b6ff;
           &:hover {
             text-decoration: underline;
           }
@@ -55,13 +55,13 @@ main#index {
 
   p {
     font-family: var(--text-serif);
-    letter-spacing: var(--text-tracking-7);
-    margin-block: var(--text-leading-3);
+    letter-spacing: var(--letter-spacing-7);
+    margin-block: var(--line-height-3);
 
     small {
       font-size: var(--text-size-2);
-      letter-spacing: var(--text-tracking-2);
-      line-height: var(--text-leading-2);
+      letter-spacing: var(--letter-spacing-2);
+      line-height: var(--line-height-2);
       margin-inline: 0.5rem;
       color: var(--neutral-10);
     }
@@ -107,7 +107,7 @@ main#index {
       span {
         order: 1;
         font-family: var(--text-serif);
-        letter-spacing: var(--text-tracking-7);
+        letter-spacing: var(--letter-spacing-7);
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -123,11 +123,11 @@ main#index {
 
       time {
         order: 3;
-        letter-spacing: var(--text-tracking-7);
+        letter-spacing: var(--letter-spacing-7);
         font-family: var(--text-monospace);
         font-size: var(--text-size-2);
-        letter-spacing: var(--text-tracking-2);
-        line-height: var(--text-leading-2);
+        letter-spacing: var(--letter-spacing-2);
+        line-height: var(--line-height-2);
         color: var(--neutral-11);
       }
     }
@@ -159,7 +159,10 @@ main#index {
   #photos {
     display: grid;
     grid-auto-flow: dense;
-    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(225px, 1fr)
+    );
     gap: var(--space-1);
     margin-block: 4.5em;
 
@@ -210,7 +213,6 @@ main#index {
     }
   }
 }
-
 
 /* @keyframes fade-in-stagger {
   from {
