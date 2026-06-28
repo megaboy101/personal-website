@@ -19,6 +19,7 @@ main#index {
 
     img#pfp-deco {
       transform: scale(1.7) translateY(3px);
+      filter: grayscale(90%);
       border-radius: 0;
     }
 
