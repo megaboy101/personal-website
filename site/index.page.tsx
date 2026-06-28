@@ -50,11 +50,14 @@ export default ({obsidian, photos}: SiteData) => {
         </figure>
 
         <p class="animated" style="--i:1">
-          Product Engineer at Discord, writing about web
-          development, creativity, ADHD, and Cyberpunk
+          Hey, I'm Jacob ʕっ•ᴥ•ʔっ
           <br />
           <br />
-          Living in Brooklyn NY with Katherine and Miles
+          I'm a Brooklyn based product engineer working at Discord. I've helped
+          launch Quests, Orbs, and a bunch of other odds and ends
+          <br />
+          <br />
+          I write about programming, and also sometimes do photography
         </p>
 
         <ol class="animated" style="--i:2">
