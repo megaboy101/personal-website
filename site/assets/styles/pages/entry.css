@@ -72,6 +72,7 @@ main#entry article header {
   }
 
   time {
+    font-family: var(--text-sans);
     font-size: var(--text-size-2);
     letter-spacing: var(--letter-spacing-2);
     line-height: var(--line-height-2);
