@@ -214,23 +214,3 @@ main#index {
     }
   }
 }
-
-/* @keyframes fade-in-stagger {
-  from {
-    opacity: 0;
-    top: 20px;
-  }
-  to {
-    opacity: 1;
-    top: 0px;
-  }
-}
-
-.animated {
-  opacity: 0;
-  position: relative;
-  top: 20px;
-  animation: fade-in-stagger 0.5s forwards;
-  animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
-  animation-delay: calc(0.5s + var(--i, 0) * 0.075s);
-} */

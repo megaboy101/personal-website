@@ -31,25 +31,16 @@ export default ({obsidian, photos}: SiteData) => {
         </button>
       </nav>
       <main id="index">
-        <figure id="profile" class="animated" style="--i:0">
+        <figure id="profile">
           <img
             id="pfp"
             src="/img/pfp.jpg"
             alt="Jacob Bleser"
           />
           <img id="pfp-deco" src="/img/cat.png" alt="" />
-
-          <figcaption>
-            <span>Jacob Bleser</span>
-            <span>
-              <a href="https://bsky.app/profile/jacobb.nyc">
-                @jacobb.nyc
-              </a>
-            </span>
-          </figcaption>
         </figure>
 
-        <p class="animated" style="--i:1">
+        <p>
           Hey, I'm Jacob ʕっ•ᴥ•ʔっ
           <br />
           <br />
@@ -60,7 +51,7 @@ export default ({obsidian, photos}: SiteData) => {
           I write about programming, and also sometimes do photography
         </p>
 
-        <ol class="animated" style="--i:2">
+        <ol>
           {obsidian?.toSorted(sortCreatedTime)?.slice(0, ARTICLE_LIMIT)?.map((article) => (
             <li>
               <a href={`/writing/${article.id}`}>
@@ -80,7 +71,7 @@ export default ({obsidian, photos}: SiteData) => {
           ))}
         </ol>
 
-        <div id="photos" class="animated" style="--i:3">
+        <div id="photos">
           <div>
             {photos
               ?.slice(0, Math.floor(photos.length / 2))
