@@ -41,14 +41,15 @@ export default ({obsidian, photos}: SiteData) => {
         </figure>
 
         <p>
-          Hey, I'm Jacob ʕっ•ᴥ•ʔっ
+          Hey, I'm Jacob&ensp;ʕっ•ᴥ•ʔっ♥
           <br />
           <br />
-          I'm a Brooklyn based product engineer working at Discord. I've helped
-          launch Quests, Orbs, and a bunch of other odds and ends
+          I'm a product engineer at Discord
+          <br />
+          I work on <a href="https://discord.com/ads/quests">Quests</a>, <a href="https://support.discord.com/hc/en-us/articles/30593690165783-Discord-Orbs-FAQ">Orbs</a>, and the <a href="https://support.discord.com/hc/en-us/articles/17162747936663-Shop-FAQ">Shop</a>
           <br />
           <br />
-          I write about programming, and also sometimes do photography
+          I write about web and game programming, and also do photography
         </p>
 
         <ol>
