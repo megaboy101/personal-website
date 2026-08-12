@@ -18,8 +18,8 @@ site.use(mdx({
   rehypePlugins: [
     [rehypePrettyCode, {
       theme: {
-        light: 'gruvbox-light-hard',
-        dark: 'gruvbox-dark-hard',
+        light: 'one-light',
+        dark: 'one-dark-pro',
       },
       keepBackground: false,
     }]
