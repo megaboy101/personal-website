@@ -111,7 +111,7 @@ main#entry article .content {
   p {
     font-size: var(--text-size-3);
     letter-spacing: var(--letter-spacing-7);
-    line-height: 1.6em;
+    line-height: 1.5em;
     margin: 1rem 0;
   }
 
@@ -187,7 +187,7 @@ main#entry article .content {
   li {
     font-size: var(--text-size-3);
     letter-spacing: var(--letter-spacing-3);
-    line-height: 1.6em;
+    line-height: 1.5em;
     margin-block: var(--space-1);
   }
 
