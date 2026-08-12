@@ -1,20 +1,18 @@
 {
   "tasks": {
-    "dev": "deno run -A --watch blog.ts",
-    "start": "deno run -A blog.ts",
     "deploy": "fly deploy",
     "status": "fly status",
-    "lume": {
+    "start": {
       "description": "Run Lume command",
       "command": "deno run -P=lume lume/cli.ts"
     },
     "build": {
       "description": "Build the site for production",
-      "command": "deno task lume"
+      "command": "deno task start"
     },
-    "serve": {
+    "dev": {
       "description": "Run and serve the site for development",
-      "command": "deno task lume -s"
+      "command": "deno task start -s"
     }
   },
   "imports": {
