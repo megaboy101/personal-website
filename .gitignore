@@ -25,7 +25,7 @@ _cache
 
 # Mac
 .DS_Store
-Icon*
+Icon?
 
 # Obsidian
 .obsidian
