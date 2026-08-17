@@ -32,6 +32,10 @@ body {
     minmax(var(--space-4), 1fr)
     minmax(0, 62ch) minmax(var(--space-4), 1fr);
 
+  &:has(main#photos) {
+    grid-template-rows: auto 1fr;
+  }
+
   > nav {
     grid-column: 1 / span 3;
     grid-row: 1 / span 1;

@@ -1,0 +1,33 @@
+---
+title: Zig Field Guide 2
+layout: layouts/post.tsx
+metas:
+  author: Jacob Bleser
+  site: Jacob's Blog
+  lang: en
+  type: article
+  image: https://jacobb.nyc/img/card-gradient.jpg
+
+createdAt: 06-27-26
+---
+
+> See also: [Zig Language Reference](https://ziglang.org/documentation/master/)
+
+
+## Getting Started
+
+Simply create a Zig file and you're all set.
+
+Zig doesn't require a dedicated project initializiation command.
+
+```zig title="hello.zig" showLineNumbers
+const std = @import("std");
+
+pub fn main() void {
+    std.debug.print("Hello, {s}!\n", .{"World"});
+}
+```
+
+```bash
+zig build-exe hello.zig
+```

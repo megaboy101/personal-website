@@ -1,5 +1,5 @@
 import { Entry } from "@/includes/types.ts";
-import { HalfCircle } from "@/includes/icons.tsx";
+import { Article, HalfCircle, Image } from "@/includes/icons.tsx";
 
 export const title = 'Jacob Bleser'
 export const metas = {
@@ -15,14 +15,14 @@ export const metas = {
 
 export const layout = "page.tsx";
 
-const ARTICLE_LIMIT = 7;
+const ALBUM_LIMIT = 3;
+const ARTICLE_LIMIT = 4;
 
 export interface SiteData extends Lume.Data {
-  obsidian?: Entry[]
-  photos?: string[]
+  photography: {albums: Map<string, string[]>}
 }
 
-export default ({obsidian, photos}: SiteData) => {
+export default ({photography}: SiteData) => {
   return (
     <>
       <nav>
@@ -52,46 +52,52 @@ export default ({obsidian, photos}: SiteData) => {
           I write about web and game programming, and also do photography
         </p>
 
-        <ol>
-          {obsidian?.toSorted(sortCreatedTime)?.slice(0, ARTICLE_LIMIT)?.map((article) => (
-            <li>
-              <a href={`/writing/${article.id}`}>
-                <Time
-                  time={
-                    typeof article.properties?.[
-                      "created-time"
-                    ] === "string"
-                      ? article.properties?.["created-time"]
-                      : article.createdAt
-                  }
-                />
-                <div></div>
-                <span>{article.title}</span>
-              </a>
-            </li>
-          ))}
-        </ol>
+        <Directory
+          albums={photography.albums}
+        />
 
         <div id="photos">
-          <div>
-            {photos
-              ?.slice(0, Math.floor(photos.length / 2))
-              .map((pic) => (
-                <img src={pic} alt="" />
-              ))}
-          </div>
-          <div>
-            {photos
-              ?.slice(Math.ceil(photos.length / 2))
-              .map((pic) => (
-                <img src={pic} alt="" />
-              ))}
-          </div>
+          {photography.albums.values().find(() => true)?.map((pic) => (
+            <img src={pic} alt="" />
+          ))}
         </div>
       </main>
     </>
   );
 };
+
+function Directory({albums}: {albums: Map<string, string[]>}) {
+  return (
+    <ol>
+      {albums.entries().take(ALBUM_LIMIT).map(([title, items]) => (
+        <li>
+          <a href={`/photos/${title}`}>
+            <span><Image />{title}</span>
+            <div></div>
+            <span>{items.length} photos</span>
+          </a>
+        </li>
+      )).toArray()}
+      {/*{articles.toSorted(sortCreatedTime)?.slice(0, ARTICLE_LIMIT)?.entries().map(([idx, article]) => (
+        <li>
+          <a href={`/writing/${idx}`}>
+            <span><Article />{article.title}</span>
+            <div></div>
+            <Time
+              time={
+                typeof article.properties?.[
+                  "created-time"
+                ] === "string"
+                  ? article.properties?.["created-time"]
+                  : article.createdAt
+              }
+            />
+          </a>
+        </li>
+      )).toArray()}*/}
+    </ol>
+  )
+}
 
 export const Time = ({ time }: { time: string }) => (
   <time pubdate datetime={time}>

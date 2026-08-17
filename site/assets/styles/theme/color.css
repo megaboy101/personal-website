@@ -3,6 +3,14 @@
  *
 **/
 @layer theme {
+  :root {
+    /*
+    Prevent HDR images from appearing
+    ultra-bright by default
+    */
+    dynamic-range-limit: standard;
+  }
+
   /* Neutral Palette */
   :root {
     --dark-1: #111111;

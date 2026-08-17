@@ -1,5 +1,5 @@
 main#index {
-  #profile {
+  figure#profile {
     display: grid;
     grid-template:
       "avatar ." 6fr
@@ -59,6 +59,23 @@ main#index {
     letter-spacing: var(--letter-spacing-7);
     margin-block: var(--line-height-3);
 
+    a {
+      text-decoration: underline;
+      text-decoration-style: wavy;
+      text-decoration-thickness: 1px;
+      text-decoration-color: var(--neutral-8);
+      text-underline-offset: 2px;
+
+      &:hover {
+        text-decoration-color: var(--neutral-10);
+      }
+    }
+
+    svg {
+      display: inline-block;
+      height: 1em;
+    }
+
     small {
       font-size: var(--text-size-2);
       letter-spacing: var(--letter-spacing-2);
@@ -105,7 +122,7 @@ main#index {
         }
       }
 
-      span {
+      > *:nth-child(1) {
         order: 1;
         font-family: var(--text-serif);
         letter-spacing: var(--letter-spacing-7);
@@ -114,6 +131,10 @@ main#index {
         text-overflow: ellipsis;
         width: 100%;
         min-width: 0;
+
+        display: flex;
+        flex-flow: row nowrap;
+        gap: var(--space-2);
       }
 
       div {
@@ -122,7 +143,7 @@ main#index {
         background-color: var(--neutral-3);
       }
 
-      time {
+      > *:nth-child(3) {
         order: 3;
         letter-spacing: var(--letter-spacing-7);
         font-family: var(--text-monospace);
@@ -130,6 +151,10 @@ main#index {
         letter-spacing: var(--letter-spacing-2);
         line-height: var(--line-height-2);
         color: var(--neutral-11);
+      }
+
+      .icon {
+        width: 18px;
       }
     }
 
