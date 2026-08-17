@@ -10,7 +10,8 @@ import rehypePrettyCode from "rehype-pretty-code"
 import { CodeFigure } from "@/includes/code.tsx"
 
 const site = lume({
-  src: './site'
+  src: './site',
+  location: new URL('https://jacobb.nyc'),
 });
 
 site.use(jsx());

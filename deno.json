@@ -1,7 +1,9 @@
 {
   "tasks": {
-    "deploy": "fly deploy",
-    "status": "fly status",
+    "deploy": {
+      "description": "Build the site and publish it to Cloudflare Workers",
+      "command": "deno task build && deno run -A npm:wrangler deploy"
+    },
     "start": {
       "description": "Run Lume command",
       "command": "deno run -P=lume lume/cli.ts"

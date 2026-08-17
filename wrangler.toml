@@ -1,0 +1,7 @@
+# See https://developers.cloudflare.com/workers/wrangler/configuration/
+name = "jacob-bleser"
+compatibility_date = "2026-08-17"
+
+[assets]
+directory = "./_site"
+not_found_handling = "404-page"
