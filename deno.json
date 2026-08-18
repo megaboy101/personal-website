@@ -6,7 +6,7 @@
     },
     "start": {
       "description": "Run Lume command",
-      "command": "deno run -P=lume lume/cli.ts"
+      "command": "deno run --env-file -P=lume lume/cli.ts"
     },
     "build": {
       "description": "Build the site for production",
@@ -20,6 +20,7 @@
   "imports": {
     "@/": "./lib/",
     "@/includes/": "./site/_includes/",
+    "@aws-sdk/client-s3": "npm:@aws-sdk/client-s3",
     "@googleapis/drive": "npm:@googleapis/drive",
     "@std/fs": "jsr:@std/fs@^1.0.19",
     "@std/collections": "jsr:@std/collections",
@@ -65,7 +66,8 @@
         "jsr.io:443",
         "deno.land:443",
         "esm.sh:443",
-        "registry.npmjs.org:443"
+        "registry.npmjs.org:443",
+        "3858a365a9d414c509ee229867057438.r2.cloudflarestorage.com:443"
       ],
       "env": true,
       "run": true,
