@@ -14,14 +14,14 @@ export const metas = {
 
 export const layout = 'page.tsx'
 
-export default ({pics: photos}: {pics: string[]}) => {
+export default ({title, pics: photos}: {title: string, pics: string[]}) => {
   const track1 = 0
   const track2 = Math.floor(((photos.length ?? 0) / 3))
   const track3 = Math.floor(((photos.length ?? 0) / 3) * 2)
 
   return (
     <>
-      <BasicNav />
+      <BasicNav title={title} />
       <main id="photos">
         <div class="track">
           {photos.slice(track1, track2).map(photo => (
@@ -43,10 +43,12 @@ export default ({pics: photos}: {pics: string[]}) => {
   );
 };
 
-function BasicNav() {
+function BasicNav({title}: {title: string}) {
   return (
     <nav>
-      <img id="pfp-deco" src="/img/cat.png" alt="" />
+      <a href="/"><img id="pfp-deco" src="/img/cat.png" alt="" /></a>
+
+      <span>{title}</span>
 
       <button id="theme-toggle" type="button">
         <HalfCircle />

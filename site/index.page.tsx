@@ -72,16 +72,18 @@ function Directory({albums}: {albums: Map<string, string[]>}) {
       {albums.entries().take(ALBUM_LIMIT).map(([title, items]) => (
         <li>
           <a href={`/photos/${title}`}>
-            <span><Image />{title}</span>
+            <Image />
+            <span class="item">{title}</span>
             <div></div>
-            <span>{items.length} photos</span>
+            <span class="item-detail">{items.length} photos</span>
           </a>
         </li>
       )).toArray()}
       {/*{articles.toSorted(sortCreatedTime)?.slice(0, ARTICLE_LIMIT)?.entries().map(([idx, article]) => (
         <li>
           <a href={`/writing/${idx}`}>
-            <span><Article />{article.title}</span>
+            <Article />
+            <span>{article.title}</span>
             <div></div>
             <Time
               time={

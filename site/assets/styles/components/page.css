@@ -52,7 +52,7 @@ body {
   }
 }
 
-nav:has(~ main#index, ~ main#entry) {
+nav:has(~ main#index, ~ main#photos, ~ main#entry) {
   display: flex;
   flex-flow: row nowrap;
   justify-content: end;
