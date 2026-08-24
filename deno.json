@@ -22,6 +22,7 @@
     "@/includes/": "./site/_includes/",
     "@aws-sdk/client-s3": "npm:@aws-sdk/client-s3",
     "@googleapis/drive": "npm:@googleapis/drive",
+    "image-size": "npm:image-size@^1.1.1",
     "@std/fs": "jsr:@std/fs@^1.0.19",
     "@std/collections": "jsr:@std/collections",
     "rehype-pretty-code": "npm:rehype-pretty-code@^0.14.3",

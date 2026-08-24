@@ -1,5 +1,6 @@
 import { Entry } from "@/includes/types.ts";
-import { Article, HalfCircle, Image } from "@/includes/icons.tsx";
+import { HalfCircle, Image } from "@/includes/icons.tsx";
+import { Photo } from "./_data/photography.ts";
 
 export const title = 'Jacob Bleser'
 export const metas = {
@@ -16,10 +17,9 @@ export const metas = {
 export const layout = "page.tsx";
 
 const ALBUM_LIMIT = 3;
-const ARTICLE_LIMIT = 4;
 
 export interface SiteData extends Lume.Data {
-  photography: {albums: Map<string, string[]>}
+  photography: {albums: Map<string, Photo[]>}
 }
 
 export default ({photography}: SiteData) => {
@@ -57,8 +57,16 @@ export default ({photography}: SiteData) => {
         />
 
         <div id="photos">
-          {photography.albums.values().find(() => true)?.map((pic) => (
-            <img src={pic} alt="" />
+          {photography.albums.entries().find(([name]) => name === 'japan-highlights-2026')?.[1].map((pic, idx) => (
+            <img
+              src={pic.src}
+              width={pic.width}
+              height={pic.height}
+              alt=""
+              // Lazy load images beneath the fold
+              // Images are really big on the index page, so only a single
+              // image will realistically be in frame at the start
+              loading={idx === 0 ? "eager" : "lazy"} />
           ))}
         </div>
       </main>
@@ -66,7 +74,7 @@ export default ({photography}: SiteData) => {
   );
 };
 
-function Directory({albums}: {albums: Map<string, string[]>}) {
+function Directory({albums}: {albums: Map<string, Photo[]>}) {
   return (
     <ol>
       {albums.entries().take(ALBUM_LIMIT).map(([title, items]) => (

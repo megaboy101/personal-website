@@ -1,4 +1,5 @@
 import { HalfCircle } from "@/includes/icons.tsx"
+import { Photo } from "../../_data/photography.ts"
 
 export const title = 'Photo Album'
 export const metas = {
@@ -14,7 +15,9 @@ export const metas = {
 
 export const layout = 'page.tsx'
 
-export default ({title, pics: photos}: {title: string, pics: string[]}) => {
+const EAGER_LOAD_IMG_COUNT = 1;
+
+export default ({title, pics: photos}: {title: string, pics: Photo[]}) => {
   const track1 = 0
   const track2 = Math.floor(((photos.length ?? 0) / 3))
   const track3 = Math.floor(((photos.length ?? 0) / 3) * 2)
@@ -24,18 +27,18 @@ export default ({title, pics: photos}: {title: string, pics: string[]}) => {
       <BasicNav title={title} />
       <main id="photos">
         <div class="track">
-          {photos.slice(track1, track2).map(photo => (
-            <img src={photo} alt="" />
+          {photos.slice(track1, track2).map((photo, idx) => (
+            <img src={photo.src} width={photo.width} height={photo.height} alt="" loading={idx < EAGER_LOAD_IMG_COUNT ? "eager" : "lazy"} />
           ))}
         </div>
         <div class="track">
-          {photos.slice(track2, track3).map(photo => (
-            <img src={photo} alt="" />
+          {photos.slice(track2, track3).map((photo, idx) => (
+            <img src={photo.src} width={photo.width} height={photo.height} alt="" loading={idx < EAGER_LOAD_IMG_COUNT ? "eager" : "lazy"} />
           ))}
         </div>
         <div class="track">
-          {photos.slice(track3).map(photo => (
-            <img src={photo} alt="" />
+          {photos.slice(track3).map((photo, idx) => (
+            <img src={photo.src} width={photo.width} height={photo.height} alt="" loading={idx < EAGER_LOAD_IMG_COUNT ? "eager" : "lazy"} />
           ))}
         </div>
       </main>

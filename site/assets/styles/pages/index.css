@@ -202,23 +202,19 @@ main#index {
       margin-inline: calc(-1 * var(--space-4));
     }
 
-    > div {
-      gap: var(--space-1);
+    img {
+      content-visibility: auto;
+      min-width: 0;
+      width: 100%;
 
-      img {
-        content-visibility: auto;
-        min-width: 0;
-        width: 100%;
-
-        /* Hack to select on iOS Safari specifically */
-        @supports (hanging-punctuation: first) {
-          /*
-          Disable intelligent content-visibility on
-          iOS Safari because it's broken with our
-          layout rules
-          */
-          content-visibility: visible;
-        }
+      /* Hacky selector that only matches on iOS Safari */
+      @supports (hanging-punctuation: first) {
+        /*
+        Disable content-visibility on
+        iOS Safari because it's broken with our
+        layout rules
+        */
+        content-visibility: visible;
       }
     }
   }

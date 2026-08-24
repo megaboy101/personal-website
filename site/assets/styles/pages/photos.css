@@ -42,7 +42,19 @@ main#photos {
   }
 
   img {
+    content-visibility: auto;
+    min-width: 0;
     width: 100%;
+
+    /* Hacky selector that only matches on iOS Safari */
+    @supports (hanging-punctuation: first) {
+      /*
+      Disable content-visibility on
+      iOS Safari because it's broken with our
+      layout rules
+      */
+      content-visibility: visible;
+    }
   }
 
   @media (max-width: 500px) {
